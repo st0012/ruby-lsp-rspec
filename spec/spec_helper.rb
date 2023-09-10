@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "ruby/lsp/rspec"
+require "ruby-lsp-rspec"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

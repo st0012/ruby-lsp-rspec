@@ -1,13 +1,40 @@
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+require:
+ - rubocop-sorbet
+ - rubocop-rake
+
 AllCops:
-  TargetRubyVersion: 2.6
+  NewCops: disable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.0
 
-Style/StringLiterals:
+Naming/FileName:
+  Exclude:
+  - "lib/ruby-lsp-rspec.rb"
+
+Sorbet/FalseSigil:
+  Enabled: false
+
+Sorbet/TrueSigil:
   Enabled: true
-  EnforcedStyle: double_quotes
+  Include:
+    - "test/**/*.rb"
+  Exclude:
+    - "**/*.rake"
+    - "lib/**/*.rb"
 
-Style/StringLiteralsInInterpolation:
+Sorbet/StrictSigil:
   Enabled: true
-  EnforcedStyle: double_quotes
+  Include:
+    - "lib/**/*.rb"
+  Exclude:
+    - "**/*.rake"
+    - "test/**/*.rb"
 
-Layout/LineLength:
-  Max: 120
+Style/StderrPuts:
+  Enabled: true
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: false

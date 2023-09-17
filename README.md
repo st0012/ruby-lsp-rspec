@@ -1,8 +1,10 @@
 # Ruby LSP RSpec
 
-Ruby LSP RSpec is a [Ruby LSP](https://github.com/Shopify/ruby-lsp) extension for displaying code-lenses for RSpec tests.
+[![Gem Version](https://badge.fury.io/rb/ruby-lsp-rspec.svg)](https://badge.fury.io/rb/ruby-lsp-rspec)
 
-![Screenshot of the code lenses](/misc/example.png)
+Ruby LSP RSpec is a [Ruby LSP](https://github.com/Shopify/ruby-lsp) extension for displaying CodeLens for RSpec tests.
+
+![Screenshot of the code lenses](/misc/example.gif)
 
 ## Installation
 
@@ -15,7 +17,7 @@ group :development do
 end
 ```
 
-After running `bundle install`, restart Ruby LSP and you should start seeing code-lenses in your RSpec test files.
+After running `bundle install`, restart Ruby LSP and you should start seeing CodeLens in your RSpec test files.
 
 ## Usages (with VS Code)
 

@@ -1,24 +1,30 @@
-# Ruby::Lsp::Rspec
+# Ruby LSP RSpec
 
-TODO: Delete this and the text below, and describe your gem
+Ruby LSP RSpec is a [Ruby LSP](https://github.com/Shopify/ruby-lsp) extension for displaying code-lenses for RSpec tests.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruby/lsp/rspec`. To experiment with that code, run `bin/console` for an interactive prompt.
+![Screenshot of the code lenses](/misc/example.png)
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+To install, add the following line to your application's Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
+```ruby
+# Gemfile
+group :development do
+  gem "ruby-lsp-rspec"
+end
+```
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+After running `bundle install`, restart Ruby LSP and you should start seeing code-lenses in your RSpec test files.
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+## Usages (with VS Code)
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+1. When clicking `Run`, the test(s) will be executed via the Test Explorer.
+    - However, deeply nested tests may not be displayed correctly at the moment.
+2. When clicking `Run In Terminal`, a test command will be generated in the terminal.
+3. When clicking `Debug`, the test(s) will be executed with VS Code debugger enabled (requires the [`debug`](https://github.com/ruby/debug) gem).
+    - [Learn how to set breakpoints in VS Code](https://code.visualstudio.com/docs/editor/debugging#_breakpoints).
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
@@ -28,7 +34,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ruby-lsp-rspec. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/ruby-lsp-rspec/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/st0012/ruby-lsp-rspec. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/st0012/ruby-lsp-rspec/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -36,4 +42,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Ruby::Lsp::Rspec project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/ruby-lsp-rspec/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the Ruby::Lsp::Rspec project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/st0012/ruby-lsp-rspec/blob/main/CODE_OF_CONDUCT.md).

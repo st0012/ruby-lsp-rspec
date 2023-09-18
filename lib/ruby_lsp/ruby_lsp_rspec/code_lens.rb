@@ -10,7 +10,6 @@ module RubyLsp
       include ::RubyLsp::Requests::Support::Common
 
       ResponseType = type_member { { fixed: T::Array[::RubyLsp::Interface::CodeLens] } }
-      BASE_COMMAND = T.let((File.exist?("Gemfile.lock") ? "bundle exec rspec" : "rspec"), String)
 
       sig { override.returns(ResponseType) }
       attr_reader :_response
@@ -20,6 +19,23 @@ module RubyLsp
         @_response = T.let([], ResponseType)
         @path = T.let(uri.to_standardized_path, T.nilable(String))
         emitter.register(self, :on_command, :on_command_call, :on_call)
+
+        @base_command = T.let(
+          begin
+            cmd = if File.exist?(File.join(Dir.pwd, "bin", "rspec"))
+              "bin/rspec"
+            else
+              "rspec"
+            end
+
+            if File.exist?("Gemfile.lock")
+              "bundle exec #{cmd}"
+            else
+              cmd
+            end
+          end,
+          String,
+        )
 
         super(emitter, message_queue)
       end
@@ -103,7 +119,7 @@ module RubyLsp
         return unless @path
 
         line_number = node.location.start_line
-        command = "#{BASE_COMMAND} #{@path}:#{line_number}"
+        command = "#{@base_command} #{@path}:#{line_number}"
 
         arguments = [
           @path,

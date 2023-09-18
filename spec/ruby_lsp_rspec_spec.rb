@@ -105,4 +105,42 @@ RSpec.describe RubyLsp::RSpec do
     response = response.response
     expect(response.count).to eq(12)
   end
+
+  context "when there's a binstub" do
+    let(:binstub_path) { File.expand_path("../bin/rspec", __dir__) }
+
+    before do
+      File.write(binstub_path, <<~RUBY)
+        #!/usr/bin/env ruby
+        puts "binstub is called"
+      RUBY
+    end
+
+    after do
+      FileUtils.rm(binstub_path) if File.exist?(binstub_path)
+    end
+
+    it "uses the binstub" do
+      store.set(uri: uri, source: <<~RUBY, version: 1)
+        RSpec.describe(Foo::Bar) do
+        end
+      RUBY
+
+      response = RubyLsp::Executor.new(store, message_queue).execute(
+        {
+          method: "textDocument/codeLens",
+          params: {
+            textDocument: { uri: uri },
+            position: { line: 0, character: 0 },
+          },
+        },
+      )
+
+      expect(response.error).to(be_nil)
+
+      response = response.response
+      expect(response.count).to eq(3)
+      expect(response[0].command.arguments[2]).to eq("bundle exec bin/rspec /fake.rb:1")
+    end
+  end
 end

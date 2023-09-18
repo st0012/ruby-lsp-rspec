@@ -75,18 +75,13 @@ RSpec.describe RubyLsp::RSpec do
     end
   end
 
-  it "recognizes different describe declaration" do
+  it "recognizes different it declaration" do
     store.set(uri: uri, source: <<~RUBY, version: 1)
-      RSpec.describe(Foo::Bar) do
-      end
-
-      RSpec.describe Foo::Bar do
-      end
-
-      describe(Foo) do
-      end
-
-      describe Foo do
+      RSpec.describe Foo do
+        it { do_something }
+        it var do
+          do_something
+        end
       end
     RUBY
 
@@ -103,7 +98,51 @@ RSpec.describe RubyLsp::RSpec do
     expect(response.error).to(be_nil)
 
     response = response.response
-    expect(response.count).to eq(12)
+    expect(response.count).to eq(9)
+
+    expect(response[3].command.arguments[1]).to eq("<unnamed>")
+    expect(response[6].command.arguments[1]).to eq("<var>")
+  end
+
+  it "recognizes different describe declaration" do
+    store.set(uri: uri, source: <<~RUBY, version: 1)
+      RSpec.describe(Foo::Bar) do
+      end
+
+      RSpec.describe Foo::Bar do
+      end
+
+      describe(Foo) do
+      end
+
+      describe Foo do
+      end
+
+      describe "Foo" do
+      end
+
+      describe var do
+      end
+    RUBY
+
+    response = RubyLsp::Executor.new(store, message_queue).execute(
+      {
+        method: "textDocument/codeLens",
+        params: {
+          textDocument: { uri: uri },
+          position: { line: 0, character: 0 },
+        },
+      },
+    )
+
+    expect(response.error).to(be_nil)
+
+    response = response.response
+    expect(response.count).to eq(18)
+
+    expect(response[11].command.arguments[1]).to eq("Foo")
+    expect(response[13].command.arguments[1]).to eq("Foo")
+    expect(response[15].command.arguments[1]).to eq("<var>")
   end
 
   context "when there's a binstub" do

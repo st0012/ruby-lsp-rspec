@@ -1,14 +1,14 @@
 # typed: strict
 # frozen_string_literal: true
 
-require "ruby_lsp/extension"
+require "ruby_lsp/addon"
 require "ruby_lsp/internal"
 
 require_relative "code_lens"
 
 module RubyLsp
   module RSpec
-    class Extension < ::RubyLsp::Extension
+    class Addon < ::RubyLsp::Addon
       extend T::Sig
 
       sig { override.void }

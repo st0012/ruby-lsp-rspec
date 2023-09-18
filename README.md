@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/ruby-lsp-rspec.svg)](https://badge.fury.io/rb/ruby-lsp-rspec)
 
-Ruby LSP RSpec is a [Ruby LSP](https://github.com/Shopify/ruby-lsp) extension for displaying CodeLens for RSpec tests.
+Ruby LSP RSpec is a [Ruby LSP](https://github.com/Shopify/ruby-lsp) addon for displaying CodeLens for RSpec tests.
 
 ![Screenshot of the code lenses](/misc/example.gif)
 

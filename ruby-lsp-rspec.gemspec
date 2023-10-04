@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Stan Lo"]
   spec.email = ["stan001212@gmail.com"]
 
-  spec.summary = "RSpec extension for ruby-lsp"
-  spec.description = "RSpec extension for ruby-lsp"
+  spec.summary = "RSpec addon for ruby-lsp"
+  spec.description = "RSpec addon for ruby-lsp"
   spec.homepage = "https://github.com/st0012/ruby-lsp-rspec"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
@@ -41,5 +41,5 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "ruby-lsp", "~> 0.10.1"
+  spec.add_dependency "ruby-lsp", "~> 0.11.0"
 end

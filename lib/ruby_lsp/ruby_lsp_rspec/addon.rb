@@ -21,7 +21,7 @@ module RubyLsp
       sig do
         override.params(
           uri: URI::Generic,
-          emitter: EventEmitter,
+          emitter: Prism::Dispatcher,
           message_queue: Thread::Queue,
         ).returns(T.nilable(Listener[T::Array[Interface::CodeLens]]))
       end

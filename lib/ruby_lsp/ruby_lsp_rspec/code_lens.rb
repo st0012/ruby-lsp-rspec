@@ -14,11 +14,11 @@ module RubyLsp
       sig { override.returns(ResponseType) }
       attr_reader :_response
 
-      sig { params(uri: URI::Generic, emitter: EventEmitter, message_queue: Thread::Queue).void }
-      def initialize(uri, emitter, message_queue)
+      sig { params(uri: URI::Generic, dispatcher: Prism::Dispatcher, message_queue: Thread::Queue).void }
+      def initialize(uri, dispatcher, message_queue)
         @_response = T.let([], ResponseType)
         @path = T.let(uri.to_standardized_path, T.nilable(String))
-        emitter.register(self, :on_call)
+        dispatcher.register(self, :on_call_node_enter)
 
         @base_command = T.let(
           begin
@@ -37,11 +37,11 @@ module RubyLsp
           String,
         )
 
-        super(emitter, message_queue)
+        super(dispatcher, message_queue)
       end
 
-      sig { params(node: YARP::CallNode).void }
-      def on_call(node)
+      sig { params(node: Prism::CallNode).void }
+      def on_call_node_enter(node)
         message_value = node.message
         if message_value == "it"
           name = generate_name(node)
@@ -54,15 +54,15 @@ module RubyLsp
         end
       end
 
-      sig { params(node: YARP::CallNode).returns(String) }
+      sig { params(node: Prism::CallNode).returns(String) }
       def generate_name(node)
         if node.arguments
           argument = node.arguments.arguments.first
 
           case argument
-          when YARP::StringNode
+          when Prism::StringNode
             argument.content
-          when YARP::CallNode
+          when Prism::CallNode
             "<#{argument.name}>"
           when nil
             ""
@@ -76,7 +76,7 @@ module RubyLsp
 
       private
 
-      sig { params(node: YARP::Node, name: String, kind: Symbol).void }
+      sig { params(node: Prism::Node, name: String, kind: Symbol).void }
       def add_test_code_lens(node, name:, kind:)
         return unless @path
 

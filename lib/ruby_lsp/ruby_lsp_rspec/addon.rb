@@ -26,7 +26,7 @@ module RubyLsp
         ).returns(T.nilable(Listener[T::Array[Interface::CodeLens]]))
       end
       def create_code_lens_listener(uri, emitter, message_queue)
-        return nil unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
+        return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
 
         CodeLens.new(uri, emitter, message_queue)
       end

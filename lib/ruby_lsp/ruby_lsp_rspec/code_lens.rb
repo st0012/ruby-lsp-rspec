@@ -17,7 +17,8 @@ module RubyLsp
       sig { params(uri: URI::Generic, dispatcher: Prism::Dispatcher, message_queue: Thread::Queue).void }
       def initialize(uri, dispatcher, message_queue)
         @_response = T.let([], ResponseType)
-        @path = T.let(uri.to_standardized_path, T.nilable(String))
+        # Listener is only initialized if uri.to_standardized_path is valid
+        @path = T.let(T.must(uri.to_standardized_path), String)
         dispatcher.register(self, :on_call_node_enter)
 
         @base_command = T.let(
@@ -78,8 +79,6 @@ module RubyLsp
 
       sig { params(node: Prism::Node, name: String, kind: Symbol).void }
       def add_test_code_lens(node, name:, kind:)
-        return unless @path
-
         line_number = node.location.start_line
         command = "#{@base_command} #{@path}:#{line_number}"
 

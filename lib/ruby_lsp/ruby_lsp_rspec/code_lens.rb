@@ -17,7 +17,8 @@ module RubyLsp
       sig { params(uri: URI::Generic, dispatcher: Prism::Dispatcher, message_queue: Thread::Queue).void }
       def initialize(uri, dispatcher, message_queue)
         @_response = T.let([], ResponseType)
-        @path = T.let(T.must(uri.to_standardized_path), String) # Listener is only initialized if uri.to_standardized_path is valid
+        # Listener is only initialized if uri.to_standardized_path is valid
+        @path = T.let(T.must(uri.to_standardized_path), String) 
         dispatcher.register(self, :on_call_node_enter)
 
         @base_command = T.let(

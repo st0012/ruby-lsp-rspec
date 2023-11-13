@@ -13,7 +13,7 @@ To install, add the following line to your application's Gemfile:
 ```ruby
 # Gemfile
 group :development do
-  gem "ruby-lsp-rspec"
+  gem "ruby-lsp-rspec", require: false
 end
 ```
 

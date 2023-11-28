@@ -75,11 +75,15 @@ RSpec.describe RubyLsp::RSpec do
     end
   end
 
-  it "recognizes different it declaration" do
+  it "recognizes different example, it, and specify declarations" do
     store.set(uri: uri, source: <<~RUBY, version: 1)
       RSpec.describe Foo do
         it { do_something }
-        it var do
+        it var1 do
+          do_something
+        end
+        specify { do_something }
+        example var2 do
           do_something
         end
       end
@@ -98,13 +102,15 @@ RSpec.describe RubyLsp::RSpec do
     expect(response.error).to(be_nil)
 
     response = response.response
-    expect(response.count).to eq(9)
+    expect(response.count).to eq(15)
 
     expect(response[3].command.arguments[1]).to eq("<unnamed>")
-    expect(response[6].command.arguments[1]).to eq("<var>")
+    expect(response[6].command.arguments[1]).to eq("<var1>")
+    expect(response[9].command.arguments[1]).to eq("<unnamed>")
+    expect(response[12].command.arguments[1]).to eq("<var2>")
   end
 
-  it "recognizes different describe declaration" do
+  it "recognizes different context and describe declarations" do
     store.set(uri: uri, source: <<~RUBY, version: 1)
       RSpec.describe(Foo::Bar) do
       end
@@ -112,13 +118,13 @@ RSpec.describe RubyLsp::RSpec do
       RSpec.describe Foo::Bar do
       end
 
-      describe(Foo) do
+      context(Foo) do
       end
 
       describe Foo do
       end
 
-      describe "Foo" do
+      context "Foo" do
       end
 
       describe var do

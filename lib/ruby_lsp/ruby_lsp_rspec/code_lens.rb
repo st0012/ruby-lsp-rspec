@@ -43,11 +43,11 @@ module RubyLsp
 
       sig { params(node: Prism::CallNode).void }
       def on_call_node_enter(node)
-        message_value = node.message
-        if message_value == "it"
+        case node.message
+        when "example", "it", "specify"
           name = generate_name(node)
           add_test_code_lens(node, name: name, kind: :example)
-        elsif message_value == "describe" || message_value == "context"
+        when "context", "describe"
           return if node.receiver && node.receiver.name.to_s != "RSpec"
 
           name = generate_name(node)

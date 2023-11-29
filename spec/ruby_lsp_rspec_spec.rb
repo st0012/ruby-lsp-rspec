@@ -35,9 +35,9 @@ RSpec.describe RubyLsp::RSpec do
     response = response.response
     expect(response.count).to eq(9)
 
-    expect(response[0].data).to eq({ type: "test", kind: :group })
-    expect(response[1].data).to eq({ type: "test_in_terminal", kind: :group })
-    expect(response[2].data).to eq({ type: "debug", kind: :group })
+    expect(response[0].data).to eq({ type: "test", kind: :group, group_id: nil, id: 1 })
+    expect(response[1].data).to eq({ type: "test_in_terminal", kind: :group, group_id: nil, id: 1 })
+    expect(response[2].data).to eq({ type: "debug", kind: :group, group_id: nil, id: 1 })
 
     0.upto(2) do |i|
       expect(response[i].command.arguments).to eq([
@@ -48,9 +48,9 @@ RSpec.describe RubyLsp::RSpec do
       ])
     end
 
-    expect(response[3].data).to eq({ type: "test", kind: :group })
-    expect(response[4].data).to eq({ type: "test_in_terminal", kind: :group })
-    expect(response[5].data).to eq({ type: "debug", kind: :group })
+    expect(response[3].data).to eq({ type: "test", kind: :group, group_id: 1, id: 2 })
+    expect(response[4].data).to eq({ type: "test_in_terminal", kind: :group, group_id: 1, id: 2 })
+    expect(response[5].data).to eq({ type: "debug", kind: :group, group_id: 1, id: 2 })
 
     3.upto(5) do |i|
       expect(response[i].command.arguments).to eq([
@@ -61,9 +61,9 @@ RSpec.describe RubyLsp::RSpec do
       ])
     end
 
-    expect(response[6].data).to eq({ type: "test", kind: :example })
-    expect(response[7].data).to eq({ type: "test_in_terminal", kind: :example })
-    expect(response[8].data).to eq({ type: "debug", kind: :example })
+    expect(response[6].data).to eq({ type: "test", kind: :example, group_id: 2 })
+    expect(response[7].data).to eq({ type: "test_in_terminal", kind: :example, group_id: 2 })
+    expect(response[8].data).to eq({ type: "debug", kind: :example, group_id: 2 })
 
     6.upto(8) do |i|
       expect(response[i].command.arguments).to eq([

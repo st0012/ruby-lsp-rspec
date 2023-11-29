@@ -19,7 +19,9 @@ module RubyLsp
         @_response = T.let([], ResponseType)
         # Listener is only initialized if uri.to_standardized_path is valid
         @path = T.let(T.must(uri.to_standardized_path), String)
-        dispatcher.register(self, :on_call_node_enter)
+        @group_id = T.let(1, Integer)
+        @group_id_stack = T.let([], T::Array[Integer])
+        dispatcher.register(self, :on_call_node_enter, :on_call_node_leave)
 
         @base_command = T.let(
           begin
@@ -52,6 +54,19 @@ module RubyLsp
 
           name = generate_name(node)
           add_test_code_lens(node, name: name, kind: :group)
+
+          @group_id_stack.push(@group_id)
+          @group_id += 1
+        end
+      end
+
+      sig { params(node: Prism::CallNode).void }
+      def on_call_node_leave(node)
+        case node.message
+        when "context", "describe"
+          return if node.receiver && node.receiver.name.to_s != "RSpec"
+
+          @group_id_stack.pop
         end
       end
 
@@ -82,6 +97,9 @@ module RubyLsp
         line_number = node.location.start_line
         command = "#{@base_command} #{@path}:#{line_number}"
 
+        grouping_data = { group_id: @group_id_stack.last, kind: kind }
+        grouping_data[:id] = @group_id if kind == :group
+
         arguments = [
           @path,
           name,
@@ -99,7 +117,7 @@ module RubyLsp
           title: "Run",
           command_name: "rubyLsp.runTest",
           arguments: arguments,
-          data: { type: "test", kind: kind },
+          data: { type: "test", **grouping_data },
         )
 
         @_response << create_code_lens(
@@ -107,7 +125,7 @@ module RubyLsp
           title: "Run In Terminal",
           command_name: "rubyLsp.runTestInTerminal",
           arguments: arguments,
-          data: { type: "test_in_terminal", kind: kind },
+          data: { type: "test_in_terminal", **grouping_data },
         )
 
         @_response << create_code_lens(
@@ -115,7 +133,7 @@ module RubyLsp
           title: "Debug",
           command_name: "rubyLsp.debugTest",
           arguments: arguments,
-          data: { type: "debug", kind: kind },
+          data: { type: "debug", **grouping_data },
         )
       end
     end

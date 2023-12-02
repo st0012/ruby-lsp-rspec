@@ -3,6 +3,7 @@ gem:
   #
   exclude:
   - irb
+  - reline
   # doc: true
   # workers: 5
 dsl:

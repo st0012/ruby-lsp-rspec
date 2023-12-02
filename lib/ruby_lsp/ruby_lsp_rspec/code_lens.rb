@@ -14,8 +14,8 @@ module RubyLsp
       sig { override.returns(ResponseType) }
       attr_reader :_response
 
-      sig { params(uri: URI::Generic, dispatcher: Prism::Dispatcher, message_queue: Thread::Queue).void }
-      def initialize(uri, dispatcher, message_queue)
+      sig { params(uri: URI::Generic, dispatcher: Prism::Dispatcher).void }
+      def initialize(uri, dispatcher)
         @_response = T.let([], ResponseType)
         # Listener is only initialized if uri.to_standardized_path is valid
         @path = T.let(T.must(uri.to_standardized_path), String)
@@ -40,7 +40,7 @@ module RubyLsp
           String,
         )
 
-        super(dispatcher, message_queue)
+        super(dispatcher)
       end
 
       sig { params(node: Prism::CallNode).void }
@@ -50,7 +50,7 @@ module RubyLsp
           name = generate_name(node)
           add_test_code_lens(node, name: name, kind: :example)
         when "context", "describe"
-          return if node.receiver && node.receiver.name.to_s != "RSpec"
+          return if node.receiver && node.receiver&.slice != "RSpec"
 
           name = generate_name(node)
           add_test_code_lens(node, name: name, kind: :group)
@@ -64,7 +64,7 @@ module RubyLsp
       def on_call_node_leave(node)
         case node.message
         when "context", "describe"
-          return if node.receiver && node.receiver.name.to_s != "RSpec"
+          return if node.receiver && node.receiver&.slice != "RSpec"
 
           @group_id_stack.pop
         end
@@ -72,8 +72,10 @@ module RubyLsp
 
       sig { params(node: Prism::CallNode).returns(String) }
       def generate_name(node)
-        if node.arguments
-          argument = node.arguments.arguments.first
+        arguments = node.arguments&.arguments
+
+        if arguments
+          argument = arguments.first
 
           case argument
           when Prism::StringNode

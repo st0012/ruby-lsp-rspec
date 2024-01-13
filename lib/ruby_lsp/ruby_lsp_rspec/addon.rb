@@ -5,6 +5,7 @@ require "ruby_lsp/addon"
 require "ruby_lsp/internal"
 
 require_relative "code_lens"
+require_relative "document_symbol"
 
 module RubyLsp
   module RSpec
@@ -20,14 +21,25 @@ module RubyLsp
       # Creates a new CodeLens listener. This method is invoked on every CodeLens request
       sig do
         override.params(
+          response_builder: ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens],
           uri: URI::Generic,
           emitter: Prism::Dispatcher,
-        ).returns(T.nilable(Listener[T::Array[Interface::CodeLens]]))
+        ).void
       end
-      def create_code_lens_listener(uri, emitter)
+      def create_code_lens_listener(response_builder, uri, emitter)
         return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
 
-        CodeLens.new(uri, emitter)
+        CodeLens.new(response_builder, uri, emitter)
+      end
+
+      sig do
+        override.params(
+          response_builder: ResponseBuilders::DocumentSymbol,
+          dispatcher: Prism::Dispatcher,
+        ).void
+      end
+      def create_document_symbol_listener(response_builder, dispatcher)
+        DocumentSymbol.new(response_builder, dispatcher)
       end
 
       sig { override.returns(String) }

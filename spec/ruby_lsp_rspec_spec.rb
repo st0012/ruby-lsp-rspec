@@ -129,6 +129,11 @@ RSpec.describe RubyLsp::RSpec do
 
       describe var do
       end
+
+      # these should bot be recognized
+      context
+      describe
+      context("foo")
     RUBY
 
     response = RubyLsp::Executor.new(store, message_queue).execute(

@@ -50,7 +50,7 @@ module RubyLsp
           name = generate_name(node)
           add_test_code_lens(node, name: name, kind: :example)
         when "context", "describe"
-          return if node.receiver && node.receiver&.slice != "RSpec"
+          return unless valid_group?(node)
 
           name = generate_name(node)
           add_test_code_lens(node, name: name, kind: :group)
@@ -64,10 +64,17 @@ module RubyLsp
       def on_call_node_leave(node)
         case node.message
         when "context", "describe"
-          return if node.receiver && node.receiver&.slice != "RSpec"
+          return unless valid_group?(node)
 
           @group_id_stack.pop
         end
+      end
+
+      private
+
+      sig { params(node: Prism::CallNode).returns(T::Boolean) }
+      def valid_group?(node)
+        !(node.block.nil? || (node.receiver && node.receiver&.slice != "RSpec"))
       end
 
       sig { params(node: Prism::CallNode).returns(String) }
@@ -91,8 +98,6 @@ module RubyLsp
           "<unnamed>"
         end
       end
-
-      private
 
       sig { params(node: Prism::Node, name: String, kind: Symbol).void }
       def add_test_code_lens(node, name:, kind:)

@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    ruby-lsp-rspec (0.1.9)
-      ruby-lsp (~> 0.13.0)
+    ruby-lsp-rspec (0.1.10)
+      ruby-lsp (>= 0.13.0)
 
 GEM
   remote: https://rubygems.org/
@@ -111,6 +111,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES

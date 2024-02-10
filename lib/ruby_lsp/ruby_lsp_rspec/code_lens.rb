@@ -3,20 +3,20 @@
 
 module RubyLsp
   module RSpec
-    class CodeLens < ::RubyLsp::Listener
+    class CodeLens
       extend T::Sig
-      extend T::Generic
 
       include ::RubyLsp::Requests::Support::Common
 
-      ResponseType = type_member { { fixed: T::Array[::RubyLsp::Interface::CodeLens] } }
-
-      sig { override.returns(ResponseType) }
-      attr_reader :_response
-
-      sig { params(uri: URI::Generic, dispatcher: Prism::Dispatcher).void }
-      def initialize(uri, dispatcher)
-        @_response = T.let([], ResponseType)
+      sig do
+        params(
+          response_builder: ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens],
+          uri: URI::Generic,
+          dispatcher: Prism::Dispatcher,
+        ).void
+      end
+      def initialize(response_builder, uri, dispatcher)
+        @response_builder = response_builder
         # Listener is only initialized if uri.to_standardized_path is valid
         @path = T.let(T.must(uri.to_standardized_path), String)
         @group_id = T.let(1, Integer)
@@ -39,8 +39,6 @@ module RubyLsp
           end,
           String,
         )
-
-        super(dispatcher)
       end
 
       sig { params(node: Prism::CallNode).void }
@@ -119,7 +117,7 @@ module RubyLsp
           },
         ]
 
-        @_response << create_code_lens(
+        @response_builder << create_code_lens(
           node,
           title: "Run",
           command_name: "rubyLsp.runTest",
@@ -127,7 +125,7 @@ module RubyLsp
           data: { type: "test", **grouping_data },
         )
 
-        @_response << create_code_lens(
+        @response_builder << create_code_lens(
           node,
           title: "Run In Terminal",
           command_name: "rubyLsp.runTestInTerminal",
@@ -135,7 +133,7 @@ module RubyLsp
           data: { type: "test_in_terminal", **grouping_data },
         )
 
-        @_response << create_code_lens(
+        @response_builder << create_code_lens(
           node,
           title: "Debug",
           command_name: "rubyLsp.debugTest",

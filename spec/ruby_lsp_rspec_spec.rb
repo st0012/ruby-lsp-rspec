@@ -6,9 +6,14 @@ RSpec.describe RubyLsp::RSpec do
   let(:store) { RubyLsp::Store.new }
   let(:message_queue) { Thread::Queue.new }
 
+  before do
+    RubyLsp::Addon.load_addons(message_queue)
+  end
+
   after do
     message_queue.close
   end
+
   describe "document symbol" do
     it "generates correct document symbols" do
       store.set(uri: uri, source: <<~RUBY, version: 1)

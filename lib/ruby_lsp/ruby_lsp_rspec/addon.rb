@@ -12,8 +12,8 @@ module RubyLsp
     class Addon < ::RubyLsp::Addon
       extend T::Sig
 
-      sig { override.params(message_queue: Thread::Queue).void }
-      def activate(message_queue); end
+      sig { override.params(global_state: GlobalState, message_queue: Thread::Queue).void }
+      def activate(global_state, message_queue); end
 
       sig { override.void }
       def deactivate; end
@@ -23,13 +23,13 @@ module RubyLsp
         override.params(
           response_builder: ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens],
           uri: URI::Generic,
-          emitter: Prism::Dispatcher,
+          dispatcher: Prism::Dispatcher,
         ).void
       end
-      def create_code_lens_listener(response_builder, uri, emitter)
+      def create_code_lens_listener(response_builder, uri, dispatcher)
         return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
 
-        CodeLens.new(response_builder, uri, emitter)
+        CodeLens.new(response_builder, uri, dispatcher)
       end
 
       sig do

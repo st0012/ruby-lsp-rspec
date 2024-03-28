@@ -2,6 +2,7 @@
 
 require "ruby-lsp-rspec"
 require "ruby_lsp/internal"
+require "ruby_lsp/test_helper"
 require "ruby_lsp/ruby_lsp_rspec/addon"
 
 RSpec.configure do |config|

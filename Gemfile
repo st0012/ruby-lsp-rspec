@@ -20,3 +20,5 @@ gem "tapioca", "~> 0.11", require: false, platforms: :ruby
 
 gem "debug"
 gem "irb"
+
+gem "ruby-lsp", github: "Shopify/ruby-lsp", branch: "pass-global-state-via-activate"

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby-lsp-rspec (0.1.11)
+    ruby-lsp-rspec (0.1.12)
       ruby-lsp (~> 0.17.0)
 
 GEM

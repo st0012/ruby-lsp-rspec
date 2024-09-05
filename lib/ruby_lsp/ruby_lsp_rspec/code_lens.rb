@@ -25,17 +25,15 @@ module RubyLsp
 
         @base_command = T.let(
           begin
-            cmd = if File.exist?(File.join(Dir.pwd, "bin", "rspec"))
-              "bin/rspec"
-            else
-              "rspec"
+            if File.exist?(File.join(Dir.pwd, "bin", "rspec"))
+              return "bin/rspec"
             end
 
             if File.exist?("Gemfile.lock")
-              "bundle exec #{cmd}"
-            else
-              cmd
+              "bundle exec rspec"
             end
+
+            "rspec"
           end,
           String,
         )

@@ -11,70 +11,70 @@
 # source://rspec-expectations/lib/rspec/matchers/english_phrasing.rb#1
 module RSpec
   class << self
-    # source://rspec-core/3.13.0lib/rspec/core.rb#70
+    # source://rspec-core/3.13.1lib/rspec/core.rb#70
     def clear_examples; end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#85
+    # source://rspec-core/3.13.1lib/rspec/core.rb#85
     def configuration; end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#49
+    # source://rspec-core/3.13.1lib/rspec/core.rb#49
     def configuration=(_arg0); end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#97
+    # source://rspec-core/3.13.1lib/rspec/core.rb#97
     def configure; end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#194
+    # source://rspec-core/3.13.1lib/rspec/core.rb#194
     def const_missing(name); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/dsl.rb#42
+    # source://rspec-core/3.13.1lib/rspec/core/dsl.rb#42
     def context(*args, &example_group_block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#122
+    # source://rspec-core/3.13.1lib/rspec/core.rb#122
     def current_example; end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#128
+    # source://rspec-core/3.13.1lib/rspec/core.rb#128
     def current_example=(example); end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#154
+    # source://rspec-core/3.13.1lib/rspec/core.rb#154
     def current_scope; end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#134
+    # source://rspec-core/3.13.1lib/rspec/core.rb#134
     def current_scope=(scope); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/dsl.rb#42
+    # source://rspec-core/3.13.1lib/rspec/core/dsl.rb#42
     def describe(*args, &example_group_block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/dsl.rb#42
+    # source://rspec-core/3.13.1lib/rspec/core/dsl.rb#42
     def example_group(*args, &example_group_block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/dsl.rb#42
+    # source://rspec-core/3.13.1lib/rspec/core/dsl.rb#42
     def fcontext(*args, &example_group_block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/dsl.rb#42
+    # source://rspec-core/3.13.1lib/rspec/core/dsl.rb#42
     def fdescribe(*args, &example_group_block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#58
+    # source://rspec-core/3.13.1lib/rspec/core.rb#58
     def reset; end
 
-    # source://rspec-core/3.13.0lib/rspec/core/shared_example_group.rb#110
+    # source://rspec-core/3.13.1lib/rspec/core/shared_example_group.rb#110
     def shared_context(name, *args, &block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/shared_example_group.rb#110
+    # source://rspec-core/3.13.1lib/rspec/core/shared_example_group.rb#110
     def shared_examples(name, *args, &block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/shared_example_group.rb#110
+    # source://rspec-core/3.13.1lib/rspec/core/shared_example_group.rb#110
     def shared_examples_for(name, *args, &block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#160
+    # source://rspec-core/3.13.1lib/rspec/core.rb#160
     def world; end
 
-    # source://rspec-core/3.13.0lib/rspec/core.rb#49
+    # source://rspec-core/3.13.1lib/rspec/core.rb#49
     def world=(_arg0); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/dsl.rb#42
+    # source://rspec-core/3.13.1lib/rspec/core/dsl.rb#42
     def xcontext(*args, &example_group_block); end
 
-    # source://rspec-core/3.13.0lib/rspec/core/dsl.rb#42
+    # source://rspec-core/3.13.1lib/rspec/core/dsl.rb#42
     def xdescribe(*args, &example_group_block); end
   end
 end
@@ -128,7 +128,7 @@ module RSpec::Expectations
     #
     # @return [RSpec::Expectations::Configuration] the configuration object
     #
-    # source://rspec-expectations/lib/rspec/expectations/configuration.rb#223
+    # source://rspec-expectations/lib/rspec/expectations/configuration.rb#228
     def configuration; end
 
     # @private
@@ -208,13 +208,13 @@ class RSpec::Expectations::BlockSnippetExtractor
 
   private
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#60
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#62
   def beginning_line_number; end
 
   # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#39
   def block_token_extractor; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#56
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#58
   def file_path; end
 
   # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#31
@@ -228,7 +228,7 @@ class RSpec::Expectations::BlockSnippetExtractor
   # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#44
   def source; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#64
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#66
   def source_location; end
 
   class << self
@@ -237,14 +237,14 @@ class RSpec::Expectations::BlockSnippetExtractor
   end
 end
 
-# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#70
+# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#72
 class RSpec::Expectations::BlockSnippetExtractor::AmbiguousTargetError < ::RSpec::Expectations::BlockSnippetExtractor::Error; end
 
 # Locates target block with node information (semantics), which tokens don't have.
 #
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#198
+# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#200
 class RSpec::Expectations::BlockSnippetExtractor::BlockLocator < ::Struct
   # Returns the value of attribute beginning_line_number
   #
@@ -257,10 +257,10 @@ class RSpec::Expectations::BlockSnippetExtractor::BlockLocator < ::Struct
   # @return [Object] the newly set value
   def beginning_line_number=(_); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#203
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#205
   def body_content_locations; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#199
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#201
   def method_call_location; end
 
   # Returns the value of attribute method_name
@@ -287,24 +287,24 @@ class RSpec::Expectations::BlockSnippetExtractor::BlockLocator < ::Struct
 
   private
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#216
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#218
   def block_body_node; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#221
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#223
   def block_wrapper_node; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#232
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#234
   def candidate_block_wrapper_nodes; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#241
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#243
   def candidate_method_ident_nodes; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#209
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#211
   def method_ident_node; end
 
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#247
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#249
   def method_ident_node?(node); end
 
   class << self
@@ -321,11 +321,11 @@ end
 #
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#75
+# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#77
 class RSpec::Expectations::BlockSnippetExtractor::BlockTokenExtractor < ::Struct
   # @return [BlockTokenExtractor] a new instance of BlockTokenExtractor
   #
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#78
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#80
   def initialize(*_arg0); end
 
   # Returns the value of attribute beginning_line_number
@@ -341,7 +341,7 @@ class RSpec::Expectations::BlockSnippetExtractor::BlockTokenExtractor < ::Struct
 
   # Returns the value of attribute body_tokens.
   #
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#76
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#78
   def body_tokens; end
 
   # Returns the value of attribute method_name
@@ -368,69 +368,69 @@ class RSpec::Expectations::BlockSnippetExtractor::BlockTokenExtractor < ::Struct
 
   # Returns the value of attribute state.
   #
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#76
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#78
   def state; end
 
   private
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#124
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#126
   def after_beginning_of_args_state(token); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#128
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#130
   def after_beginning_of_body_state(token); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#107
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#109
   def after_method_call_state(token); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#111
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#113
   def after_opener_state(token); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#191
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#193
   def block_locator; end
 
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#185
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#187
   def correct_block?(body_tokens); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#141
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#143
   def finalize_pending_tokens!; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#95
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#97
   def finish!; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#147
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#149
   def finish_or_find_next_block_if_incorrect!; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#168
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#170
   def handle_closer_token(token); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#158
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#160
   def handle_opener_token(token); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#103
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#105
   def initial_state(token); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#99
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#101
   def invoke_state_handler(token); end
 
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#164
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#166
   def opener_token?(token); end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#177
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#179
   def opener_token_stack; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#85
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#87
   def parse!; end
 
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#137
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#139
   def pending_tokens; end
 
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#181
+  # source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#183
   def pipe_token?(token); end
 
   class << self
@@ -442,10 +442,10 @@ class RSpec::Expectations::BlockSnippetExtractor::BlockTokenExtractor < ::Struct
   end
 end
 
-# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#68
+# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#70
 class RSpec::Expectations::BlockSnippetExtractor::Error < ::StandardError; end
 
-# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#69
+# source://rspec-expectations/lib/rspec/expectations/block_snippet_extractor.rb#71
 class RSpec::Expectations::BlockSnippetExtractor::TargetNotFoundError < ::RSpec::Expectations::BlockSnippetExtractor::Error; end
 
 # Provides configuration options for rspec-expectations.
@@ -471,6 +471,8 @@ class RSpec::Expectations::Configuration
   # source://rspec-expectations/lib/rspec/expectations/configuration.rb#29
   def initialize; end
 
+  # :nocov: Because this is only really _useful_ on 1.8, and hard to test elsewhere.
+  #
   # Adds `should` and `should_not` to the given classes
   # or modules. This can be used to ensure `should` works
   # properly on things like proxy objects (particular
@@ -479,7 +481,7 @@ class RSpec::Expectations::Configuration
   # @param modules [Array<Module>] the list of classes or modules
   #   to add `should` and `should_not` to.
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#112
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#116
   def add_should_and_should_not_to(*modules); end
 
   # Sets or gets the backtrace formatter. The backtrace formatter should
@@ -491,7 +493,7 @@ class RSpec::Expectations::Configuration
   # will be used (including respecting the presence or absence of
   # the `--backtrace` option).
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#129
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#134
   def backtrace_formatter; end
 
   # Sets or gets the backtrace formatter. The backtrace formatter should
@@ -503,7 +505,7 @@ class RSpec::Expectations::Configuration
   # will be used (including respecting the presence or absence of
   # the `--backtrace` option).
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#128
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#133
   def backtrace_formatter=(_arg0); end
 
   # Indicates whether or not diffs should be colored.
@@ -517,7 +519,7 @@ class RSpec::Expectations::Configuration
 
   # @private
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#216
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#221
   def false_positives_handler; end
 
   # Sets if custom matcher descriptions and failure messages
@@ -525,7 +527,7 @@ class RSpec::Expectations::Configuration
   #
   # @param value [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#140
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#145
   def include_chain_clauses_in_custom_matcher_descriptions=(_arg0); end
 
   # Indicates whether or not custom matcher descriptions and failure messages
@@ -534,7 +536,7 @@ class RSpec::Expectations::Configuration
   #
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#145
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#150
   def include_chain_clauses_in_custom_matcher_descriptions?; end
 
   # Configures the maximum character length that RSpec will print while
@@ -556,7 +558,7 @@ class RSpec::Expectations::Configuration
   # potentially cause false positives in tests, generally you want to
   # avoid such scenarios so this defaults to `true`.
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#206
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#211
   def on_potential_false_positives; end
 
   # Configures what RSpec will do about matcher use which will
@@ -564,17 +566,17 @@ class RSpec::Expectations::Configuration
   #
   # @param behavior [Symbol] can be set to :warn, :raise or :nothing
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#182
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#187
   def on_potential_false_positives=(behavior); end
 
   # @private
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#150
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#155
   def reset_syntaxes_to_default; end
 
   # Returns the value of attribute strict_predicate_matchers.
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#197
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#202
   def strict_predicate_matchers; end
 
   # Configures RSpec to check predicate matchers to `be(true)` / `be(false)` (strict),
@@ -583,12 +585,12 @@ class RSpec::Expectations::Configuration
   #
   # @raise [ArgumentError]
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#192
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#197
   def strict_predicate_matchers=(flag); end
 
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#199
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#204
   def strict_predicate_matchers?; end
 
   # The list of configured syntaxes.
@@ -624,7 +626,7 @@ class RSpec::Expectations::Configuration
   #
   # @param boolean [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#168
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#173
   def warn_about_potential_false_positives=(boolean); end
 
   # Indicates whether RSpec will warn about matcher use which will
@@ -633,7 +635,7 @@ class RSpec::Expectations::Configuration
   #
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#211
+  # source://rspec-expectations/lib/rspec/expectations/configuration.rb#216
   def warn_about_potential_false_positives?; end
 end
 
@@ -647,10 +649,10 @@ RSpec::Expectations::Configuration::FALSE_POSITIVE_BEHAVIOURS = T.let(T.unsafe(n
 #
 # @api private
 #
-# source://rspec-expectations/lib/rspec/expectations/configuration.rb#158
+# source://rspec-expectations/lib/rspec/expectations/configuration.rb#163
 module RSpec::Expectations::Configuration::NullBacktraceFormatter
   class << self
-    # source://rspec-expectations/lib/rspec/expectations/configuration.rb#159
+    # source://rspec-expectations/lib/rspec/expectations/configuration.rb#164
     def format_backtrace(backtrace); end
   end
 end
@@ -663,7 +665,7 @@ module RSpec::Expectations::ExpectationHelper
     # source://rspec-expectations/lib/rspec/expectations/handler.rb#5
     def check_message(msg); end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#33
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#32
     def handle_failure(matcher, message, failure_message_method); end
 
     # Returns an RSpec-3+ compatible matcher, wrapping a legacy one
@@ -671,10 +673,10 @@ module RSpec::Expectations::ExpectationHelper
     #
     # @private
     #
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#19
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#18
     def modern_matcher_from(matcher); end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#24
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#23
     def with_matcher(handler, matcher, message); end
   end
 end
@@ -797,10 +799,10 @@ module RSpec::Expectations::ExpectationTarget::UndefinedValue; end
 class RSpec::Expectations::FailureAggregator
   # @return [FailureAggregator] a new instance of FailureAggregator
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#90
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#97
   def initialize(block_label, metadata); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#22
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#27
   def aggregate; end
 
   # Returns the value of attribute block_label.
@@ -811,10 +813,10 @@ class RSpec::Expectations::FailureAggregator
   # This method is defined to satisfy the callable interface
   # expected by `RSpec::Support.with_failure_notifier`.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#59
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#64
   def call(failure, options); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#49
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#54
   def failures; end
 
   # Returns the value of attribute metadata.
@@ -822,34 +824,38 @@ class RSpec::Expectations::FailureAggregator
   # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#5
   def metadata; end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#53
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#58
   def other_errors; end
 
   private
 
   # Using `caller` performs better (and is simpler) than `raise` on most Rubies.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#85
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#92
   def assign_backtrace(failure); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#96
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#103
   def notify_aggregated_failures; end
 end
 
-# source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#20
+# source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#25
 RSpec::Expectations::FailureAggregator::AGGREGATED_FAILURE = T.let(T.unsafe(nil), RSpec::Expectations::FailureAggregator::AggregatedFailure)
 
 # @private
 #
 # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#8
 class RSpec::Expectations::FailureAggregator::AggregatedFailure
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#15
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#19
   def inspect; end
 end
 
+# :nocov:
+# `inspect` was apparently used by some versions early in ruby 3 while constructing
+# NoMethodError, but seems to be no longer.
+#
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#10
+# source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#14
 RSpec::Expectations::FailureAggregator::AggregatedFailure::MESSAGE = T.let(T.unsafe(nil), String)
 
 # RSpec 3.0 was released with the class name misspelled. For SemVer compatibility,
@@ -858,7 +864,7 @@ RSpec::Expectations::FailureAggregator::AggregatedFailure::MESSAGE = T.let(T.uns
 # @deprecated Use LegacyMatcherAdapter instead.
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/handler.rb#180
+# source://rspec-expectations/lib/rspec/expectations/handler.rb#179
 RSpec::Expectations::LegacyMacherAdapter = RSpec::Expectations::LegacyMatcherAdapter
 
 # Wraps a matcher written against one of the legacy protocols in
@@ -866,15 +872,15 @@ RSpec::Expectations::LegacyMacherAdapter = RSpec::Expectations::LegacyMatcherAda
 #
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/handler.rb#113
+# source://rspec-expectations/lib/rspec/expectations/handler.rb#112
 class RSpec::Expectations::LegacyMatcherAdapter < ::RSpec::Matchers::MatcherDelegator
   # @return [LegacyMatcherAdapter] a new instance of LegacyMatcherAdapter
   #
-  # source://rspec-expectations/lib/rspec/expectations/handler.rb#114
+  # source://rspec-expectations/lib/rspec/expectations/handler.rb#113
   def initialize(matcher); end
 
   class << self
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#124
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#123
     def wrap(matcher); end
   end
 end
@@ -885,12 +891,12 @@ end
 #
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/handler.rb#157
+# source://rspec-expectations/lib/rspec/expectations/handler.rb#156
 class RSpec::Expectations::LegacyMatcherAdapter::RSpec1 < ::RSpec::Expectations::LegacyMatcherAdapter
-  # source://rspec-expectations/lib/rspec/expectations/handler.rb#158
+  # source://rspec-expectations/lib/rspec/expectations/handler.rb#157
   def failure_message; end
 
-  # source://rspec-expectations/lib/rspec/expectations/handler.rb#162
+  # source://rspec-expectations/lib/rspec/expectations/handler.rb#161
   def failure_message_when_negated; end
 
   class << self
@@ -900,7 +906,7 @@ class RSpec::Expectations::LegacyMatcherAdapter::RSpec1 < ::RSpec::Expectations:
     #
     # @return [Boolean]
     #
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#169
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#168
     def interface_matches?(matcher); end
   end
 end
@@ -912,18 +918,18 @@ end
 #
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/handler.rb#133
+# source://rspec-expectations/lib/rspec/expectations/handler.rb#132
 class RSpec::Expectations::LegacyMatcherAdapter::RSpec2 < ::RSpec::Expectations::LegacyMatcherAdapter
-  # source://rspec-expectations/lib/rspec/expectations/handler.rb#134
+  # source://rspec-expectations/lib/rspec/expectations/handler.rb#133
   def failure_message; end
 
-  # source://rspec-expectations/lib/rspec/expectations/handler.rb#138
+  # source://rspec-expectations/lib/rspec/expectations/handler.rb#137
   def failure_message_when_negated; end
 
   class << self
     # @return [Boolean]
     #
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#142
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#141
     def interface_matches?(matcher); end
   end
 end
@@ -939,130 +945,130 @@ end
 class RSpec::Expectations::MultipleExpectationsNotMetError < ::RSpec::Expectations::ExpectationNotMetError
   # @return [MultipleExpectationsNotMetError] a new instance of MultipleExpectationsNotMetError
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#153
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#160
   def initialize(failure_aggregator); end
 
   # @return [String] The user-assigned label for the aggregation block.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#128
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#135
   def aggregation_block_label; end
 
   # @return [Hash] The metadata hash passed to `aggregate_failures`.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#133
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#140
   def aggregation_metadata; end
 
   # @return [Array<Exception>] The list of expectation failures and other exceptions, combined.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#125
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#132
   def all_exceptions; end
 
   # return [String] A description of the failure/error counts.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#144
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#151
   def exception_count_description; end
 
   # @return [Array<RSpec::Expectations::ExpectationNotMetError>] The list of expectation failures.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#115
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#122
   def failures; end
 
   # @return [String] The fully formatted exception message.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#110
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#117
   def message; end
 
   # @return [Array<Exception>] The list of other exceptions.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#120
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#127
   def other_errors; end
 
   # @return [String] A summary of the failure, including the block label and a count of failures.
   #
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#138
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#145
   def summary; end
 
   private
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#185
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#192
   def backtrace_line(line); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#158
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#165
   def block_description; end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#167
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#174
   def enumerated(exceptions, index_offset); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#197
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#204
   def enumerated_errors; end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#193
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#200
   def enumerated_failures; end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#175
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#182
   def exclusion_patterns; end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#181
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#188
   def format_backtrace(backtrace); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#212
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#219
   def indentation; end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#203
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#210
   def indented(failure_message, index); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#224
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#231
   def index_label(index); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#216
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#223
   def longest_index_label_width; end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#163
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#170
   def pluralize(noun, count); end
 
-  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#220
+  # source://rspec-expectations/lib/rspec/expectations/failure_aggregator.rb#227
   def width_of_label(index); end
 end
 
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/handler.rb#74
+# source://rspec-expectations/lib/rspec/expectations/handler.rb#73
 class RSpec::Expectations::NegativeExpectationHandler
   class << self
     # @return [Boolean]
     #
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#88
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#87
     def does_not_match?(matcher, actual, &block); end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#75
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#74
     def handle_matcher(actual, initial_matcher, custom_message = T.unsafe(nil), &block); end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#104
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#103
     def opposite_should_method; end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#100
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#99
     def should_method; end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#96
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#95
     def verb; end
   end
 end
 
 # @private
 #
-# source://rspec-expectations/lib/rspec/expectations/handler.rb#46
+# source://rspec-expectations/lib/rspec/expectations/handler.rb#45
 class RSpec::Expectations::PositiveExpectationHandler
   class << self
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#47
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#46
     def handle_matcher(actual, initial_matcher, custom_message = T.unsafe(nil), &block); end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#68
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#67
     def opposite_should_method; end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#64
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#63
     def should_method; end
 
-    # source://rspec-expectations/lib/rspec/expectations/handler.rb#60
+    # source://rspec-expectations/lib/rspec/expectations/handler.rb#59
     def verb; end
   end
 end
@@ -3574,11 +3580,6 @@ class RSpec::Matchers::BuiltIn::BaseMatcher
   # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#36
   def matches?(actual); end
 
-  # :nocov:
-  #
-  # @api private
-  def present_ivars; end
-
   # @api private
   # @private
   #
@@ -3601,13 +3602,6 @@ class RSpec::Matchers::BuiltIn::BaseMatcher
   #
   # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#82
   def supports_value_expectations?; end
-
-  private
-
-  # @api private
-  #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#129
-  def assert_ivars(*expected_ivars); end
 
   class << self
     # @api private
@@ -3632,7 +3626,7 @@ end
 #
 # @api private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#207
+# source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#193
 module RSpec::Matchers::BuiltIn::BaseMatcher::DefaultFailureMessages
   # Provides a good generic failure message. Based on `description`.
   # When subclassing, if you are not satisfied with this failure message
@@ -3641,7 +3635,7 @@ module RSpec::Matchers::BuiltIn::BaseMatcher::DefaultFailureMessages
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#213
+  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#199
   def failure_message; end
 
   # Provides a good generic negative failure message. Based on `description`.
@@ -3651,7 +3645,7 @@ module RSpec::Matchers::BuiltIn::BaseMatcher::DefaultFailureMessages
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#222
+  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#208
   def failure_message_when_negated; end
 
   class << self
@@ -3659,7 +3653,7 @@ module RSpec::Matchers::BuiltIn::BaseMatcher::DefaultFailureMessages
     # @private
     # @return [Boolean]
     #
-    # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#227
+    # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#213
     def has_default_failure_messages?(matcher); end
   end
 end
@@ -3667,7 +3661,7 @@ end
 # @api private
 # @private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#146
+# source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#128
 module RSpec::Matchers::BuiltIn::BaseMatcher::HashFormatting
   private
 
@@ -3683,7 +3677,7 @@ module RSpec::Matchers::BuiltIn::BaseMatcher::HashFormatting
   #
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#156
+  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#138
   def improve_hash_formatting(inspect_string); end
 
   class << self
@@ -3699,7 +3693,7 @@ module RSpec::Matchers::BuiltIn::BaseMatcher::HashFormatting
     #
     # @api private
     #
-    # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#156
+    # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#138
     def improve_hash_formatting(inspect_string); end
   end
 end
@@ -3707,39 +3701,45 @@ end
 # @api private
 # @private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#165
+# source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#147
 module RSpec::Matchers::BuiltIn::BaseMatcher::StringEncodingFormatting
   private
 
   # Formats a String's encoding as a human readable string
+  # :nocov:
   #
   # @api private
   # @param _value [String]
   # @return [nil] nil as the curent Ruby version does not support String encoding
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#188
+  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#172
   def format_encoding(value); end
 
+  # :nocov:
+  #
   # @api private
   # @return [Boolean] False always as the curent Ruby version does not support String encoding
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#171
+  # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#153
   def string_encoding_differs?; end
 
   class << self
     # Formats a String's encoding as a human readable string
+    # :nocov:
     #
     # @api private
     # @param _value [String]
     # @return [nil] nil as the curent Ruby version does not support String encoding
     #
-    # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#188
+    # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#172
     def format_encoding(value); end
 
+    # :nocov:
+    #
     # @api private
     # @return [Boolean] False always as the curent Ruby version does not support String encoding
     #
-    # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#171
+    # source://rspec-expectations/lib/rspec/matchers/built_in/base_matcher.rb#153
     def string_encoding_differs?; end
   end
 end
@@ -4048,40 +4048,40 @@ end
 #
 # @api private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#137
+# source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#164
 class RSpec::Matchers::BuiltIn::BePredicate < ::RSpec::Matchers::BuiltIn::DynamicPredicate
   private
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#149
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#176
   def failure_to_respond_explanation; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#141
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#168
   def predicate; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#157
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#184
   def predicate_accessible?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#145
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#172
   def predicate_method_name; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#161
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#188
   def present_tense_predicate; end
 end
 
 # @api private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#139
+# source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#166
 RSpec::Matchers::BuiltIn::BePredicate::REGEX = T.let(T.unsafe(nil), Regexp)
 
 # Provides the implementation for `be_truthy`.
@@ -4388,6 +4388,8 @@ class RSpec::Matchers::BuiltIn::ChangeDetails
   # source://rspec-expectations/lib/rspec/matchers/built_in/change.rb#424
   def evaluate_value_proc; end
 
+  # :nocov:
+  #
   # source://rspec-expectations/lib/rspec/matchers/built_in/change.rb#438
   def extract_value_block_snippet; end
 
@@ -4621,17 +4623,17 @@ class RSpec::Matchers::BuiltIn::Compound < ::RSpec::Matchers::BuiltIn::BaseMatch
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#93
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#96
   def compound_failure_message; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#125
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#128
   def diffable_matcher_list_for(matcher); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#87
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#90
   def indent_multiline_message(message); end
 
   # @api private
@@ -4647,31 +4649,31 @@ class RSpec::Matchers::BuiltIn::Compound < ::RSpec::Matchers::BuiltIn::BaseMatch
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#99
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#102
   def matcher_1_matches?; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#103
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#106
   def matcher_2_matches?; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#119
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#122
   def matcher_is_diffable?(matcher); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#107
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#110
   def matcher_supports_block_expectations?(matcher); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#113
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#116
   def matcher_supports_value_expectations?(matcher); end
 end
 
@@ -4679,24 +4681,24 @@ end
 #
 # @api public
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#242
+# source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#245
 class RSpec::Matchers::BuiltIn::Compound::And < ::RSpec::Matchers::BuiltIn::Compound
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#245
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#248
   def failure_message; end
 
   private
 
   # @api public
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#262
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#265
   def conjunction; end
 
   # @api public
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#257
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#260
   def match(*_arg0); end
 end
 
@@ -4717,18 +4719,18 @@ end
 #
 # @api private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#156
+# source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#159
 class RSpec::Matchers::BuiltIn::Compound::NestedEvaluator
   # @api private
   # @return [NestedEvaluator] a new instance of NestedEvaluator
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#157
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#160
   def initialize(actual, matcher_1, matcher_2); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#170
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#173
   def matcher_matches?(matcher); end
 
   private
@@ -4739,7 +4741,7 @@ class RSpec::Matchers::BuiltIn::Compound::NestedEvaluator
   #
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#184
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#187
   def inner_matcher_block(outer_args); end
 
   # For a matcher like `raise_error` or `throw_symbol`, where the block will jump
@@ -4772,14 +4774,14 @@ class RSpec::Matchers::BuiltIn::Compound::NestedEvaluator
   # @api private
   # @raise [ArgumentError]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#224
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#227
   def order_block_matchers; end
 
   class << self
     # @api private
     # @return [Boolean]
     #
-    # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#233
+    # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#236
     def matcher_expects_call_stack_jump?(matcher); end
   end
 end
@@ -4788,24 +4790,24 @@ end
 #
 # @api public
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#269
+# source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#272
 class RSpec::Matchers::BuiltIn::Compound::Or < ::RSpec::Matchers::BuiltIn::Compound
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#272
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#275
   def failure_message; end
 
   private
 
   # @api public
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#283
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#286
   def conjunction; end
 
   # @api public
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#278
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#281
   def match(*_arg0); end
 end
 
@@ -4813,18 +4815,18 @@ end
 #
 # @api private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#132
+# source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#135
 class RSpec::Matchers::BuiltIn::Compound::SequentialEvaluator
   # @api private
   # @return [SequentialEvaluator] a new instance of SequentialEvaluator
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#133
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#136
   def initialize(actual, *_arg1); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#137
+  # source://rspec-expectations/lib/rspec/matchers/built_in/compound.rb#140
   def matcher_matches?(matcher); end
 end
 
@@ -4868,7 +4870,7 @@ class RSpec::Matchers::BuiltIn::ContainExactly < ::RSpec::Matchers::BuiltIn::Bas
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#135
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#137
   def best_solution; end
 
   # @api private
@@ -4893,7 +4895,7 @@ class RSpec::Matchers::BuiltIn::ContainExactly < ::RSpec::Matchers::BuiltIn::Bas
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#129
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#131
   def extra_items; end
 
   # @api private
@@ -4929,12 +4931,12 @@ class RSpec::Matchers::BuiltIn::ContainExactly < ::RSpec::Matchers::BuiltIn::Bas
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#123
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#125
   def missing_items; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#139
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#141
   def pairings_maximizer; end
 
   # @api private
@@ -4942,10 +4944,12 @@ class RSpec::Matchers::BuiltIn::ContainExactly < ::RSpec::Matchers::BuiltIn::Bas
   # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#104
   def safe_sort(array); end
 
+  # :nocov:
+  #
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#118
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#120
   def to_a_disallowed?(object); end
 end
 
@@ -4980,55 +4984,55 @@ end
 # @api private
 # @private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#186
+# source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#188
 class RSpec::Matchers::BuiltIn::ContainExactly::PairingsMaximizer
   # @api private
   # @return [PairingsMaximizer] a new instance of PairingsMaximizer
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#223
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#225
   def initialize(expected_to_actual_matched_indexes, actual_to_expected_matched_indexes); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#221
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#223
   def actual_to_expected_matched_indexes; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#221
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#223
   def expected_to_actual_matched_indexes; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#237
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#239
   def find_best_solution; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#221
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#223
   def solution; end
 
   private
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#299
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#301
   def apply_pairing_to(indeterminates, original_matches, other_list_index); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#283
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#285
   def best_solution_for_pairing(expected_index, actual_index); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#263
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#265
   def categorize_indexes(indexes_to_categorize, other_indexes); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#278
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#280
   def reciprocal_single_match?(matches, index, other_list); end
 end
 
@@ -5037,10 +5041,10 @@ end
 # @api private
 # @private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#257
+# source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#259
 class RSpec::Matchers::BuiltIn::ContainExactly::PairingsMaximizer::NullSolution
   class << self
-    # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#258
+    # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#260
     def worse_than?(_other); end
   end
 end
@@ -5048,23 +5052,23 @@ end
 # @api private
 # @private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#188
+# source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#190
 class RSpec::Matchers::BuiltIn::ContainExactly::PairingsMaximizer::Solution < ::Struct
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#210
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#212
   def +(derived_candidate_solution); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#194
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#196
   def candidate?; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#199
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#201
   def ideal?; end
 
   # Returns the value of attribute indeterminate_actual_indexes
@@ -5113,13 +5117,13 @@ class RSpec::Matchers::BuiltIn::ContainExactly::PairingsMaximizer::Solution < ::
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#206
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#208
   def unmatched_item_count; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#190
+  # source://rspec-expectations/lib/rspec/matchers/built_in/contain_exactly.rb#192
   def worse_than?(other); end
 
   class << self
@@ -5203,19 +5207,21 @@ module RSpec::Matchers::BuiltIn::CountExpectation
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#120
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#122
   def count_constraint_to_number(n); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#139
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#141
   def count_expectation_description; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#143
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#145
   def count_failure_reason(action); end
 
+  # :nocov:
+  #
   # @api private
   # @return [Boolean]
   #
@@ -5225,46 +5231,46 @@ module RSpec::Matchers::BuiltIn::CountExpectation
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#69
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#71
   def expected_count_matches?(actual_count); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#77
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#79
   def has_expected_count?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#157
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#159
   def human_readable_count(count); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#148
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#150
   def human_readable_expectation_type; end
 
   # @api private
   # @raise [ArgumentError]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#100
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#102
   def raise_impossible_count_expectation(count); end
 
   # @api private
   # @raise [ArgumentError]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#109
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#111
   def raise_unsupported_count_expectation; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#81
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#83
   def set_expected_count(relativity, n); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#132
+  # source://rspec-expectations/lib/rspec/matchers/built_in/count_expectation.rb#134
   def unsupported_count_expectation?(relativity); end
 end
 
@@ -5345,44 +5351,50 @@ class RSpec::Matchers::BuiltIn::DynamicPredicate < ::RSpec::Matchers::BuiltIn::B
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#99
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#126
   def expectation_of(value); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#94
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#121
   def failure_message_expecting(value); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#115
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#142
   def failure_to_respond_explanation; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#90
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#117
   def method_description; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#49
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#88
+  def methods_include?(method); end
+
+  # @api private
+  # @return [Boolean]
+  #
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#68
   def predicate_accessible?; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#74
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#101
   def predicate_matches?(value = T.unsafe(nil)); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#70
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#97
   def predicate_method_name; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#66
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#93
   def predicate_result; end
 
   # :nocov:
@@ -5390,17 +5402,25 @@ class RSpec::Matchers::BuiltIn::DynamicPredicate < ::RSpec::Matchers::BuiltIn::B
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#61
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#84
   def private_predicate?; end
 
-  # @api private
+  # :nocov:
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#82
-  def root; end
+  # @api private
+  # @return [Boolean]
+  #
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#62
+  def really_responds_to?(method); end
 
   # @api private
   #
   # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#109
+  def root; end
+
+  # @api private
+  #
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#136
   def validity_message; end
 end
 
@@ -5653,19 +5673,19 @@ end
 #
 # @api private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#125
+# source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#152
 class RSpec::Matchers::BuiltIn::Has < ::RSpec::Matchers::BuiltIn::DynamicPredicate
   private
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#129
+  # source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#156
   def predicate; end
 end
 
 # @api private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#127
+# source://rspec-expectations/lib/rspec/matchers/built_in/has.rb#154
 RSpec::Matchers::BuiltIn::Has::REGEX = T.let(T.unsafe(nil), Regexp)
 
 # Provides the implementation for `have_attributes`.
@@ -5779,6 +5799,7 @@ class RSpec::Matchers::BuiltIn::Include < ::RSpec::Matchers::BuiltIn::BaseMatche
   include ::RSpec::Matchers::BuiltIn::CountExpectation
 
   # @api private
+  # @raise [ArgumentError]
   # @return [Include] a new instance of Include
   #
   # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#15
@@ -5787,25 +5808,25 @@ class RSpec::Matchers::BuiltIn::Include < ::RSpec::Matchers::BuiltIn::BaseMatche
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#43
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#44
   def description; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#61
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#62
   def diffable?; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#32
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#33
   def does_not_match?(actual); end
 
   # @api private
   # @return [Array, Hash]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#67
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#68
   def expected; end
 
   # @api private
@@ -5817,19 +5838,19 @@ class RSpec::Matchers::BuiltIn::Include < ::RSpec::Matchers::BuiltIn::BaseMatche
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#49
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#50
   def failure_message; end
 
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#55
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#56
   def failure_message_when_negated; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#21
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#22
   def matches?(actual); end
 
   private
@@ -5837,85 +5858,87 @@ class RSpec::Matchers::BuiltIn::Include < ::RSpec::Matchers::BuiltIn::BaseMatche
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#167
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#168
   def actual_collection_includes?(expected_item); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#153
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#154
   def actual_hash_has_key?(expected_key); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#141
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#142
   def actual_hash_includes?(expected_key, expected_value); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#77
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#78
   def check_actual?(actual); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#83
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#84
   def check_expected_count?; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#149
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#150
   def comparing_hash_keys?(expected_item); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#137
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#138
   def comparing_hash_to_a_subset?(expected_item); end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#207
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#212
   def convert_to_hash?(obj); end
 
+  # :nocov:
+  #
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#181
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#185
   def count_enumerable(expected_item); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#186
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#190
   def count_inclusions; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#198
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#202
   def diff_would_wrongly_highlight_matched_item?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#120
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#121
   def excluded_from_actual; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#95
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#96
   def format_failure_message(preposition); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#115
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#116
   def perform_match(&block); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#106
+  # source://rspec-expectations/lib/rspec/matchers/built_in/include.rb#107
   def readable_list_of(items); end
 end
 
@@ -6238,176 +6261,176 @@ class RSpec::Matchers::BuiltIn::RaiseError
   # @api private
   # @return [RaiseError] a new instance of RaiseError
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#18
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#22
   def initialize(expected_error_or_message, expected_message, &block); end
 
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#113
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#117
   def description; end
 
   # @api private
   # @private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#79
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#83
   def does_not_match?(given_proc); end
 
   # @api private
   # @private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#95
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#99
   def expects_call_stack_jump?; end
 
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#101
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#105
   def failure_message; end
 
   # @api private
   # @return [String]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#107
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#111
   def failure_message_when_negated; end
 
   # @api private
   # @private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#48
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#52
   def matches?(given_proc, negative_expectation = T.unsafe(nil), &block); end
 
   # @api private
   # @private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#85
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#89
   def supports_block_expectations?; end
 
   # @api private
   # @private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#90
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#94
   def supports_value_expectations?; end
 
   # Specifies the expected error message.
   #
   # @api public
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#39
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#43
   def with_message(expected_message); end
 
   private
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#119
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#123
   def actual_error_message; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#133
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#137
   def block_matches?; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#129
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#133
   def error_and_message_match?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#141
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#145
   def eval_block; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#125
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#129
   def expectation_matched?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#222
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#226
   def expected_error; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#253
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#257
   def expecting_specific_exception?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#237
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#241
   def format_backtrace(backtrace); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#242
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#246
   def given_error; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#172
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#176
   def handle_warning(message); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#257
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#261
   def raise_message_already_set; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#137
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#141
   def ready_to_eval_block?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#151
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#155
   def verify_message; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#184
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#188
   def warn_about_bare_error!; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#176
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#180
   def warn_about_bare_error?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#210
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#214
   def warn_about_negative_false_positive!(expression); end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#197
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#201
   def warn_about_nil_error!; end
 
   # @api private
   # @return [Boolean]
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#180
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#184
   def warn_about_nil_error?; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#156
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#160
   def warn_for_negative_false_positives!; end
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#262
+  # source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#266
   def warning; end
 end
 
@@ -6416,9 +6439,13 @@ end
 # passed in a different way. It's an Object, not a Module, since Module's `===`
 # does not evaluate to true when compared to itself.
 #
+# Note; this _is_ the default value supplied for expected_error_or_message, but
+# because there are two method-calls involved, that default is actually supplied
+# in the definition of the _matcher_ method, `RSpec::Matchers#raise_error`
+#
 # @api private
 #
-# source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#16
+# source://rspec-expectations/lib/rspec/matchers/built_in/raise_error.rb#20
 RSpec::Matchers::BuiltIn::RaiseError::UndefinedValue = T.let(T.unsafe(nil), Object)
 
 # Used to wrap match data and make it reliable for 1.8.7
@@ -6438,7 +6465,7 @@ class RSpec::Matchers::BuiltIn::ReliableMatchData
   # @api private
   # @return Array
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/match.rb#96
+  # source://rspec-expectations/lib/rspec/matchers/built_in/match.rb#98
   def captures; end
 
   # Returns match data names for named captures
@@ -6446,14 +6473,14 @@ class RSpec::Matchers::BuiltIn::ReliableMatchData
   # @api private
   # @return Array
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/match.rb#88
+  # source://rspec-expectations/lib/rspec/matchers/built_in/match.rb#90
   def names; end
 
   protected
 
   # @api private
   #
-  # source://rspec-expectations/lib/rspec/matchers/built_in/match.rb#102
+  # source://rspec-expectations/lib/rspec/matchers/built_in/match.rb#104
   def match_data; end
 end
 
@@ -6700,6 +6727,8 @@ class RSpec::Matchers::BuiltIn::Satisfy < ::RSpec::Matchers::BuiltIn::BaseMatche
 
   private
 
+  # :nocov:
+  #
   # @api private
   #
   # source://rspec-expectations/lib/rspec/matchers/built_in/satisfy.rb#40

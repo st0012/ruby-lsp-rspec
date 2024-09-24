@@ -468,7 +468,7 @@ class RSpec::Core::Configuration
   # @see #before
   # @see #prepend_before
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2025
+  # source://rspec-core/lib/rspec/core/configuration.rb#2026
   def after(scope = T.unsafe(nil), *meta, &block); end
 
   # Creates a method that defines an example group with the provided
@@ -609,7 +609,7 @@ class RSpec::Core::Configuration
   # @see #before
   # @see #prepend_before
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2055
+  # source://rspec-core/lib/rspec/core/configuration.rb#2056
   def append_after(scope = T.unsafe(nil), *meta, &block); end
 
   # Defines a `before` hook. See {Hooks#before} for full docs.
@@ -623,20 +623,20 @@ class RSpec::Core::Configuration
   # @see #after
   # @see #append_after
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1970
+  # source://rspec-core/lib/rspec/core/configuration.rb#1971
   def append_before(scope = T.unsafe(nil), *meta, &block); end
 
   # @private
   # @raise [SystemStackError]
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1935
+  # source://rspec-core/lib/rspec/core/configuration.rb#1936
   def apply_derived_metadata_to(metadata); end
 
   # Registers `block` as an `around` hook.
   #
   # See {Hooks#around} for full `around` hook docs.
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2073
+  # source://rspec-core/lib/rspec/core/configuration.rb#2074
   def around(scope = T.unsafe(nil), *meta, &block); end
 
   # Regexps used to exclude lines from backtraces.
@@ -700,7 +700,7 @@ class RSpec::Core::Configuration
   # @see #after
   # @see #append_after
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1970
+  # source://rspec-core/lib/rspec/core/configuration.rb#1971
   def before(scope = T.unsafe(nil), *meta, &block); end
 
   # Determines which bisect runner implementation gets used to run subsets
@@ -730,7 +730,7 @@ class RSpec::Core::Configuration
 
   # @private
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2119
+  # source://rspec-core/lib/rspec/core/configuration.rb#2120
   def bisect_runner_class; end
 
   # Enables color output if the output is a TTY.  As of RSpec 3.6, this is
@@ -889,7 +889,7 @@ class RSpec::Core::Configuration
   # @yieldparam metadata [Hash] original metadata hash from an example or
   #   group. Mutate this in your block as needed.
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1894
+  # source://rspec-core/lib/rspec/core/configuration.rb#1895
   def define_derived_metadata(*filters, &block); end
 
   # Determines where deprecation warnings are printed.
@@ -930,7 +930,7 @@ class RSpec::Core::Configuration
 
   # @private
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1875
+  # source://rspec-core/lib/rspec/core/configuration.rb#1876
   def disable_monkey_patching; end
 
   # Enables zero monkey patching mode for RSpec. It removes monkey
@@ -968,12 +968,12 @@ class RSpec::Core::Configuration
   #   (or similar) they will still have monkey patching active
   #   in their test environment from mocha.
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1867
+  # source://rspec-core/lib/rspec/core/configuration.rb#1868
   def disable_monkey_patching!; end
 
   # @private
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1875
+  # source://rspec-core/lib/rspec/core/configuration.rb#1876
   def disable_monkey_patching=(_arg0); end
 
   # Run examples over DRb (default: `false`). RSpec doesn't supply the DRb
@@ -1158,7 +1158,7 @@ class RSpec::Core::Configuration
   #   end
   # @param method_name [Symbol] the name of the helper method
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1805
+  # source://rspec-core/lib/rspec/core/configuration.rb#1806
   def expose_current_running_example_as(method_name); end
 
   # Use this to expose the core RSpec DSL via `Module` and the `main`
@@ -1580,7 +1580,7 @@ class RSpec::Core::Configuration
   #
   # @private
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2103
+  # source://rspec-core/lib/rspec/core/configuration.rb#2104
   def hooks; end
 
   # @private
@@ -1794,14 +1794,14 @@ class RSpec::Core::Configuration
 
   # Invokes block before defining an example group
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2108
+  # source://rspec-core/lib/rspec/core/configuration.rb#2109
   def on_example_group_definition(&block); end
 
   # Returns an array of blocks to call before defining an example group
   #
   # @api private
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2114
+  # source://rspec-core/lib/rspec/core/configuration.rb#2115
   def on_example_group_definition_callbacks; end
 
   # Indicates if the `--only-failures` (or `--next-failure`) flag is being used.
@@ -1959,7 +1959,7 @@ class RSpec::Core::Configuration
   # @see #before
   # @see #prepend_before
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2025
+  # source://rspec-core/lib/rspec/core/configuration.rb#2026
   def prepend_after(scope = T.unsafe(nil), *meta, &block); end
 
   # Adds `block` to the start of the list of `before` blocks in the same
@@ -1977,7 +1977,7 @@ class RSpec::Core::Configuration
   # @see #after
   # @see #append_after
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2000
+  # source://rspec-core/lib/rspec/core/configuration.rb#2001
   def prepend_before(scope = T.unsafe(nil), *meta, &block); end
 
   # Defaults `profile_examples` to 10 examples when `@profile_examples` is
@@ -2037,11 +2037,12 @@ class RSpec::Core::Configuration
   #   rspec.raise_errors_for_deprecations!
   #   end
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1827
+  # source://rspec-core/lib/rspec/core/configuration.rb#1828
   def raise_errors_for_deprecations!; end
 
-  # Turns warnings into errors. This can be useful when
+  # Turns RSpec warnings into errors. This can be useful when
   # you want RSpec to run in a 'strict' no warning situation.
+  # (Note this does not capture or raise on Ruby warnings).
   #
   # @example
   #
@@ -2049,7 +2050,7 @@ class RSpec::Core::Configuration
   #   rspec.raise_on_warning = true
   #   end
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1775
+  # source://rspec-core/lib/rspec/core/configuration.rb#1776
   def raise_on_warning=(value); end
 
   # Registers a named ordering strategy that can later be
@@ -2340,12 +2341,12 @@ class RSpec::Core::Configuration
   #   end
   #   end
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#1917
+  # source://rspec-core/lib/rspec/core/configuration.rb#1918
   def when_first_matching_example_defined(*filters); end
 
   # @private
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2085
+  # source://rspec-core/lib/rspec/core/configuration.rb#2086
   def with_suite_hooks; end
 
   # @private
@@ -2364,111 +2365,111 @@ class RSpec::Core::Configuration
   #
   # @return [Boolean]
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2248
+  # source://rspec-core/lib/rspec/core/configuration.rb#2249
   def absolute_pattern?(pattern); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2349
+  # source://rspec-core/lib/rspec/core/configuration.rb#2350
   def add_hook_to_existing_matching_groups(meta, scope, &block); end
 
   # @raise [MustBeConfiguredBeforeExampleGroupsError]
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2288
+  # source://rspec-core/lib/rspec/core/configuration.rb#2289
   def assert_no_example_groups_defined(config_option); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2338
+  # source://rspec-core/lib/rspec/core/configuration.rb#2339
   def clear_values_derived_from_example_status_persistence_file_path; end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2270
+  # source://rspec-core/lib/rspec/core/configuration.rb#2271
   def command; end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2314
+  # source://rspec-core/lib/rspec/core/configuration.rb#2315
   def conditionally_disable_expectations_monkey_patching; end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2305
+  # source://rspec-core/lib/rspec/core/configuration.rb#2306
   def conditionally_disable_mocks_monkey_patching; end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2343
+  # source://rspec-core/lib/rspec/core/configuration.rb#2344
   def configure_group_with(group, module_list, application_method); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2278
+  # source://rspec-core/lib/rspec/core/configuration.rb#2279
   def define_built_in_hooks; end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2401
+  # source://rspec-core/lib/rspec/core/configuration.rb#2402
   def define_mixed_in_module(mod, filters, mod_list, config_method, &block); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2253
+  # source://rspec-core/lib/rspec/core/configuration.rb#2254
   def extract_location(path); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2230
+  # source://rspec-core/lib/rspec/core/configuration.rb#2231
   def file_glob_from(path, pattern); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2219
+  # source://rspec-core/lib/rspec/core/configuration.rb#2220
   def gather_directories(path); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2198
+  # source://rspec-core/lib/rspec/core/configuration.rb#2199
   def get_files_to_run(paths); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2225
+  # source://rspec-core/lib/rspec/core/configuration.rb#2226
   def get_matching_files(path, pattern); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2165
+  # source://rspec-core/lib/rspec/core/configuration.rb#2166
   def handle_suite_hook(scope, meta); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2137
+  # source://rspec-core/lib/rspec/core/configuration.rb#2138
   def load_file_handling_errors(method, file); end
 
   # @return [Boolean]
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2371
+  # source://rspec-core/lib/rspec/core/configuration.rb#2372
   def metadata_applies_to_group?(meta, group); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2363
+  # source://rspec-core/lib/rspec/core/configuration.rb#2364
   def on_existing_matching_groups(meta); end
 
   # @return [Boolean]
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2301
+  # source://rspec-core/lib/rspec/core/configuration.rb#2302
   def output_to_tty?(output = T.unsafe(nil)); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2297
+  # source://rspec-core/lib/rspec/core/configuration.rb#2298
   def output_wrapper; end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2210
+  # source://rspec-core/lib/rspec/core/configuration.rb#2211
   def paths_to_check(paths); end
 
   # @return [Boolean]
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2215
+  # source://rspec-core/lib/rspec/core/configuration.rb#2216
   def pattern_might_load_specs_from_vendored_dirs?; end
 
   # @return [Boolean]
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2324
+  # source://rspec-core/lib/rspec/core/configuration.rb#2325
   def rspec_expectations_loaded?; end
 
   # @return [Boolean]
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2320
+  # source://rspec-core/lib/rspec/core/configuration.rb#2321
   def rspec_mocks_loaded?; end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2180
+  # source://rspec-core/lib/rspec/core/configuration.rb#2181
   def run_suite_hooks(hook_description, hooks); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2386
+  # source://rspec-core/lib/rspec/core/configuration.rb#2387
   def safe_extend(mod, host); end
 
   # :nocov:
   #
-  # source://rspec-core/lib/rspec/core/configuration.rb#2382
+  # source://rspec-core/lib/rspec/core/configuration.rb#2383
   def safe_include(mod, host); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2376
+  # source://rspec-core/lib/rspec/core/configuration.rb#2377
   def safe_prepend(mod, host); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2328
+  # source://rspec-core/lib/rspec/core/configuration.rb#2329
   def update_pattern_attr(name, value); end
 
-  # source://rspec-core/lib/rspec/core/configuration.rb#2274
+  # source://rspec-core/lib/rspec/core/configuration.rb#2275
   def value_for(key); end
 
   class << self
@@ -2537,7 +2538,7 @@ end
 
 # @private
 #
-# source://rspec-core/lib/rspec/core/configuration.rb#1815
+# source://rspec-core/lib/rspec/core/configuration.rb#1816
 module RSpec::Core::Configuration::ExposeCurrentExample; end
 
 # @private
@@ -9502,7 +9503,7 @@ module RSpec::Core::Pending
   # @param message [String] optional message to add to the summary report.
   #
   # source://rspec-core/lib/rspec/core/pending.rb#62
-  def pending(message = T.unsafe(nil)); end
+  def pending(message = T.unsafe(nil), &_block); end
 
   # Marks an example as pending and skips execution.
   #

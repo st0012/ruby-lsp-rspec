@@ -18,6 +18,11 @@ module RubyLsp
       sig { override.void }
       def deactivate; end
 
+      sig { override.returns(String) }
+      def version
+        VERSION
+      end
+
       # Creates a new CodeLens listener. This method is invoked on every CodeLens request
       sig do
         override.params(

@@ -21,6 +21,7 @@ module RubyLsp
         @path = T.let(T.must(uri.to_standardized_path), String)
         @group_id = T.let(1, Integer)
         @group_id_stack = T.let([], T::Array[Integer])
+        @anonymous_example_count = T.let(0, Integer)
         dispatcher.register(self, :on_call_node_enter, :on_call_node_leave)
 
         @base_command = T.let(
@@ -93,7 +94,8 @@ module RubyLsp
             argument.slice
           end
         else
-          "<unnamed>"
+          @anonymous_example_count += 1
+          "<unnamed-#{@anonymous_example_count}>"
         end
       end
 

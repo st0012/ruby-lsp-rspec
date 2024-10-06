@@ -4,8 +4,6 @@
 
 Ruby LSP RSpec is a [Ruby LSP](https://github.com/Shopify/ruby-lsp) addon for displaying CodeLens for RSpec tests.
 
-![Screenshot of the code lenses](/misc/example.gif)
-
 ## Installation
 
 To install, add the following line to your application's Gemfile:
@@ -19,14 +17,36 @@ end
 
 After running `bundle install`, restart Ruby LSP and you should start seeing CodeLens in your RSpec test files.
 
-## Usages (with VS Code)
+## Features
 
-1. When clicking `Run`, the test(s) will be executed via the Test Explorer.
-    - However, deeply nested tests may not be displayed correctly at the moment.
-2. When clicking `Run In Terminal`, a test command will be generated in the terminal.
-3. When clicking `Debug`, the test(s) will be executed with VS Code debugger enabled (requires the [`debug`](https://github.com/ruby/debug) gem).
-    - [Learn how to set breakpoints in VS Code](https://code.visualstudio.com/docs/editor/debugging#_breakpoints).
+### CodeLens
 
+1. When clicking `Run`, the test(s) will be executed via the Test Explorer
+    - However, deeply nested tests may not be displayed correctly at the moment
+2. When clicking `Run In Terminal`, a test command will be generated in the terminal
+3. When clicking `Debug`, the test(s) will be executed with VS Code debugger enabled (requires the [`debug`](https://github.com/ruby/debug) gem)
+    - [Learn how to set breakpoints in VS Code](https://code.visualstudio.com/docs/editor/debugging#_breakpoints)
+
+<img src="misc/code-lens.gif" alt="CodeLens" width="75%">
+
+### Document Symbols
+
+Document Symbols can be triggered by:
+
+- Typing `@` in VS Code's command palette
+- Pressing `Cmd+Shift+O`
+
+<img src="misc/document-symbol.gif" alt="Document Symbols" width="75%">
+
+### Go to definition
+
+In VS Code this feature can be triggered by one of the following methods:
+
+- `Right click` on the target, and then select `Go to Definition`
+- Placing the cursor on the target, and then hit `F12`
+- `Command + click` the target
+
+<img src="misc/go-to-definition.gif" alt="Go to definition" width="75%">
 
 ## Development
 

@@ -40,11 +40,16 @@ Document Symbols can be triggered by:
 
 ### Go to definition
 
+`ruby-lsp-rspec` supports go-to-definition on methods defined through `let` and `subject` DSLs in spec files.
+
 In VS Code this feature can be triggered by one of the following methods:
 
 - `Right click` on the target, and then select `Go to Definition`
 - Placing the cursor on the target, and then hit `F12`
 - `Command + click` the target
+
+> [!Note]
+> This feature requires indexing your spec files so they can't be excluded from Ruby LSP's indexing.
 
 <img src="misc/go-to-definition.gif" alt="Go to definition" width="75%">
 

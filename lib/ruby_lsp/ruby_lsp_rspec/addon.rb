@@ -6,6 +6,8 @@ require "ruby_lsp/internal"
 
 require_relative "code_lens"
 require_relative "document_symbol"
+require_relative "definition"
+require_relative "indexing_enhancement"
 
 module RubyLsp
   module RSpec
@@ -13,7 +15,10 @@ module RubyLsp
       extend T::Sig
 
       sig { override.params(global_state: GlobalState, message_queue: Thread::Queue).void }
-      def activate(global_state, message_queue); end
+      def activate(global_state, message_queue)
+        @index = T.let(global_state.index, T.nilable(RubyIndexer::Index))
+        global_state.index.register_enhancement(IndexingEnhancement.new)
+      end
 
       sig { override.void }
       def deactivate; end
@@ -45,6 +50,21 @@ module RubyLsp
       end
       def create_document_symbol_listener(response_builder, dispatcher)
         DocumentSymbol.new(response_builder, dispatcher)
+      end
+
+      sig do
+        override.params(
+          response_builder: ResponseBuilders::CollectionResponseBuilder[T.any(
+            Interface::Location,
+            Interface::LocationLink,
+          )],
+          uri: URI::Generic,
+          node_context: NodeContext,
+          dispatcher: Prism::Dispatcher,
+        ).void
+      end
+      def create_definition_listener(response_builder, uri, node_context, dispatcher)
+        Definition.new(response_builder, uri, node_context, T.must(@index), dispatcher)
       end
 
       sig { override.returns(String) }

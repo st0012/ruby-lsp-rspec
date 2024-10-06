@@ -14,7 +14,7 @@ GEM
     diff-lcs (1.5.1)
     erubi (1.13.0)
     io-console (0.7.2)
-    irb (1.14.0)
+    irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.7.2)
@@ -126,4 +126,4 @@ DEPENDENCIES
   tapioca (~> 0.11)
 
 BUNDLED WITH
-   2.5.4
+   2.5.11

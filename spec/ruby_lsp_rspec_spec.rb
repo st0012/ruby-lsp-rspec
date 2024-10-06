@@ -380,9 +380,9 @@ RSpec.describe RubyLsp::RSpec do
 
         expect(response.count).to eq(15)
 
-        expect(response[3].command.arguments[1]).to eq("<unnamed>")
+        expect(response[3].command.arguments[1]).to eq("<unnamed-1>")
         expect(response[6].command.arguments[1]).to eq("<var1>")
-        expect(response[9].command.arguments[1]).to eq("<unnamed>")
+        expect(response[9].command.arguments[1]).to eq("<unnamed-2>")
         expect(response[12].command.arguments[1]).to eq("<var2>")
       end
     end

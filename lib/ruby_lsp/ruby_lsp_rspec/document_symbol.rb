@@ -74,7 +74,7 @@ module RubyLsp
 
         case argument
         when Prism::StringNode
-          argument.content.dump
+          argument.unescaped
         when Prism::CallNode
           "<#{argument.name}>"
         when nil

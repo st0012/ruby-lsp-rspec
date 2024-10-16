@@ -235,6 +235,11 @@ RSpec.describe RubyLsp::RSpec do
 
           # unname test is ignored
           it { }
+
+          context "日本語テスト" do
+            it "何かのテスト" do
+            end
+          end
         end
       RUBY
 
@@ -257,27 +262,31 @@ RSpec.describe RubyLsp::RSpec do
         foo = response[0]
         expect(foo.name).to eq("Foo")
         expect(foo.kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
-        expect(foo.children.count).to eq(4)
+        expect(foo.children.count).to eq(5)
 
-        expect(foo.children[0].name).to eq("\"when something\"")
+        expect(foo.children[0].name).to eq("when something")
         expect(foo.children[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
         expect(foo.children[0].children.count).to eq(1)
-        expect(foo.children[0].children[0].name).to eq("\"does something\"")
+        expect(foo.children[0].children[0].name).to eq("does something")
         expect(foo.children[0].children[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::METHOD)
 
         foo_bar = foo.children[1]
         expect(foo_bar.name).to eq("Foo::Bar")
         expect(foo_bar.children.count).to eq(2)
-        expect(foo_bar.children[0].name).to eq("\"does something else\"")
-        expect(foo_bar.children[1].name).to eq("\"when something else\"")
+        expect(foo_bar.children[0].name).to eq("does something else")
+        expect(foo_bar.children[1].name).to eq("when something else")
         expect(foo_bar.children[1].children.count).to eq(1)
-        expect(foo_bar.children[1].children[0].name).to eq("\"does something something\"")
+        expect(foo_bar.children[1].children[0].name).to eq("does something something")
 
         expect(foo.children[2].name).to eq("<variable>")
 
         expect(foo.children[3].name).to eq("Baz")
         expect(foo.children[3].children.count).to eq(1)
         expect(foo.children[3].children[0].name).to eq("test_baz")
+
+        foo.children[4].inspect
+        STDERR.puts foo.children[4].children[0].name
+        expect(foo.children[4].children[0].name).to eq("何かのテスト")
       end
     end
   end

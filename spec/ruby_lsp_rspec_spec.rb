@@ -284,8 +284,7 @@ RSpec.describe RubyLsp::RSpec do
         expect(foo.children[3].children.count).to eq(1)
         expect(foo.children[3].children[0].name).to eq("test_baz")
 
-        foo.children[4].inspect
-        STDERR.puts foo.children[4].children[0].name
+        expect(foo.children[4].name).to eq("日本語テスト")
         expect(foo.children[4].children[0].name).to eq("何かのテスト")
       end
     end

@@ -13,9 +13,13 @@ module RubyLsp
           owner: T.nilable(RubyIndexer::Entry::Namespace),
           node: Prism::CallNode,
           file_path: String,
+          code_units_cache: T.any(
+            T.proc.params(arg0: Integer).returns(Integer),
+            Prism::CodeUnitsCache,
+          ),
         ).void
       end
-      def on_call_node(index, owner, node, file_path)
+      def on_call_node(index, owner, node, file_path, code_units_cache)
         return if node.receiver
 
         name = node.name
@@ -44,10 +48,9 @@ module RubyLsp
           index.add(RubyIndexer::Entry::Method.new(
             method_name,
             file_path,
-            block_node.location,
-            block_node.location,
+            RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
+            RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
             nil,
-            index.configuration.encoding,
             [RubyIndexer::Entry::Signature.new([])],
             RubyIndexer::Entry::Visibility::PUBLIC,
             owner,
@@ -78,10 +81,9 @@ module RubyLsp
           index.add(RubyIndexer::Entry::Method.new(
             method_name,
             file_path,
-            block_node.location,
-            block_node.location,
+            RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
+            RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
             nil,
-            index.configuration.encoding,
             [RubyIndexer::Entry::Signature.new([])],
             RubyIndexer::Entry::Visibility::PUBLIC,
             owner,

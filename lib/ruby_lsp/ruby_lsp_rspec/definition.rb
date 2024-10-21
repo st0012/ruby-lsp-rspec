@@ -42,6 +42,7 @@ module RubyLsp
         entries.each do |entry|
           # Technically, let can be defined in a different file, but we're not going to handle that case yet
           next unless entry.file_path == @uri.to_standardized_path
+          next unless entry.file_path.end_with?('spec.rb')
 
           @response_builder << Interface::LocationLink.new(
             target_uri: URI::Generic.from_path(path: entry.file_path).to_s,

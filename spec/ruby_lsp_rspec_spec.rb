@@ -21,7 +21,7 @@ RSpec.describe RubyLsp::RSpec do
         end
       RUBY
 
-      tempfile = Tempfile.new
+      tempfile = Tempfile.new(["", "_fake_spec.rb"])
       tempfile.write(source)
       tempfile.close
       uri = URI(tempfile.path)
@@ -89,7 +89,7 @@ RSpec.describe RubyLsp::RSpec do
         end
       RUBY
 
-      tempfile = Tempfile.new
+      tempfile = Tempfile.new(["", "_fake_spec.rb"])
       tempfile.write(source)
       tempfile.close
       uri = URI(tempfile.path)
@@ -150,7 +150,7 @@ RSpec.describe RubyLsp::RSpec do
         end
       RUBY
 
-      tempfile = Tempfile.new
+      tempfile = Tempfile.new(["", "_fake_spec.rb"])
       tempfile.write(source)
       tempfile.close
       uri = URI(tempfile.path)
@@ -204,6 +204,39 @@ RSpec.describe RubyLsp::RSpec do
       end
     ensure
       tempfile&.unlink
+    end
+
+    context "when the file is not a test file" do
+      let(:uri) { URI("file:///not_spec_file.rb") }
+
+      it "ignores file" do
+        source = <<~RUBY
+          class FooBar
+            def bar
+              foo
+            end
+
+            def foo; end
+          end
+        RUBY
+
+        with_server(source, uri) do |server, uri|
+          server.process_message(
+            {
+              id: 1,
+              method: "textDocument/definition",
+              params: {
+                textDocument: { uri: uri },
+                position: { character: 4, line: 2 },
+              },
+            },
+          )
+
+          response = server.pop_response.response
+
+          expect(response.count).to eq(1)
+        end
+      end
     end
   end
 

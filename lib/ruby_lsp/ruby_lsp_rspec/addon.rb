@@ -64,6 +64,8 @@ module RubyLsp
         ).void
       end
       def create_definition_listener(response_builder, uri, node_context, dispatcher)
+        return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
+
         Definition.new(response_builder, uri, node_context, T.must(@index), dispatcher)
       end
 

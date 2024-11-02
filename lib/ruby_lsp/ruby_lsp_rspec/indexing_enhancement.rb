@@ -3,13 +3,11 @@
 
 module RubyLsp
   module RSpec
-    class IndexingEnhancement
+    class IndexingEnhancement < RubyIndexer::Enhancement
       extend T::Sig
-      include RubyIndexer::Enhancement
 
       sig do
         override.params(
-          index: RubyIndexer::Index,
           owner: T.nilable(RubyIndexer::Entry::Namespace),
           node: Prism::CallNode,
           file_path: String,
@@ -19,7 +17,7 @@ module RubyLsp
           ),
         ).void
       end
-      def on_call_node(index, owner, node, file_path, code_units_cache)
+      def on_call_node_enter(owner, node, file_path, code_units_cache)
         return if node.receiver
 
         name = node.name
@@ -45,7 +43,7 @@ module RubyLsp
 
           return unless method_name
 
-          index.add(RubyIndexer::Entry::Method.new(
+          @index.add(RubyIndexer::Entry::Method.new(
             method_name,
             file_path,
             RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
@@ -78,7 +76,7 @@ module RubyLsp
 
           return unless method_name
 
-          index.add(RubyIndexer::Entry::Method.new(
+          @index.add(RubyIndexer::Entry::Method.new(
             method_name,
             file_path,
             RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),

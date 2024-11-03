@@ -1,7 +1,7 @@
 # typed: false
 # frozen_string_literal: true
 
-require_relative "../../../spec_helper"
+require_relative "spec_helper"
 
 RSpec.describe RubyLsp::RSpec do
   include RubyLsp::TestHelper
@@ -192,7 +192,7 @@ RSpec.describe RubyLsp::RSpec do
     end
 
     context "when there's a binstub" do
-      let(:binstub_path) { File.expand_path("../../../../bin/rspec", __dir__) }
+      let(:binstub_path) { File.expand_path("../bin/rspec", __dir__) }
 
       before do
         File.write(binstub_path, <<~RUBY)

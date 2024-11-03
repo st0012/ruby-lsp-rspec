@@ -4,6 +4,7 @@ require "ruby-lsp-rspec"
 require "ruby_lsp/internal"
 require "ruby_lsp/test_helper"
 require "ruby_lsp/ruby_lsp_rspec/addon"
+require "tempfile"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

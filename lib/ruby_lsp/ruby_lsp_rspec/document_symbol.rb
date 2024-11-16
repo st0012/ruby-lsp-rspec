@@ -34,7 +34,7 @@ module RubyLsp
             selection_range: range_from_node(node),
             range: range_from_node(node),
           )
-        when "context", "describe"
+        when "context", "describe", "shared_examples", "shared_context"
           return if node.receiver && node.receiver&.slice != "RSpec"
 
           name = generate_name(node)

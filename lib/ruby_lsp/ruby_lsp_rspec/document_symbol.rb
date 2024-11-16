@@ -57,7 +57,7 @@ module RubyLsp
       sig { params(node: Prism::CallNode).void }
       def on_call_node_leave(node)
         case node.message
-        when "context", "describe"
+        when "context", "describe", "shared_examples", "shared_context", "shared_examples_for"
           return if node.receiver && node.receiver&.slice != "RSpec"
 
           @response_builder.pop

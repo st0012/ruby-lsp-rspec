@@ -268,5 +268,77 @@ RSpec.describe RubyLsp::RSpec do
         expect(response[0].children.count).to eq(2)
       end
     end
+
+    it "simple shared_examples_for" do
+      source = <<~RUBY
+        RSpec.shared_examples_for "simple shared_examples_for" do
+          before { @some_var = :some_value }
+          def shared_method
+            "it works"
+          end
+          let(:shared_let) { {'arbitrary' => 'object'} }
+          subject do
+            'this is the subject'
+          end
+        end
+      RUBY
+
+      with_server(source, uri) do |server, uri|
+        server.process_message(
+          {
+            id: 2,
+            method: "textDocument/documentSymbol",
+            params: {
+              textDocument: { uri: uri },
+            },
+          },
+        )
+
+        result = server.pop_response
+        expect(result).to be_a(RubyLsp::Result)
+        response = result.response
+
+        expect(response.count).to eq(1)
+        expect(response[0].name).to eq("simple shared_examples_for")
+        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].children.count).to eq(2)
+      end
+    end
+
+    it "symbol shared_examples_for" do
+      source = <<~RUBY
+        RSpec.shared_examples_for :symbol_shared_examples_for do
+          before { @some_var = :some_value }
+          def shared_method
+            "it works"
+          end
+          let(:shared_let) { {'arbitrary' => 'object'} }
+          subject do
+            'this is the subject'
+          end
+        end
+      RUBY
+
+      with_server(source, uri) do |server, uri|
+        server.process_message(
+          {
+            id: 2,
+            method: "textDocument/documentSymbol",
+            params: {
+              textDocument: { uri: uri },
+            },
+          },
+        )
+
+        result = server.pop_response
+        expect(result).to be_a(RubyLsp::Result)
+        response = result.response
+
+        expect(response.count).to eq(1)
+        expect(response[0].name).to eq(":symbol_shared_examples_for")
+        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].children.count).to eq(2)
+      end
+    end
   end
 end

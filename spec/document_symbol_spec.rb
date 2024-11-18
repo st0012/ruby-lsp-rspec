@@ -340,5 +340,104 @@ RSpec.describe RubyLsp::RSpec do
         expect(response[0].children.count).to eq(2)
       end
     end
+
+    it "on_call_node_leave for shared examples" do
+      source = <<~RUBY
+        RSpec.shared_examples "shared examples" do
+        end
+
+        describe "something" do
+        end
+      RUBY
+
+      with_server(source, uri) do |server, uri|
+        server.process_message(
+          {
+            id: 2,
+            method: "textDocument/documentSymbol",
+            params: {
+              textDocument: { uri: uri },
+            },
+          },
+        )
+
+        result = server.pop_response
+        expect(result).to be_a(RubyLsp::Result)
+        response = result.response
+
+        expect(response.count).to eq(2)
+        expect(response[0].name).to eq("shared examples")
+        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+
+        expect(response[1].name).to eq("something")
+        expect(response[1].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+      end
+    end
+
+    it "on_call_node_leave for shared_context" do
+      source = <<~RUBY
+        RSpec.shared_context "shared context" do
+        end
+
+        describe "something" do
+        end
+      RUBY
+
+      with_server(source, uri) do |server, uri|
+        server.process_message(
+          {
+            id: 2,
+            method: "textDocument/documentSymbol",
+            params: {
+              textDocument: { uri: uri },
+            },
+          },
+        )
+
+        result = server.pop_response
+        expect(result).to be_a(RubyLsp::Result)
+        response = result.response
+
+        expect(response.count).to eq(2)
+        expect(response[0].name).to eq("shared context")
+        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+
+        expect(response[1].name).to eq("something")
+        expect(response[1].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+      end
+    end
+
+    it "on_call_node_leave for shared_examples_for" do
+      source = <<~RUBY
+        RSpec.shared_examples_for "shared examples for" do
+        end
+
+        describe "something" do
+        end
+      RUBY
+
+      with_server(source, uri) do |server, uri|
+        server.process_message(
+          {
+            id: 2,
+            method: "textDocument/documentSymbol",
+            params: {
+              textDocument: { uri: uri },
+            },
+          },
+        )
+
+        result = server.pop_response
+        expect(result).to be_a(RubyLsp::Result)
+        response = result.response
+
+        expect(response.count).to eq(2)
+        expect(response[0].name).to eq("shared examples for")
+        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+
+        expect(response[1].name).to eq("something")
+        expect(response[1].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+      end
+    end
   end
 end

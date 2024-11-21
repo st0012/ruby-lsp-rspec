@@ -17,7 +17,6 @@ module RubyLsp
       sig { override.params(global_state: GlobalState, message_queue: Thread::Queue).void }
       def activate(global_state, message_queue)
         @index = T.let(global_state.index, T.nilable(RubyIndexer::Index))
-        global_state.index.register_enhancement(IndexingEnhancement.new(global_state.index))
       end
 
       sig { override.void }

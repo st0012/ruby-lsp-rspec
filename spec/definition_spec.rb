@@ -25,8 +25,6 @@ RSpec.describe RubyLsp::RSpec do
       uri = URI(tempfile.path)
 
       with_server(source, uri) do |server, uri|
-        index = server.instance_variable_get(:@global_state).index
-        index.index_single(RubyIndexer::IndexablePath.new(nil, tempfile.path))
         server.process_message(
           {
             id: 1,
@@ -93,8 +91,6 @@ RSpec.describe RubyLsp::RSpec do
       uri = URI(tempfile.path)
 
       with_server(source, uri) do |server, uri|
-        index = server.instance_variable_get(:@global_state).index
-        index.index_single(RubyIndexer::IndexablePath.new(nil, tempfile.path))
         server.process_message(
           {
             id: 1,
@@ -154,8 +150,6 @@ RSpec.describe RubyLsp::RSpec do
       uri = URI(tempfile.path)
 
       with_server(source, uri) do |server, uri|
-        index = server.instance_variable_get(:@global_state).index
-        index.index_single(RubyIndexer::IndexablePath.new(nil, tempfile.path))
         server.process_message(
           {
             id: 1,

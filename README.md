@@ -15,15 +15,7 @@ group :development do
 end
 ```
 
-Make sure `rubyLsp.enabledFeatures.codeLens` is set to `true` in your VSCode settings:
-
-```json
-{
-  "rubyLsp.enabledFeatures": {
-    "codeLens": true
-  }
-}
-```
+Make sure the relevant features are enabled in `rubyLsp.enabledFeatures` in your VSCode settings, such as `codeLens`. See https://shopify.github.io/ruby-lsp for the full list of configuration options.
 
 After running `bundle install`, restart Ruby LSP and you should start seeing CodeLens in your RSpec test files.
 

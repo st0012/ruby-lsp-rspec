@@ -6,18 +6,8 @@ module RubyLsp
     class IndexingEnhancement < RubyIndexer::Enhancement
       extend T::Sig
 
-      sig do
-        override.params(
-          owner: T.nilable(RubyIndexer::Entry::Namespace),
-          node: Prism::CallNode,
-          file_path: String,
-          code_units_cache: T.any(
-            T.proc.params(arg0: Integer).returns(Integer),
-            Prism::CodeUnitsCache,
-          ),
-        ).void
-      end
-      def on_call_node_enter(owner, node, file_path, code_units_cache)
+      sig { override.params(node: Prism::CallNode).void }
+      def on_call_node_enter(node)
         return if node.receiver
 
         name = node.name
@@ -43,16 +33,7 @@ module RubyLsp
 
           return unless method_name
 
-          @index.add(RubyIndexer::Entry::Method.new(
-            method_name,
-            file_path,
-            RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
-            RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
-            nil,
-            [RubyIndexer::Entry::Signature.new([])],
-            RubyIndexer::Entry::Visibility::PUBLIC,
-            owner,
-          ))
+          @listener.add_method(method_name, block_node.location, [RubyIndexer::Entry::Signature.new([])])
         when :subject, :subject!
           block_node = node.block
           return unless block_node
@@ -76,16 +57,7 @@ module RubyLsp
 
           return unless method_name
 
-          @index.add(RubyIndexer::Entry::Method.new(
-            method_name,
-            file_path,
-            RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
-            RubyIndexer::Location.from_prism_location(block_node.location, code_units_cache),
-            nil,
-            [RubyIndexer::Entry::Signature.new([])],
-            RubyIndexer::Entry::Visibility::PUBLIC,
-            owner,
-          ))
+          @listener.add_method(method_name, block_node.location, [RubyIndexer::Entry::Signature.new([])])
         end
       end
     end

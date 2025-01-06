@@ -56,6 +56,73 @@ In VS Code this feature can be triggered by one of the following methods:
 
 <img src="misc/go-to-definition.gif" alt="Go to definition" width="75%">
 
+### VS Code Configuration
+`ruby-lsp-rspec` supports various configuration items exposed via `settings.json` in VS Code.
+
+These configuration options require the `ruby-lsp` VS Code plugin are nested within `rubyLsp.addonSettings`:
+```json
+{
+  ...
+  "rubyLsp.addonSettings": {
+    "Ruby LSP RSpec": {
+      // Configuration goes here
+    }
+  }
+}
+```
+
+#### `rspecCommand`
+**Description:**
+Override the inferred rspec command with a user-specified command
+
+**Default Value**: `nil` (infer rspec command based on presence of a binstub or Gemfile)
+
+**Example**
+```json
+{
+  ...
+  "rubyLsp.addonSettings": {
+    "Ruby LSP RSpec": {
+      "rspecCommand": "docker compose exec web rspec",
+    }
+  }
+}
+```
+
+#### `useRelativePaths`
+**Description:**
+If set to `true`, send a relative file path to rspec rather than the absolute path. Configured value must be a JavaScript Boolean.
+
+**Default Value**: `false` (Send the absolute spec file path as an rspec command argument)
+
+**Example**
+```json
+{
+  ...
+  "rubyLsp.addonSettings": {
+    "Ruby LSP RSpec": {
+      "useRelativePaths": true
+    }
+  }
+}
+```
+
+#### Running with Docker
+The `rspecCommand` and `useRelativePath` configuration items can be combined to run rspec in a docker container:
+
+```json
+{
+  ...
+  "rubyLsp.addonSettings": {
+    "Ruby LSP RSpec": {
+      "rspecCommand": "docker compose exec web rspec",
+      "useRelativePaths": true
+    }
+  }
+}
+```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

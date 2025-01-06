@@ -13,6 +13,8 @@ module RubyLsp
           response_builder: ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens],
           uri: URI::Generic,
           dispatcher: Prism::Dispatcher,
+          rspec_command: T.nilable(String),
+          use_relative_paths: T::Boolean,
         ).void
       end
       def initialize(response_builder, uri, dispatcher, rspec_command: nil, use_relative_paths: false)
@@ -26,7 +28,8 @@ module RubyLsp
         dispatcher.register(self, :on_call_node_enter, :on_call_node_leave)
 
         @base_command = T.let(
-          begin
+          # The user-configured command takes precedence over inferred command default
+          rspec_command || begin
             cmd = if File.exist?(File.join(Dir.pwd, "bin", "rspec"))
               "bin/rspec"
             else
@@ -38,9 +41,6 @@ module RubyLsp
             else
               cmd
             end
-
-            # The user-configured command takes precedence over inferred command defaults
-            cmd = rspec_command if rspec_command
           end,
           String,
         )

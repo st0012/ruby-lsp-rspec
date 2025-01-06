@@ -15,13 +15,14 @@ module RubyLsp
           dispatcher: Prism::Dispatcher,
         ).void
       end
-      def initialize(response_builder, uri, dispatcher)
+      def initialize(response_builder, uri, dispatcher, rspec_command: nil, use_relative_paths: false)
         @response_builder = response_builder
         # Listener is only initialized if uri.to_standardized_path is valid
         @path = T.let(T.must(uri.to_standardized_path), String)
         @group_id = T.let(1, Integer)
         @group_id_stack = T.let([], T::Array[Integer])
         @anonymous_example_count = T.let(0, Integer)
+        @use_relative_paths = T.let(use_relative_paths, T::Boolean)
         dispatcher.register(self, :on_call_node_enter, :on_call_node_leave)
 
         @base_command = T.let(
@@ -37,6 +38,9 @@ module RubyLsp
             else
               cmd
             end
+
+            # The user-configured command takes precedence over inferred command defaults
+            cmd = rspec_command if rspec_command
           end,
           String,
         )
@@ -102,7 +106,13 @@ module RubyLsp
       sig { params(node: Prism::Node, name: String, kind: Symbol).void }
       def add_test_code_lens(node, name:, kind:)
         line_number = node.location.start_line
-        command = "#{@base_command} #{@path}:#{line_number}"
+
+        path_for_command = if @use_relative_paths
+          Pathname.new(@path).relative_path_from(Pathname.new(Dir.pwd)).to_s
+        else
+          @path
+        end
+        command = "#{@base_command} #{path_for_command}:#{line_number}"
 
         grouping_data = { group_id: @group_id_stack.last, kind: kind }
         grouping_data[:id] = @group_id if kind == :group

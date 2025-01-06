@@ -14,9 +14,15 @@ module RubyLsp
     class Addon < ::RubyLsp::Addon
       extend T::Sig
 
+      attr_reader :use_relative_paths, :rspec_command
+
       sig { override.params(global_state: GlobalState, message_queue: Thread::Queue).void }
       def activate(global_state, message_queue)
         @index = T.let(global_state.index, T.nilable(RubyIndexer::Index))
+
+        settings = global_state.settings_for_addon(name)
+        @rspec_command = T.let(settings&.dig(:rspecCommand), T.nilable(String))
+        @use_relative_paths = T.let(settings&.dig(:useRelativePaths) || false, T::Boolean)
       end
 
       sig { override.void }
@@ -38,7 +44,7 @@ module RubyLsp
       def create_code_lens_listener(response_builder, uri, dispatcher)
         return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
 
-        CodeLens.new(response_builder, uri, dispatcher)
+        CodeLens.new(response_builder, uri, dispatcher, rspec_command: rspec_command, use_relative_paths: use_relative_paths)
       end
 
       sig do

@@ -36,10 +36,10 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
-        expect(response[0].target_uri).to eq(URI::Generic.from_path(path: tempfile.path).to_s)
+        expect(response[0].target_uri.path).to eq(tempfile.path)
         range = response[0].target_range.attributes
         range_hash = { start: range[:start].to_hash, end: range[:end].to_hash }
         expect(range_hash).to eq(
@@ -58,10 +58,10 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
-        expect(response[0].target_uri).to eq(URI::Generic.from_path(path: tempfile.path).to_s)
+        expect(response[0].target_uri.path).to eq(tempfile.path)
         range = response[0].target_range.attributes
         range_hash = { start: range[:start].to_hash, end: range[:end].to_hash }
         expect(range_hash).to eq(
@@ -102,7 +102,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(0)
 
@@ -117,10 +117,10 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
-        expect(response[0].target_uri).to eq(URI::Generic.from_path(path: tempfile.path).to_s)
+        expect(response[0].target_uri.path).to eq(tempfile.path)
         range = response[0].target_range.attributes
         range_hash = { start: range[:start].to_hash, end: range[:end].to_hash }
         expect(range_hash).to eq(
@@ -161,10 +161,10 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
-        expect(response[0].target_uri).to eq(URI::Generic.from_path(path: tempfile.path).to_s)
+        expect(response[0].target_uri.path).to eq(tempfile.path)
         range = response[0].target_range.attributes
         range_hash = { start: range[:start].to_hash, end: range[:end].to_hash }
         expect(range_hash).to eq(
@@ -183,10 +183,10 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
-        expect(response[0].target_uri).to eq(URI::Generic.from_path(path: tempfile.path).to_s)
+        expect(response[0].target_uri.path).to eq(tempfile.path)
         range = response[0].target_range.attributes
         range_hash = { start: range[:start].to_hash, end: range[:end].to_hash }
         expect(range_hash).to eq(
@@ -224,7 +224,7 @@ RSpec.describe RubyLsp::RSpec do
             },
           )
 
-          response = server.pop_response.response
+          response = pop_result(server).response
 
           expect(response.count).to eq(1)
         end

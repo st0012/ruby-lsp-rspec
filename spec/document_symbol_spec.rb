@@ -55,8 +55,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
+        result = pop_result(server)
         response = result.response
 
         expect(response.count).to eq(1)

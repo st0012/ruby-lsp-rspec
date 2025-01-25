@@ -44,7 +44,7 @@ module RubyLsp
           next unless entry.file_path == @uri.to_standardized_path
 
           @response_builder << Interface::LocationLink.new(
-            target_uri: URI::Generic.from_path(path: entry.file_path).to_s,
+            target_uri: entry.uri,
             target_range: range_from_location(entry.location),
             target_selection_range: range_from_location(entry.name_location),
           )

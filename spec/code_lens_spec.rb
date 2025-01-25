@@ -31,7 +31,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(9)
 
@@ -102,7 +102,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(15)
 
@@ -151,7 +151,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        response = server.pop_response.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(18)
 
@@ -221,7 +221,7 @@ RSpec.describe RubyLsp::RSpec do
             },
           )
 
-          response = server.pop_response.response
+          response = pop_result(server).response
 
           expect(response.count).to eq(0)
         end
@@ -260,7 +260,7 @@ RSpec.describe RubyLsp::RSpec do
             },
           )
 
-          response = server.pop_response.response
+          response = pop_result(server).response
 
           expect(response.count).to eq(3)
           expect(response[0].command.arguments[2]).to eq("bundle exec bin/rspec /fake_spec.rb:1")

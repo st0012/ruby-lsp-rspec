@@ -108,9 +108,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
         shared = response[0]
@@ -143,9 +141,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
         shared = response[0]
@@ -180,9 +176,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
         shared = response[0]
@@ -221,9 +215,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
         expect(response[0].name).to eq("simple shared_context")
@@ -257,9 +249,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
         expect(response[0].name).to eq(":symbol_shared_context")
@@ -293,9 +283,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
         expect(response[0].name).to eq("simple shared_examples_for")
@@ -329,9 +317,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(1)
         expect(response[0].name).to eq(":symbol_shared_examples_for")
@@ -360,9 +346,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(2)
         expect(response[0].name).to eq("shared examples")
@@ -393,9 +377,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(2)
         expect(response[0].name).to eq("shared context")
@@ -426,9 +408,7 @@ RSpec.describe RubyLsp::RSpec do
           },
         )
 
-        result = server.pop_response
-        expect(result).to be_a(RubyLsp::Result)
-        response = result.response
+        response = pop_result(server).response
 
         expect(response.count).to eq(2)
         expect(response[0].name).to eq("shared examples for")

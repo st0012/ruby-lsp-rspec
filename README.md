@@ -83,17 +83,19 @@ Override the inferred rspec command with a user-specified command
   ...
   "rubyLsp.addonSettings": {
     "Ruby LSP RSpec": {
-      "rspecCommand": "docker compose exec web rspec",
+      "rspecCommand": "rspec -f d",
     }
   }
 }
 ```
 
-#### `useRelativePaths`
+#### `debug`
 **Description:**
-If set to `true`, send a relative file path to rspec rather than the absolute path. Configured value must be a JavaScript Boolean.
+A boolean flag that prints the complete RSpec command to stdout when enabled.
 
-**Default Value**: `false` (Send the absolute spec file path as an rspec command argument)
+View the output in VS Code's `OUTPUT` panel under `Ruby LSP`.
+
+**Default Value**: `false`
 
 **Example**
 ```json
@@ -101,22 +103,30 @@ If set to `true`, send a relative file path to rspec rather than the absolute pa
   ...
   "rubyLsp.addonSettings": {
     "Ruby LSP RSpec": {
-      "useRelativePaths": true
+      "debug": true
     }
   }
 }
 ```
 
-#### Running with Docker
-The `rspecCommand` and `useRelativePath` configuration items can be combined to run rspec in a docker container:
+#### Developing on containers
+If your project uses containers for development, you should use `Visual Studio Code Dev Containers` extension.
 
+This extension will run Ruby LSP (and thus Ruby LSP RSpec) within the Dev Container, which allows the proper spec paths to be sent to rspec.
+
+For more details on using Ruby LSP with containers and setting up the dev continers extension, see [the Ruby LSP documentation](https://github.com/Shopify/ruby-lsp/blob/main/vscode/README.md?tab=readme-ov-file#developing-on-containers).
+
+Be sure to specify Ruby LSP as an extension that should run _within_ the Dev Container in your `.devcontainer.json`:
 ```json
 {
+  "name": "my-app",
   ...
-  "rubyLsp.addonSettings": {
-    "Ruby LSP RSpec": {
-      "rspecCommand": "docker compose exec web rspec",
-      "useRelativePaths": true
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp"
+        ...
+      ]
     }
   }
 }

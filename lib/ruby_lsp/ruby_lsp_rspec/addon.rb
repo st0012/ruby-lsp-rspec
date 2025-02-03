@@ -14,7 +14,18 @@ module RubyLsp
     class Addon < ::RubyLsp::Addon
       extend T::Sig
 
-      attr_reader :debug, :rspec_command
+      sig { returns(T.nilable(String)) }
+      attr_reader :rspec_command
+
+      sig { returns(T::Boolean) }
+      attr_reader :debug
+
+      sig { void }
+      def initialize
+        super
+        @debug = T.let(false, T::Boolean)
+        @rspec_command = T.let(nil, T.nilable(String))
+      end
 
       sig { override.params(global_state: GlobalState, message_queue: Thread::Queue).void }
       def activate(global_state, message_queue)
@@ -22,7 +33,7 @@ module RubyLsp
 
         settings = global_state.settings_for_addon(name)
         @rspec_command = T.let(settings&.dig(:rspecCommand), T.nilable(String))
-        @debug = T.let(settings&.dig(:debug) || false, T::Boolean)
+        @debug = settings&.dig(:debug) || false
       end
 
       sig { override.void }

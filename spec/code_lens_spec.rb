@@ -164,7 +164,7 @@ RSpec.describe RubyLsp::RSpec do
     context "with a custom rspec command configured" do
       let(:configuration) do
         {
-          rspecCommand: "docker compose run --rm web rspec"
+          rspecCommand: "docker compose run --rm web rspec",
         }
       end
 
@@ -192,7 +192,7 @@ RSpec.describe RubyLsp::RSpec do
             },
           )
 
-          response = server.pop_response.response
+          response = pop_result(server).response
           expect(response[0].command.arguments[2]).to eq("docker compose run --rm web rspec /fake_spec.rb:1")
         end
       end

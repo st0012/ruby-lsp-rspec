@@ -15,7 +15,7 @@ group :development do
 end
 ```
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > Make sure the relevant features are [enabled](https://github.com/Shopify/ruby-lsp/tree/main/vscode#enable-or-disable-features) under your VSCode's `rubyLsp.enabledFeatures` setting, such as `codeLens`.
 
 After running `bundle install`, restart Ruby LSP and you should start seeing CodeLens in your RSpec test files.
@@ -57,50 +57,55 @@ In VS Code this feature can be triggered by one of the following methods:
 <img src="misc/go-to-definition.gif" alt="Go to definition" width="75%">
 
 ### VS Code Configuration
-`ruby-lsp-rspec` supports various configuration items exposed via `settings.json` in VS Code.
 
-These configuration options require the `ruby-lsp` VS Code plugin are nested within `rubyLsp.addonSettings`:
+`ruby-lsp-rspec` can be configured through VS Code's `settings.json` file.
+
+All configuration options must be nested under the `Ruby LSP RSpec` addon within `rubyLsp.addonSettings`:
+
 ```json
 {
-  ...
+  // ...
   "rubyLsp.addonSettings": {
     "Ruby LSP RSpec": {
-      // Configuration goes here
+      // Configuration options go here
     }
   }
 }
 ```
 
 #### `rspecCommand`
+
 **Description:**
-Override the inferred rspec command with a user-specified command
 
-**Default Value**: `nil` (infer rspec command based on presence of a binstub or Gemfile)
+Customize the command used to run tests via CodeLens. If not set, the command will be inferred based on the presence of a binstub or Gemfile.
 
-**Example**
+**Default Value**: `nil`
+
+**Example:**
+
 ```json
 {
-  ...
+  // ...
   "rubyLsp.addonSettings": {
     "Ruby LSP RSpec": {
-      "rspecCommand": "rspec -f d",
+      "rspecCommand": "rspec -f d"
     }
   }
 }
 ```
 
 #### `debug`
-**Description:**
-A boolean flag that prints the complete RSpec command to stdout when enabled.
 
-View the output in VS Code's `OUTPUT` panel under `Ruby LSP`.
+**Description:**
+
+Enable debug logging. Currently, this only logs the RSpec command used by CodeLens to stderr, which can be viewed in VS Code's `OUTPUT` panel under `Ruby LSP`.
 
 **Default Value**: `false`
 
-**Example**
+**Example:**
+
 ```json
 {
-  ...
   "rubyLsp.addonSettings": {
     "Ruby LSP RSpec": {
       "debug": true
@@ -109,29 +114,28 @@ View the output in VS Code's `OUTPUT` panel under `Ruby LSP`.
 }
 ```
 
-#### Developing on containers
-If your project uses containers for development, you should use `Visual Studio Code Dev Containers` extension.
+### Container Development
 
-This extension will run Ruby LSP (and thus Ruby LSP RSpec) within the Dev Container, which allows the proper spec paths to be sent to rspec.
+When developing in containers, use the official [`Dev Containers`](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension. This ensures Ruby LSP and Ruby LSP RSpec run inside the container, allowing correct spec path resolution.
 
-For more details on using Ruby LSP with containers and setting up the dev continers extension, see [the Ruby LSP documentation](https://github.com/Shopify/ruby-lsp/blob/main/vscode/README.md?tab=readme-ov-file#developing-on-containers).
+For detailed container setup instructions, see the [Ruby LSP documentation](https://github.com/Shopify/ruby-lsp/blob/main/vscode/README.md?tab=readme-ov-file#developing-on-containers).
 
-Be sure to specify Ruby LSP as an extension that should run _within_ the Dev Container in your `.devcontainer.json`:
+Make sure to configure Ruby LSP to run inside the container by adding it to your `.devcontainer.json`:
+
 ```json
 {
   "name": "my-app",
-  ...
+  // ...
   "customizations": {
     "vscode": {
       "extensions": [
-        "Shopify.ruby-lsp"
-        ...
+        "Shopify.ruby-lsp",
+        // ...
       ]
     }
   }
 }
 ```
-
 
 ## Development
 

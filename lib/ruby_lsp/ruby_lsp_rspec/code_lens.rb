@@ -13,9 +13,11 @@ module RubyLsp
           response_builder: ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens],
           uri: URI::Generic,
           dispatcher: Prism::Dispatcher,
+          rspec_command: T.nilable(String),
+          debug: T::Boolean,
         ).void
       end
-      def initialize(response_builder, uri, dispatcher)
+      def initialize(response_builder, uri, dispatcher, rspec_command: nil, debug: false)
         @response_builder = response_builder
         # Listener is only initialized if uri.to_standardized_path is valid
         @path = T.let(T.must(uri.to_standardized_path), String)
@@ -24,8 +26,10 @@ module RubyLsp
         @anonymous_example_count = T.let(0, Integer)
         dispatcher.register(self, :on_call_node_enter, :on_call_node_leave)
 
+        @debug = debug
         @base_command = T.let(
-          begin
+          # The user-configured command takes precedence over inferred command default
+          rspec_command || begin
             cmd = if File.exist?(File.join(Dir.pwd, "bin", "rspec"))
               "bin/rspec"
             else
@@ -71,6 +75,11 @@ module RubyLsp
 
       private
 
+      sig { params(message: String).void }
+      def log_message(message)
+        puts "[#{self.class}]: #{message}"
+      end
+
       sig { params(node: Prism::CallNode).returns(T::Boolean) }
       def valid_group?(node)
         !(node.block.nil? || (node.receiver && node.receiver&.slice != "RSpec"))
@@ -103,6 +112,8 @@ module RubyLsp
       def add_test_code_lens(node, name:, kind:)
         line_number = node.location.start_line
         command = "#{@base_command} #{@path}:#{line_number}"
+
+        log_message("Full command: `#{command}`") if @debug
 
         grouping_data = { group_id: @group_id_stack.last, kind: kind }
         grouping_data[:id] = @group_id if kind == :group

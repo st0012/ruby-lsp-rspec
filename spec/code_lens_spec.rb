@@ -161,6 +161,43 @@ RSpec.describe RubyLsp::RSpec do
       end
     end
 
+    context "with a custom rspec command configured" do
+      let(:configuration) do
+        {
+          rspecCommand: "docker compose run --rm web rspec",
+        }
+      end
+
+      before do
+        allow_any_instance_of(RubyLsp::GlobalState).to receive(:settings_for_addon).and_return(configuration)
+      end
+
+      it "uses the configured rspec command" do
+        source = <<~RUBY
+          RSpec.describe Foo do
+            it "does something" do
+            end
+          end
+        RUBY
+
+        with_server(source, uri) do |server, uri|
+          server.process_message(
+            {
+              id: 1,
+              method: "textDocument/codeLens",
+              params: {
+                textDocument: { uri: uri },
+                position: { line: 0, character: 0 },
+              },
+            },
+          )
+
+          response = pop_result(server).response
+          expect(response[0].command.arguments[2]).to eq("docker compose run --rm web rspec /fake_spec.rb:1")
+        end
+      end
+    end
+
     context "when the file is not a test file" do
       let(:uri) { URI("file:///not_spec_file.rb") }
 

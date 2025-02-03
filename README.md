@@ -56,6 +56,83 @@ In VS Code this feature can be triggered by one of the following methods:
 
 <img src="misc/go-to-definition.gif" alt="Go to definition" width="75%">
 
+### VS Code Configuration
+`ruby-lsp-rspec` supports various configuration items exposed via `settings.json` in VS Code.
+
+These configuration options require the `ruby-lsp` VS Code plugin are nested within `rubyLsp.addonSettings`:
+```json
+{
+  ...
+  "rubyLsp.addonSettings": {
+    "Ruby LSP RSpec": {
+      // Configuration goes here
+    }
+  }
+}
+```
+
+#### `rspecCommand`
+**Description:**
+Override the inferred rspec command with a user-specified command
+
+**Default Value**: `nil` (infer rspec command based on presence of a binstub or Gemfile)
+
+**Example**
+```json
+{
+  ...
+  "rubyLsp.addonSettings": {
+    "Ruby LSP RSpec": {
+      "rspecCommand": "rspec -f d",
+    }
+  }
+}
+```
+
+#### `debug`
+**Description:**
+A boolean flag that prints the complete RSpec command to stdout when enabled.
+
+View the output in VS Code's `OUTPUT` panel under `Ruby LSP`.
+
+**Default Value**: `false`
+
+**Example**
+```json
+{
+  ...
+  "rubyLsp.addonSettings": {
+    "Ruby LSP RSpec": {
+      "debug": true
+    }
+  }
+}
+```
+
+#### Developing on containers
+If your project uses containers for development, you should use `Visual Studio Code Dev Containers` extension.
+
+This extension will run Ruby LSP (and thus Ruby LSP RSpec) within the Dev Container, which allows the proper spec paths to be sent to rspec.
+
+For more details on using Ruby LSP with containers and setting up the dev continers extension, see [the Ruby LSP documentation](https://github.com/Shopify/ruby-lsp/blob/main/vscode/README.md?tab=readme-ov-file#developing-on-containers).
+
+Be sure to specify Ruby LSP as an extension that should run _within_ the Dev Container in your `.devcontainer.json`:
+```json
+{
+  "name": "my-app",
+  ...
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp"
+        ...
+      ]
+    }
+  }
+}
+```
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

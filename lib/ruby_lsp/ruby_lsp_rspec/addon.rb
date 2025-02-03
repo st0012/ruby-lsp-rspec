@@ -14,9 +14,26 @@ module RubyLsp
     class Addon < ::RubyLsp::Addon
       extend T::Sig
 
+      sig { returns(T.nilable(String)) }
+      attr_reader :rspec_command
+
+      sig { returns(T::Boolean) }
+      attr_reader :debug
+
+      sig { void }
+      def initialize
+        super
+        @debug = T.let(false, T::Boolean)
+        @rspec_command = T.let(nil, T.nilable(String))
+      end
+
       sig { override.params(global_state: GlobalState, message_queue: Thread::Queue).void }
       def activate(global_state, message_queue)
         @index = T.let(global_state.index, T.nilable(RubyIndexer::Index))
+
+        settings = global_state.settings_for_addon(name)
+        @rspec_command = T.let(settings&.dig(:rspecCommand), T.nilable(String))
+        @debug = settings&.dig(:debug) || false
       end
 
       sig { override.void }
@@ -38,7 +55,7 @@ module RubyLsp
       def create_code_lens_listener(response_builder, uri, dispatcher)
         return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
 
-        CodeLens.new(response_builder, uri, dispatcher)
+        CodeLens.new(response_builder, uri, dispatcher, rspec_command: rspec_command, debug: debug)
       end
 
       sig do

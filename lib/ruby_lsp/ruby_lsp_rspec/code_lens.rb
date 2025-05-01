@@ -13,37 +13,21 @@ module RubyLsp
           response_builder: ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens],
           uri: URI::Generic,
           dispatcher: Prism::Dispatcher,
-          rspec_command: T.nilable(String),
+          rspec_command: String,
           debug: T::Boolean,
         ).void
       end
-      def initialize(response_builder, uri, dispatcher, rspec_command: nil, debug: false)
+      def initialize(response_builder, uri, dispatcher, rspec_command, debug: false)
         @response_builder = response_builder
         # Listener is only initialized if uri.to_standardized_path is valid
         @path = T.let(T.must(uri.to_standardized_path), String)
         @group_id = T.let(1, Integer)
         @group_id_stack = T.let([], T::Array[Integer])
+        @rspec_command = rspec_command
         @anonymous_example_count = T.let(0, Integer)
         dispatcher.register(self, :on_call_node_enter, :on_call_node_leave)
 
         @debug = debug
-        @base_command = T.let(
-          # The user-configured command takes precedence over inferred command default
-          rspec_command || begin
-            cmd = if File.exist?(File.join(Dir.pwd, "bin", "rspec"))
-              "bin/rspec"
-            else
-              "rspec"
-            end
-
-            if File.exist?("Gemfile.lock")
-              "bundle exec #{cmd}"
-            else
-              cmd
-            end
-          end,
-          String,
-        )
       end
 
       sig { params(node: Prism::CallNode).void }
@@ -111,7 +95,7 @@ module RubyLsp
       sig { params(node: Prism::Node, name: String, kind: Symbol).void }
       def add_test_code_lens(node, name:, kind:)
         line_number = node.location.start_line
-        command = "#{@base_command} #{@path}:#{line_number}"
+        command = "#{@rspec_command} #{@path}:#{line_number}"
 
         log_message("Full command: `#{command}`") if @debug
 

@@ -14,9 +14,6 @@ module RubyLsp
     class Addon < ::RubyLsp::Addon
       extend T::Sig
 
-      sig { returns(T.nilable(String)) }
-      attr_reader :rspec_command
-
       sig { returns(T::Boolean) }
       attr_reader :debug
 
@@ -32,7 +29,7 @@ module RubyLsp
         @index = T.let(global_state.index, T.nilable(RubyIndexer::Index))
 
         settings = global_state.settings_for_addon(name)
-        @rspec_command = T.let(settings&.dig(:rspecCommand), T.nilable(String))
+        @rspec_command = rspec_command(settings)
         @debug = settings&.dig(:debug) || false
       end
 
@@ -55,7 +52,7 @@ module RubyLsp
       def create_code_lens_listener(response_builder, uri, dispatcher)
         return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
 
-        CodeLens.new(response_builder, uri, dispatcher, rspec_command: rspec_command, debug: debug)
+        CodeLens.new(response_builder, uri, dispatcher, T.must(@rspec_command), debug: debug)
       end
 
       sig do
@@ -88,6 +85,24 @@ module RubyLsp
       sig { override.returns(String) }
       def name
         "Ruby LSP RSpec"
+      end
+
+      sig { params(settings: T.nilable(T::Hash[Symbol, T.untyped])).returns(String) }
+      def rspec_command(settings)
+        @rspec_command ||= settings&.dig(:rspecCommand) || begin
+          cmd = if File.exist?(File.join(Dir.pwd, "bin", "rspec"))
+            "bin/rspec"
+          else
+            "rspec"
+          end
+
+          begin
+            Bundler.with_original_env { Bundler.default_lockfile }
+            "bundle exec #{cmd}"
+          rescue Bundler::GemfileNotFound
+            cmd
+          end
+        end
       end
     end
   end

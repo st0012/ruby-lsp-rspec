@@ -84,54 +84,44 @@ module RubyLsp
       end
       def resolve_test_commands(items)
         commands = []
+        queue = items.dup
 
-        # Group test items by file path
-        items_by_file = Hash.new { |h, k| h[k] = [] }
         full_files = []
 
-        # Process the queue
-        queue = items.dup
         until queue.empty?
           item = T.must(queue.shift)
-          path = item[:source_file]
-          next if path.nil?
+          tags = Set.new(item[:tags])
+          next unless tags.include?("framework:rspec")
 
-          children = item[:children] || []
-          tags = item[:tags] || []
+          children = item[:children]
+          uri = URI(item[:uri])
+          path = uri.full_path
+          next unless path
 
-          if tags.include?("test_case")
-            # This is a specific test, add it to its file's list
-            items_by_file[path] << item
-          elsif tags.include?("test_group") || tags.include?("test_class")
+          if tags.include?("test_dir")
             if children.empty?
-              # If no children, we need to run the entire group/file
-              full_files << path
-            else
-              # Otherwise process children
-              queue.concat(children)
+              full_files.concat(Dir.glob(
+                "#{path}/**/*_spec.rb",
+                File::Constants::FNM_EXTGLOB | File::Constants::FNM_PATHNAME,
+              ))
             end
           elsif tags.include?("test_file")
             full_files << path if children.empty?
+          elsif tags.include?("test_group")
+            start_line = item.dig(:range, :start, :line)
+            commands << "#{@rspec_command} #{path}:#{start_line + 1}"
+          else
+            full_files << "#{path}:#{item.dig(:range, :start, :line) + 1}"
           end
+
+          queue.concat(children)
         end
 
-        # Build commands for individual tests or entire files
-        base_cmd = T.must(@rspec_command)
-
-        # Add commands for specific tests
-        items_by_file.each do |file_path, file_items|
-          file_items.each do |item|
-            line_number = item[:range][:start][:line]
-            commands << "#{base_cmd} #{file_path}:#{line_number + 1}"
-          end
+        unless full_files.empty?
+          commands << "#{@rspec_command} #{full_files.join(" ")}"
         end
 
-        # Add commands for entire files
-        full_files.each do |file_path|
-          commands << "#{base_cmd} #{file_path}"
-        end
-
-        commands.uniq
+        commands
       end
 
       sig do

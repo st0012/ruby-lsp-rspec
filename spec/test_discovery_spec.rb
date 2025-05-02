@@ -20,6 +20,18 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
             expect(true).to be(true)
           end
         end
+
+        RSpec.describe Foo do
+          it "third test" do
+            expect(true).to be(true)
+          end
+        end
+
+        RSpec.describe Foo::Bar do
+          it "fourth test" do
+            expect(true).to be(true)
+          end
+        end
       RUBY
 
       with_server(source, uri) do |server, uri|
@@ -35,15 +47,37 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
 
         items = pop_result(server).response
 
-        expect(items.length).to eq(1)
+        expect(items.length).to eq(3)
 
-        test_group = items.first
-        expect(test_group[:label]).to eq("Sample test")
-        expect(test_group[:children].length).to eq(2)
+        first_group = items.first
+        expect(first_group[:id]).to eq("Sample test")
+        expect(first_group[:label]).to eq("Sample test")
+        expect(first_group[:children].length).to eq(2)
 
-        test_labels = test_group[:children].map { |i| i[:label] }
+        test_ids = first_group[:children].map { |i| i[:id] }
+        expect(test_ids).to include("Sample test::first test")
+        expect(test_ids).to include("Sample test::second test")
+
+        test_labels = first_group[:children].map { |i| i[:label] }
         expect(test_labels).to include("first test")
+
         expect(test_labels).to include("second test")
+
+        second_group = items[1]
+        expect(second_group[:id]).to eq("Foo")
+        expect(second_group[:label]).to eq("Foo")
+        expect(second_group[:children].length).to eq(1)
+
+        test_ids = second_group[:children].map { |i| i[:id] }
+        expect(test_ids).to include("Foo::third test")
+
+        third_group = items[2]
+        expect(third_group[:id]).to eq("Foo::Bar")
+        expect(third_group[:label]).to eq("Foo::Bar")
+        expect(third_group[:children].length).to eq(1)
+
+        test_ids = third_group[:children].map { |i| i[:id] }
+        expect(test_ids).to include("Foo::Bar::fourth test")
       end
     end
 

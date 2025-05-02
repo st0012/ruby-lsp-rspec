@@ -6,10 +6,12 @@ RSpec.describe RubyLsp::RSpec::Addon do
   include RubyLsp::TestHelper
 
   let(:uri) { URI("file:///fake_spec.rb") }
+  let(:formatter_absolute_path) { described_class::FORMATTER_PATH }
+  let(:formatter_name) { described_class::FORMATTER_NAME }
 
   describe "test command resolution" do
     it "resolves commands for individual test cases" do
-      with_server("", uri) do |server, uri|
+      with_server do |server|
         server.process_message(
           {
             id: 1,
@@ -30,12 +32,14 @@ RSpec.describe RubyLsp::RSpec::Addon do
         )
 
         response = pop_result(server).response
-        expect(response[:commands]).to include(%r{bundle exec rspec /fake_spec\.rb:11})
+        expect(response[:commands]).to eq([
+          "bundle exec rspec -r #{formatter_absolute_path} -f #{formatter_name} /fake_spec.rb:11",
+        ])
       end
     end
 
     it "resolves commands for test groups" do
-      with_server("", uri) do |server, uri|
+      with_server do |server|
         server.process_message(
           {
             id: 1,
@@ -56,12 +60,14 @@ RSpec.describe RubyLsp::RSpec::Addon do
         )
 
         response = pop_result(server).response
-        expect(response[:commands]).to include(%r{bundle exec rspec /fake_spec\.rb:6$})
+        expect(response[:commands]).to eq([
+          "bundle exec rspec -r #{formatter_absolute_path} -f #{formatter_name} /fake_spec.rb:6",
+        ])
       end
     end
 
     it "resolves commands for test files" do
-      with_server("", uri) do |server, uri|
+      with_server do |server|
         server.process_message(
           {
             id: 1,
@@ -81,7 +87,9 @@ RSpec.describe RubyLsp::RSpec::Addon do
         )
 
         response = pop_result(server).response
-        expect(response[:commands]).to include(%r{bundle exec rspec /fake_spec\.rb$})
+        expect(response[:commands]).to eq([
+          "bundle exec rspec -r #{formatter_absolute_path} -f #{formatter_name} /fake_spec.rb",
+        ])
       end
     end
   end

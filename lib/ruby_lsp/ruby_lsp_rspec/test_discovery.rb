@@ -60,13 +60,16 @@ module RubyLsp
         first_arg = node.arguments&.arguments&.first
         return "(anonymous example #{@anonymous_example_count += 1})" if first_arg.nil?
 
-        if first_arg.is_a?(Prism::StringNode)
-          return first_arg.content
-        elsif first_arg.is_a?(Prism::SymbolNode)
-          return first_arg.value
+        case first_arg
+        when Prism::StringNode
+          first_arg.content
+        when Prism::SymbolNode
+          first_arg.value
+        when Prism::ConstantReadNode
+          first_arg.name.to_s
+        when Prism::ConstantPathNode
+          first_arg.full_name
         end
-
-        nil
       end
 
       sig { params(node: Prism::CallNode).void }
@@ -75,8 +78,10 @@ module RubyLsp
         return if description.nil?
 
         parent = find_parent_test_group
+        parent_id = parent ? "#{parent.id}::" : ""
+
         test_item = ::RubyLsp::Requests::Support::TestItem.new(
-          "#{parent&.id || ""}::#{description}",
+          "#{parent_id}#{description}",
           description,
           @uri,
           range_from_node(node),

@@ -4705,6 +4705,95 @@ RubyLsp::Listeners::TestStyle::MINITEST_REPORTER_PATH = T.let(T.unsafe(nil), Str
 # source://ruby-lsp//lib/ruby_lsp/listeners/test_style.rb#137
 RubyLsp::Listeners::TestStyle::TEST_UNIT_REPORTER_PATH = T.let(T.unsafe(nil), String)
 
+# source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#9
+class RubyLsp::LspReporter
+  include ::Singleton
+  extend ::Singleton::SingletonClassMethods
+
+  # : -> void
+  #
+  # @return [LspReporter] a new instance of LspReporter
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#13
+  def initialize; end
+
+  # Gather the results returned by Coverage.result and format like the VS Code test explorer expects
+  #
+  # Coverage result format:
+  #
+  # Lines are reported in order as an array where each number is the number of times it was executed. For example,
+  # the following says that line 0 was executed 1 time and line 1 executed 3 times: [1, 3].
+  # Nil values represent lines for which coverage is not available, like empty lines, comments or keywords like
+  # `else`
+  #
+  # Branches are a hash containing the name of the branch and the location where it is found in tuples with the
+  # following elements: [NAME, ID, START_LINE, START_COLUMN, END_LINE, END_COLUMN] as the keys and the value is the
+  # number of times it was executed
+  #
+  # Methods are a similar hash [ClassName, :method_name, START_LINE, START_COLUMN, END_LINE, END_COLUMN] => NUMBER
+  # OF EXECUTIONS
+  #
+  # Example:
+  # {
+  #   "file_path" => {
+  #     "lines" => [1, 2, 3, nil],
+  #     "branches" => {
+  #       ["&.", 0, 6, 21, 6, 65] => { [:then, 1, 6, 21, 6, 65] => 0, [:else, 5, 7, 0, 7, 87] => 1 }
+  #     },
+  #     "methods" => {
+  #       ["Foo", :bar, 6, 21, 6, 65] => 0
+  #     }
+  # }
+  # : -> Hash[String, StatementCoverage]
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#83
+  def gather_coverage_results; end
+
+  # : (id: String, message: String?, uri: URI::Generic) -> void
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#51
+  def record_error(id:, message:, uri:); end
+
+  # : (id: String, message: String, uri: URI::Generic) -> void
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#41
+  def record_fail(id:, message:, uri:); end
+
+  # : (id: String, uri: URI::Generic) -> void
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#36
+  def record_pass(id:, uri:); end
+
+  # : (id: String, uri: URI::Generic) -> void
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#46
+  def record_skip(id:, uri:); end
+
+  # : -> void
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#25
+  def shutdown; end
+
+  # : (id: String, uri: URI::Generic) -> void
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#31
+  def start_test(id:, uri:); end
+
+  private
+
+  # : (method_name: String?, params: untyped) -> void
+  #
+  # source://ruby-lsp//lib/ruby_lsp/test_reporters/lsp_reporter.rb#135
+  def send_message(method_name, **params); end
+
+  class << self
+    private
+
+    def allocate; end
+    def new(*_arg0); end
+  end
+end
+
 # A notification to be sent to the client
 #
 # @abstract It cannot be directly instantiated. Subclasses must implement the `abstract` methods below.

@@ -16,6 +16,9 @@ module RubyLsp
     class Addon < ::RubyLsp::Addon
       extend T::Sig
 
+      FORMATTER_PATH = T.let(File.expand_path("rspec_formatter.rb", __dir__), String)
+      FORMATTER_NAME = T.let("RubyLsp::RSpec::RSpecFormatter", String)
+
       sig { returns(T::Boolean) }
       attr_reader :debug
 
@@ -109,7 +112,7 @@ module RubyLsp
             full_files << path if children.empty?
           elsif tags.include?("test_group")
             start_line = item.dig(:range, :start, :line)
-            commands << "#{@rspec_command} #{path}:#{start_line + 1}"
+            commands << "#{@rspec_command} -r #{FORMATTER_PATH} -f #{FORMATTER_NAME} #{path}:#{start_line + 1}"
           else
             full_files << "#{path}:#{item.dig(:range, :start, :line) + 1}"
           end
@@ -118,7 +121,7 @@ module RubyLsp
         end
 
         unless full_files.empty?
-          commands << "#{@rspec_command} #{full_files.join(" ")}"
+          commands << "#{@rspec_command} -r #{FORMATTER_PATH} -f #{FORMATTER_NAME} #{full_files.join(" ")}"
         end
 
         commands

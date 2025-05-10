@@ -23,31 +23,28 @@ module RubyLsp
       def example_started(notification)
         example = notification.example
         uri = uri_for(example)
-        id = description_for(example)
-        puts "start_test: #{id} #{uri}"
+        id = generate_id(example)
         RubyLsp::LspReporter.instance.start_test(id: id, uri: uri)
       end
 
       def example_passed(notification)
         example = notification.example
         uri = uri_for(example)
-        id = description_for(example)
-        puts "pass_test: #{id} #{uri}"
+        id = generate_id(example)
         RubyLsp::LspReporter.instance.record_pass(id: id, uri: uri)
       end
 
       def example_failed(notification)
         example = notification.example
         uri = uri_for(example)
-        id = description_for(example)
-        puts "fail_test: #{id} #{uri}"
+        id = generate_id(example)
         RubyLsp::LspReporter.instance.record_fail(id: id, message: notification.exception.message, uri: uri)
       end
 
       def example_pending(notification)
         example = notification.example
         uri = uri_for(example)
-        id = description_for(example)
+        id = generate_id(example)
         RubyLsp::LspReporter.instance.record_skip(id: id, uri: uri)
       end
 
@@ -60,8 +57,8 @@ module RubyLsp
         URI::Generic.from_path(path: absolute_path)
       end
 
-      def description_for(example)
-        [example, *example.example_group.parent_groups].reverse.map(&:description).join("::")
+      def generate_id(example)
+        [example, *example.example_group.parent_groups].reverse.map(&:location).join("::")
       end
     end
   end

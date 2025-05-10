@@ -6,7 +6,7 @@ require "spec_helper"
 RSpec.describe RubyLsp::RSpec::TestDiscovery do
   include RubyLsp::TestHelper
 
-  let(:uri) { URI("file:///fake_spec.rb") }
+  let(:uri) { URI("file://#{File.expand_path("fake_spec.rb", __dir__)}") }
 
   describe "test discovery" do
     it "discovers RSpec examples" do
@@ -50,13 +50,13 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
         expect(items.length).to eq(3)
 
         first_group = items.first
-        expect(first_group[:id]).to eq("Sample test")
+        expect(first_group[:id]).to eq("./spec/fake_spec.rb:1")
         expect(first_group[:label]).to eq("Sample test")
         expect(first_group[:children].length).to eq(2)
 
         test_ids = first_group[:children].map { |i| i[:id] }
-        expect(test_ids).to include("Sample test::first test")
-        expect(test_ids).to include("Sample test::second test")
+        expect(test_ids).to include("./spec/fake_spec.rb:1::./spec/fake_spec.rb:2")
+        expect(test_ids).to include("./spec/fake_spec.rb:1::./spec/fake_spec.rb:6")
 
         test_labels = first_group[:children].map { |i| i[:label] }
         expect(test_labels).to include("first test")
@@ -64,20 +64,20 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
         expect(test_labels).to include("second test")
 
         second_group = items[1]
-        expect(second_group[:id]).to eq("Foo")
+        expect(second_group[:id]).to eq("./spec/fake_spec.rb:11")
         expect(second_group[:label]).to eq("Foo")
         expect(second_group[:children].length).to eq(1)
 
         test_ids = second_group[:children].map { |i| i[:id] }
-        expect(test_ids).to include("Foo::third test")
+        expect(test_ids).to include("./spec/fake_spec.rb:11::./spec/fake_spec.rb:12")
 
         third_group = items[2]
-        expect(third_group[:id]).to eq("Foo::Bar")
+        expect(third_group[:id]).to eq("./spec/fake_spec.rb:17")
         expect(third_group[:label]).to eq("Foo::Bar")
         expect(third_group[:children].length).to eq(1)
 
         test_ids = third_group[:children].map { |i| i[:id] }
-        expect(test_ids).to include("Foo::Bar::fourth test")
+        expect(test_ids).to include("./spec/fake_spec.rb:17::./spec/fake_spec.rb:18")
       end
     end
 
@@ -165,9 +165,17 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
         expect(test_group[:label]).to eq("Test group")
         expect(test_group[:children].length).to eq(3)
 
-        test_group[:children].each do |example|
-          expect(example[:label]).to match(/\(anonymous example \d+\)/)
-        end
+        first_example = test_group[:children].first
+        expect(first_example[:id]).to eq("./spec/fake_spec.rb:1::./spec/fake_spec.rb:2")
+        expect(first_example[:label]).to eq("example at ./spec/fake_spec.rb:2")
+
+        second_example = test_group[:children][1]
+        expect(second_example[:id]).to eq("./spec/fake_spec.rb:1::./spec/fake_spec.rb:6")
+        expect(second_example[:label]).to eq("example at ./spec/fake_spec.rb:6")
+
+        third_example = test_group[:children][2]
+        expect(third_example[:id]).to eq("./spec/fake_spec.rb:1::./spec/fake_spec.rb:10")
+        expect(third_example[:label]).to eq("example at ./spec/fake_spec.rb:10")
       end
     end
   end

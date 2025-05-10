@@ -35,6 +35,7 @@ module RubyLsp
 
         settings = global_state.settings_for_addon(name)
         @rspec_command = rspec_command(settings)
+        @workspace_path = T.let(global_state.workspace_path, T.nilable(String))
         @debug = settings&.dig(:debug) || false
       end
 
@@ -76,7 +77,7 @@ module RubyLsp
       def create_discover_tests_listener(response_builder, dispatcher, uri)
         return unless uri.to_standardized_path&.end_with?("_spec.rb")
 
-        TestDiscovery.new(response_builder, dispatcher, uri)
+        TestDiscovery.new(response_builder, dispatcher, uri, T.must(@workspace_path))
       end
 
       # Resolves the minimal set of commands required to execute the requested tests

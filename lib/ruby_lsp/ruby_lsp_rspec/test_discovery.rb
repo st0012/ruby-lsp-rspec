@@ -13,15 +13,16 @@ module RubyLsp
           response_builder: ::RubyLsp::ResponseBuilders::TestCollection,
           dispatcher: Prism::Dispatcher,
           uri: URI::Generic,
+          workspace_path: String,
         ).void
       end
-      def initialize(response_builder, dispatcher, uri)
+      def initialize(response_builder, dispatcher, uri, workspace_path)
         @response_builder = response_builder
         @dispatcher = dispatcher
         @uri = uri
         @path = T.let(T.must(uri.to_standardized_path), String)
+        @workspace_path = T.let(workspace_path, String)
         @group_stack = T.let([], T::Array[::RubyLsp::Requests::Support::TestItem])
-        @anonymous_example_count = T.let(0, Integer)
 
         dispatcher.register(
           self,
@@ -58,7 +59,7 @@ module RubyLsp
       def extract_description(node)
         # Try to extract the description from a string literal argument
         first_arg = node.arguments&.arguments&.first
-        return "(anonymous example #{@anonymous_example_count += 1})" if first_arg.nil?
+        return "example at #{relative_location(node)}" if first_arg.nil?
 
         case first_arg
         when Prism::StringNode
@@ -81,7 +82,7 @@ module RubyLsp
         parent_id = parent ? "#{parent.id}::" : ""
 
         test_item = ::RubyLsp::Requests::Support::TestItem.new(
-          "#{parent_id}#{description}",
+          "#{parent_id}#{relative_location(node)}",
           description,
           @uri,
           range_from_node(node),
@@ -104,7 +105,7 @@ module RubyLsp
         return unless parent
 
         test_item = ::RubyLsp::Requests::Support::TestItem.new(
-          "#{parent.id}::#{description}",
+          "#{parent.id}::#{relative_location(node)}",
           description,
           @uri,
           range_from_node(node),
@@ -122,6 +123,13 @@ module RubyLsp
       sig { params(node: Prism::CallNode).returns(T::Boolean) }
       def valid_group?(node)
         !(node.block.nil? || (node.receiver && node.receiver&.slice != "RSpec"))
+      end
+
+      sig { params(node: Prism::CallNode).returns(String) }
+      def relative_location(node)
+        uri_path = T.must(@uri.to_standardized_path)
+        relative_path = Pathname.new(uri_path).relative_path_from(Pathname.new(@workspace_path))
+        "./#{relative_path}:#{node.location.start_line}"
       end
     end
   end

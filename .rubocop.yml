@@ -32,6 +32,7 @@ Sorbet/StrictSigil:
     - "lib/**/*.rb"
   Exclude:
     - "**/*.rake"
+    - "lib/ruby_lsp/ruby_lsp_rspec/rspec_formatter.rb"
     - "spec/**/*.rb"
 
 Style/StderrPuts:

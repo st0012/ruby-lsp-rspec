@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ruby-lsp-rspec (0.1.22)
-      ruby-lsp (~> 0.23.0)
+      ruby-lsp (~> 0.23.17)
 
 GEM
   remote: https://rubygems.org/
@@ -43,7 +43,7 @@ GEM
       prism (~> 1.0)
       rbs (>= 3.4.4)
       sorbet-runtime (>= 0.5.9204)
-    rbs (3.9.2)
+    rbs (3.9.3)
       logger
     rdoc (6.13.1)
       psych (>= 4.0.0)
@@ -83,20 +83,20 @@ GEM
       rubocop (~> 1.62)
     rubocop-sorbet (0.10.0)
       rubocop (>= 1)
-    ruby-lsp (0.23.15)
+    ruby-lsp (0.23.17)
       language_server-protocol (~> 3.17.0)
       prism (>= 1.2, < 2.0)
       rbs (>= 3, < 4)
       sorbet-runtime (>= 0.5.10782)
     ruby-progressbar (1.13.0)
-    sorbet (0.5.12043)
-      sorbet-static (= 0.5.12043)
-    sorbet-runtime (0.5.12043)
-    sorbet-static (0.5.12043-universal-darwin)
-    sorbet-static (0.5.12043-x86_64-linux)
-    sorbet-static-and-runtime (0.5.12043)
-      sorbet (= 0.5.12043)
-      sorbet-runtime (= 0.5.12043)
+    sorbet (0.5.12048)
+      sorbet-static (= 0.5.12048)
+    sorbet-runtime (0.5.12048)
+    sorbet-static (0.5.12048-universal-darwin)
+    sorbet-static (0.5.12048-x86_64-linux)
+    sorbet-static-and-runtime (0.5.12048)
+      sorbet (= 0.5.12048)
+      sorbet-runtime (= 0.5.12048)
     spoom (1.6.1)
       erubi (>= 1.10.0)
       prism (>= 0.28.0)

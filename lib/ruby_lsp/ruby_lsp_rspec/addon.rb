@@ -8,11 +8,16 @@ require_relative "code_lens"
 require_relative "document_symbol"
 require_relative "definition"
 require_relative "indexing_enhancement"
+require_relative "test_discovery"
+require_relative "spec_style_patch"
 
 module RubyLsp
   module RSpec
     class Addon < ::RubyLsp::Addon
       extend T::Sig
+
+      FORMATTER_PATH = T.let(File.expand_path("rspec_formatter.rb", __dir__), String)
+      FORMATTER_NAME = T.let("RubyLsp::RSpec::RSpecFormatter", String)
 
       sig { returns(T::Boolean) }
       attr_reader :debug
@@ -30,11 +35,17 @@ module RubyLsp
 
         settings = global_state.settings_for_addon(name)
         @rspec_command = rspec_command(settings)
+        @workspace_path = T.let(global_state.workspace_path, T.nilable(String))
         @debug = settings&.dig(:debug) || false
       end
 
       sig { override.void }
       def deactivate; end
+
+      sig { override.returns(String) }
+      def name
+        "ruby-lsp-rspec"
+      end
 
       sig { override.returns(String) }
       def version
@@ -55,6 +66,68 @@ module RubyLsp
         CodeLens.new(response_builder, uri, dispatcher, T.must(@rspec_command), debug: debug)
       end
 
+      # Creates a new Discover Tests listener. This method is invoked on every DiscoverTests request
+      sig do
+        override.params(
+          response_builder: ResponseBuilders::TestCollection,
+          dispatcher: Prism::Dispatcher,
+          uri: URI::Generic,
+        ).void
+      end
+      def create_discover_tests_listener(response_builder, dispatcher, uri)
+        return unless uri.to_standardized_path&.end_with?("_spec.rb")
+
+        TestDiscovery.new(response_builder, dispatcher, uri, T.must(@workspace_path))
+      end
+
+      # Resolves the minimal set of commands required to execute the requested tests
+      sig do
+        override.params(
+          items: T::Array[T::Hash[Symbol, T.untyped]],
+        ).returns(T::Array[String])
+      end
+      def resolve_test_commands(items)
+        commands = []
+        queue = items.dup
+
+        full_files = []
+
+        until queue.empty?
+          item = T.must(queue.shift)
+          tags = Set.new(item[:tags])
+          next unless tags.include?("framework:rspec")
+
+          children = item[:children]
+          uri = URI(item[:uri])
+          path = uri.full_path
+          next unless path
+
+          if tags.include?("test_dir")
+            if children.empty?
+              full_files.concat(Dir.glob(
+                "#{path}/**/*_spec.rb",
+                File::Constants::FNM_EXTGLOB | File::Constants::FNM_PATHNAME,
+              ))
+            end
+          elsif tags.include?("test_file")
+            full_files << path if children.empty?
+          elsif tags.include?("test_group")
+            start_line = item.dig(:range, :start, :line)
+            commands << "#{@rspec_command} -r #{FORMATTER_PATH} -f #{FORMATTER_NAME} #{path}:#{start_line + 1}"
+          else
+            full_files << "#{path}:#{item.dig(:range, :start, :line) + 1}"
+          end
+
+          queue.concat(children)
+        end
+
+        unless full_files.empty?
+          commands << "#{@rspec_command} -r #{FORMATTER_PATH} -f #{FORMATTER_NAME} #{full_files.join(" ")}"
+        end
+
+        commands
+      end
+
       sig do
         override.params(
           response_builder: ResponseBuilders::DocumentSymbol,
@@ -67,10 +140,7 @@ module RubyLsp
 
       sig do
         override.params(
-          response_builder: ResponseBuilders::CollectionResponseBuilder[T.any(
-            Interface::Location,
-            Interface::LocationLink,
-          )],
+          response_builder: ResponseBuilders::CollectionResponseBuilder[T.any(Interface::Location, Interface::LocationLink)],
           uri: URI::Generic,
           node_context: NodeContext,
           dispatcher: Prism::Dispatcher,
@@ -82,10 +152,7 @@ module RubyLsp
         Definition.new(response_builder, uri, node_context, T.must(@index), dispatcher)
       end
 
-      sig { override.returns(String) }
-      def name
-        "Ruby LSP RSpec"
-      end
+      private
 
       sig { params(settings: T.nilable(T::Hash[Symbol, T.untyped])).returns(String) }
       def rspec_command(settings)

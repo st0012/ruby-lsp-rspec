@@ -4,33 +4,24 @@
 module RubyLsp
   module RSpec
     class CodeLens
-      extend T::Sig
-
       include ::RubyLsp::Requests::Support::Common
 
-      sig do
-        params(
-          response_builder: ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens],
-          uri: URI::Generic,
-          dispatcher: Prism::Dispatcher,
-          rspec_command: String,
-          debug: T::Boolean,
-        ).void
-      end
+      #: (ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens], URI::Generic, Prism::Dispatcher, String, ?debug: bool) -> void
       def initialize(response_builder, uri, dispatcher, rspec_command, debug: false)
         @response_builder = response_builder
         # Listener is only initialized if uri.to_standardized_path is valid
-        @path = T.let(T.must(uri.to_standardized_path), String)
-        @group_id = T.let(1, Integer)
-        @group_id_stack = T.let([], T::Array[Integer])
+        path = uri.to_standardized_path #: as !nil
+        @path = path #: String
+        @group_id = 1 #: Integer
+        @group_id_stack = [] #: Array[Integer]
         @rspec_command = rspec_command
-        @anonymous_example_count = T.let(0, Integer)
+        @anonymous_example_count = 0 #: Integer
         dispatcher.register(self, :on_call_node_enter, :on_call_node_leave)
 
         @debug = debug
       end
 
-      sig { params(node: Prism::CallNode).void }
+      #: (Prism::CallNode) -> void
       def on_call_node_enter(node)
         case node.message
         when "example", "it", "specify"
@@ -47,7 +38,7 @@ module RubyLsp
         end
       end
 
-      sig { params(node: Prism::CallNode).void }
+      #: (Prism::CallNode) -> void
       def on_call_node_leave(node)
         case node.message
         when "context", "describe"
@@ -59,17 +50,17 @@ module RubyLsp
 
       private
 
-      sig { params(message: String).void }
+      #: (String) -> void
       def log_message(message)
         puts "[#{self.class}]: #{message}"
       end
 
-      sig { params(node: Prism::CallNode).returns(T::Boolean) }
+      #: (Prism::CallNode) -> bool
       def valid_group?(node)
         !(node.block.nil? || (node.receiver && node.receiver&.slice != "RSpec"))
       end
 
-      sig { params(node: Prism::CallNode).returns(String) }
+      #: (Prism::CallNode) -> String
       def generate_name(node)
         arguments = node.arguments&.arguments
 
@@ -92,7 +83,7 @@ module RubyLsp
         end
       end
 
-      sig { params(node: Prism::Node, name: String, kind: Symbol).void }
+      #: (Prism::Node, name: String, kind: Symbol) -> void
       def add_test_code_lens(node, name:, kind:)
         line_number = node.location.start_line
         command = "#{@rspec_command} #{@path}:#{line_number}"

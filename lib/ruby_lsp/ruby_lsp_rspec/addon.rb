@@ -14,78 +14,78 @@ require_relative "spec_style_patch"
 module RubyLsp
   module RSpec
     class Addon < ::RubyLsp::Addon
-      extend T::Sig
+      FORMATTER_PATH = File.expand_path("rspec_formatter.rb", __dir__) #: String
+      FORMATTER_NAME = "RubyLsp::RSpec::RSpecFormatter" #: String
 
-      FORMATTER_PATH = T.let(File.expand_path("rspec_formatter.rb", __dir__), String)
-      FORMATTER_NAME = T.let("RubyLsp::RSpec::RSpecFormatter", String)
-
-      sig { returns(T::Boolean) }
+      #: bool
       attr_reader :debug
 
-      sig { void }
+      #: -> void
       def initialize
         super
-        @debug = T.let(false, T::Boolean)
-        @rspec_command = T.let(nil, T.nilable(String))
+        @debug = false #: bool
+        @rspec_command = nil #: String?
       end
 
-      sig { override.params(global_state: GlobalState, message_queue: Thread::Queue).void }
+      # @override
+      #: (GlobalState, Thread::Queue) -> void
       def activate(global_state, message_queue)
-        @index = T.let(global_state.index, T.nilable(RubyIndexer::Index))
+        @index = global_state.index #: RubyIndexer::Index?
 
         settings = global_state.settings_for_addon(name)
         @rspec_command = rspec_command(settings)
-        @workspace_path = T.let(global_state.workspace_path, T.nilable(String))
+        @workspace_path = global_state.workspace_path #: String?
         @debug = settings&.dig(:debug) || false
       end
 
-      sig { override.void }
+      # @override
+      #: -> void
       def deactivate; end
 
-      sig { override.returns(String) }
+      # @override
+      #: -> String
       def name
         "ruby-lsp-rspec"
       end
 
-      sig { override.returns(String) }
+      # @override
+      #: -> String
       def version
         VERSION
       end
 
       # Creates a new CodeLens listener. This method is invoked on every CodeLens request
-      sig do
-        override.params(
-          response_builder: ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens],
-          uri: URI::Generic,
-          dispatcher: Prism::Dispatcher,
-        ).void
-      end
+      # @override
+      #: (ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens], URI::Generic, Prism::Dispatcher) -> void
       def create_code_lens_listener(response_builder, uri, dispatcher)
         return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
 
-        CodeLens.new(response_builder, uri, dispatcher, T.must(@rspec_command), debug: debug)
+        CodeLens.new(
+          response_builder,
+          uri,
+          dispatcher,
+          @rspec_command, #: as !nil
+          debug: debug,
+        )
       end
 
       # Creates a new Discover Tests listener. This method is invoked on every DiscoverTests request
-      sig do
-        override.params(
-          response_builder: ResponseBuilders::TestCollection,
-          dispatcher: Prism::Dispatcher,
-          uri: URI::Generic,
-        ).void
-      end
+      # @override
+      #: (ResponseBuilders::TestCollection, Prism::Dispatcher, URI::Generic) -> void
       def create_discover_tests_listener(response_builder, dispatcher, uri)
         return unless uri.to_standardized_path&.end_with?("_spec.rb")
 
-        TestDiscovery.new(response_builder, dispatcher, uri, T.must(@workspace_path))
+        TestDiscovery.new(
+          response_builder,
+          dispatcher,
+          uri,
+          @workspace_path, #: as !nil
+        )
       end
 
       # Resolves the minimal set of commands required to execute the requested tests
-      sig do
-        override.params(
-          items: T::Array[T::Hash[Symbol, T.untyped]],
-        ).returns(T::Array[String])
-      end
+      # @override
+      #: (Array[Hash[Symbol, untyped]]) -> Array[String]
       def resolve_test_commands(items)
         commands = []
         queue = items.dup
@@ -93,7 +93,7 @@ module RubyLsp
         full_files = []
 
         until queue.empty?
-          item = T.must(queue.shift)
+          item = queue.shift #: as !nil
           tags = Set.new(item[:tags])
           next unless tags.include?("framework:rspec")
 
@@ -128,33 +128,29 @@ module RubyLsp
         commands
       end
 
-      sig do
-        override.params(
-          response_builder: ResponseBuilders::DocumentSymbol,
-          dispatcher: Prism::Dispatcher,
-        ).void
-      end
+      # @override
+      #: (ResponseBuilders::DocumentSymbol, Prism::Dispatcher) -> void
       def create_document_symbol_listener(response_builder, dispatcher)
         DocumentSymbol.new(response_builder, dispatcher)
       end
 
-      sig do
-        override.params(
-          response_builder: ResponseBuilders::CollectionResponseBuilder[T.any(Interface::Location, Interface::LocationLink)],
-          uri: URI::Generic,
-          node_context: NodeContext,
-          dispatcher: Prism::Dispatcher,
-        ).void
-      end
+      # @override
+      #: (ResponseBuilders::CollectionResponseBuilder[Interface::Location | Interface::LocationLink], URI::Generic, NodeContext, Prism::Dispatcher) -> void
       def create_definition_listener(response_builder, uri, node_context, dispatcher)
         return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
 
-        Definition.new(response_builder, uri, node_context, T.must(@index), dispatcher)
+        Definition.new(
+          response_builder,
+          uri,
+          node_context,
+          @index, #: as !nil
+          dispatcher,
+        )
       end
 
       private
 
-      sig { params(settings: T.nilable(T::Hash[Symbol, T.untyped])).returns(String) }
+      #: (Hash[Symbol, untyped]?) -> String
       def rspec_command(settings)
         @rspec_command ||= settings&.dig(:rspecCommand) || begin
           cmd = if File.exist?(File.join(Dir.pwd, "bin", "rspec"))

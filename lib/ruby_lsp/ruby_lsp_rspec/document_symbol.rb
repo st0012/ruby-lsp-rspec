@@ -4,23 +4,16 @@
 module RubyLsp
   module RSpec
     class DocumentSymbol
-      extend T::Sig
-
       include ::RubyLsp::Requests::Support::Common
 
-      sig do
-        params(
-          response_builder: ResponseBuilders::DocumentSymbol,
-          dispatcher: Prism::Dispatcher,
-        ).void
-      end
+      #: (ResponseBuilders::DocumentSymbol, Prism::Dispatcher) -> void
       def initialize(response_builder, dispatcher)
         @response_builder = response_builder
 
         dispatcher.register(self, :on_call_node_enter, :on_call_node_leave)
       end
 
-      sig { params(node: Prism::CallNode).void }
+      #: (Prism::CallNode) -> void
       def on_call_node_enter(node)
         case node.message
         when "example", "it", "specify"
@@ -54,7 +47,7 @@ module RubyLsp
         end
       end
 
-      sig { params(node: Prism::CallNode).void }
+      #: (Prism::CallNode) -> void
       def on_call_node_leave(node)
         case node.message
         when "context", "describe", "shared_examples", "shared_context", "shared_examples_for"
@@ -64,7 +57,7 @@ module RubyLsp
         end
       end
 
-      sig { params(node: Prism::CallNode).returns(T.nilable(String)) }
+      #: (Prism::CallNode) -> String?
       def generate_name(node)
         arguments = node.arguments&.arguments
 

@@ -4,22 +4,9 @@
 module RubyLsp
   module RSpec
     class Definition
-      extend T::Sig
-
       include ::RubyLsp::Requests::Support::Common
 
-      sig do
-        params(
-          response_builder: ResponseBuilders::CollectionResponseBuilder[T.any(
-            Interface::Location,
-            Interface::LocationLink,
-          )],
-          uri: URI::Generic,
-          node_context: NodeContext,
-          index: RubyIndexer::Index,
-          dispatcher: Prism::Dispatcher,
-        ).void
-      end
+      #: (ResponseBuilders::CollectionResponseBuilder[Interface::LocationLink | Interface::Location], URI::Generic, NodeContext, RubyIndexer::Index, Prism::Dispatcher) -> void
       def initialize(response_builder, uri, node_context, index, dispatcher)
         @response_builder = response_builder
         @uri = uri
@@ -28,7 +15,7 @@ module RubyLsp
         dispatcher.register(self, :on_call_node_enter)
       end
 
-      sig { params(node: Prism::CallNode).void }
+      #: (Prism::CallNode) -> void
       def on_call_node_enter(node)
         message = node.message
         return unless message

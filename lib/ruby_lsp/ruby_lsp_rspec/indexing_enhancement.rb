@@ -4,9 +4,8 @@
 module RubyLsp
   module RSpec
     class IndexingEnhancement < RubyIndexer::Enhancement
-      extend T::Sig
-
-      sig { override.params(node: Prism::CallNode).void }
+      # @override
+      #: (Prism::CallNode) -> void
       def on_call_node_enter(node)
         return if node.receiver
 
@@ -22,7 +21,7 @@ module RubyLsp
 
           return if arguments.arguments.count != 1
 
-          method_name_node = T.must(arguments.arguments.first)
+          method_name_node = arguments.arguments.first #: as !nil
 
           method_name = case method_name_node
           when Prism::StringNode
@@ -41,7 +40,7 @@ module RubyLsp
           arguments = node.arguments
 
           if arguments && arguments.arguments.count == 1
-            method_name_node = T.must(arguments.arguments.first)
+            method_name_node = arguments.arguments.first #: as !nil
           end
 
           method_name = if method_name_node

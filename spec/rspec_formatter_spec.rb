@@ -13,7 +13,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
     server = TCPServer.new("localhost", 0)
     port = server.addr[1].to_s
     events = []
-    socket = T.let(nil, T.nilable(TCPSocket))
+    socket = nil #: TCPSocket?
 
     receiver = Thread.new do
       socket = server.accept

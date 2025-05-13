@@ -23,7 +23,7 @@ module RubyLsp
 
           @response_builder.last.children << RubyLsp::Interface::DocumentSymbol.new(
             name: name,
-            kind: LanguageServer::Protocol::Constant::SymbolKind::METHOD,
+            kind: RubyLsp::Constant::SymbolKind::METHOD,
             selection_range: range_from_node(node),
             range: range_from_node(node),
           )
@@ -36,7 +36,7 @@ module RubyLsp
 
           symbol = RubyLsp::Interface::DocumentSymbol.new(
             name: name,
-            kind: LanguageServer::Protocol::Constant::SymbolKind::MODULE,
+            kind: RubyLsp::Constant::SymbolKind::MODULE,
             selection_range: range_from_node(node),
             range: range_from_node(node),
             children: [],

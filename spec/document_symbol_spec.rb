@@ -61,14 +61,14 @@ RSpec.describe RubyLsp::RSpec do
         expect(response.count).to eq(1)
         foo = response[0]
         expect(foo.name).to eq("Foo")
-        expect(foo.kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(foo.kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(foo.children.count).to eq(5)
 
         expect(foo.children[0].name).to eq("when something")
-        expect(foo.children[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(foo.children[0].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(foo.children[0].children.count).to eq(1)
         expect(foo.children[0].children[0].name).to eq("does something")
-        expect(foo.children[0].children[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::METHOD)
+        expect(foo.children[0].children[0].kind).to eq(RubyLsp::Constant::SymbolKind::METHOD)
 
         foo_bar = foo.children[1]
         expect(foo_bar.name).to eq("Foo::Bar")
@@ -113,12 +113,12 @@ RSpec.describe RubyLsp::RSpec do
         expect(response.count).to eq(1)
         shared = response[0]
         expect(shared.name).to eq("simple shared examples")
-        expect(shared.kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(shared.kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(shared.children.count).to eq(1)
 
         example = shared.children[0]
         expect(example.name).to eq("does something")
-        expect(example.kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::METHOD)
+        expect(example.kind).to eq(RubyLsp::Constant::SymbolKind::METHOD)
       end
     end
 
@@ -146,12 +146,12 @@ RSpec.describe RubyLsp::RSpec do
         expect(response.count).to eq(1)
         shared = response[0]
         expect(shared.name).to eq(":symbol_shared_examples")
-        expect(shared.kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(shared.kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(shared.children.count).to eq(1)
 
         child = shared.children[0]
         expect(child.name).to eq("does something in symbol")
-        expect(child.kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::METHOD)
+        expect(child.kind).to eq(RubyLsp::Constant::SymbolKind::METHOD)
       end
     end
 
@@ -181,12 +181,12 @@ RSpec.describe RubyLsp::RSpec do
         expect(response.count).to eq(1)
         shared = response[0]
         expect(shared.name).to eq("shared example with parameter")
-        expect(shared.kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(shared.kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(shared.children.count).to eq(1)
 
         child1 = shared.children[0]
         expect(child1.name).to eq("uses the given parameter")
-        expect(child1.kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::METHOD)
+        expect(child1.kind).to eq(RubyLsp::Constant::SymbolKind::METHOD)
       end
     end
 
@@ -219,7 +219,7 @@ RSpec.describe RubyLsp::RSpec do
 
         expect(response.count).to eq(1)
         expect(response[0].name).to eq("simple shared_context")
-        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(response[0].children.count).to eq(2)
       end
     end
@@ -253,7 +253,7 @@ RSpec.describe RubyLsp::RSpec do
 
         expect(response.count).to eq(1)
         expect(response[0].name).to eq(":symbol_shared_context")
-        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(response[0].children.count).to eq(2)
       end
     end
@@ -287,7 +287,7 @@ RSpec.describe RubyLsp::RSpec do
 
         expect(response.count).to eq(1)
         expect(response[0].name).to eq("simple shared_examples_for")
-        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(response[0].children.count).to eq(2)
       end
     end
@@ -321,7 +321,7 @@ RSpec.describe RubyLsp::RSpec do
 
         expect(response.count).to eq(1)
         expect(response[0].name).to eq(":symbol_shared_examples_for")
-        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
         expect(response[0].children.count).to eq(2)
       end
     end
@@ -350,10 +350,10 @@ RSpec.describe RubyLsp::RSpec do
 
         expect(response.count).to eq(2)
         expect(response[0].name).to eq("shared examples")
-        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
 
         expect(response[1].name).to eq("something")
-        expect(response[1].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[1].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
       end
     end
 
@@ -381,10 +381,10 @@ RSpec.describe RubyLsp::RSpec do
 
         expect(response.count).to eq(2)
         expect(response[0].name).to eq("shared context")
-        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
 
         expect(response[1].name).to eq("something")
-        expect(response[1].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[1].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
       end
     end
 
@@ -412,10 +412,10 @@ RSpec.describe RubyLsp::RSpec do
 
         expect(response.count).to eq(2)
         expect(response[0].name).to eq("shared examples for")
-        expect(response[0].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[0].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
 
         expect(response[1].name).to eq("something")
-        expect(response[1].kind).to eq(LanguageServer::Protocol::Constant::SymbolKind::MODULE)
+        expect(response[1].kind).to eq(RubyLsp::Constant::SymbolKind::MODULE)
       end
     end
   end

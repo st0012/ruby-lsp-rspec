@@ -88,6 +88,7 @@ module RubyLsp
           @response_builder.add(test_item)
         end
 
+        @response_builder.add_code_lens(test_item)
         @group_stack.push(test_item)
       end
 
@@ -106,6 +107,7 @@ module RubyLsp
         )
 
         parent.add(test_item)
+        @response_builder.add_code_lens(test_item)
       end
 
       #: -> ::RubyLsp::Requests::Support::TestItem??

@@ -24,7 +24,8 @@ module RubyLsp
         example = notification.example
         uri = uri_for(example)
         id = generate_id(example)
-        RubyLsp::LspReporter.instance.start_test(id: id, uri: uri)
+        line = example.location.split(":").last
+        RubyLsp::LspReporter.instance.start_test(id: id, uri: uri, line: line)
       end
 
       def example_passed(notification)

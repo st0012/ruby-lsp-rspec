@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ruby-lsp-rspec (0.1.22)
-      ruby-lsp (~> 0.23.17)
+      ruby-lsp (~> 0.23.19)
 
 GEM
   remote: https://rubygems.org/
@@ -21,7 +21,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.11.3)
-    language_server-protocol (3.17.0.4)
+    language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
     netrc (0.11.0)
@@ -83,7 +83,7 @@ GEM
       rubocop (~> 1.62)
     rubocop-sorbet (0.10.0)
       rubocop (>= 1)
-    ruby-lsp (0.23.17)
+    ruby-lsp (0.23.19)
       language_server-protocol (~> 3.17.0)
       prism (>= 1.2, < 2.0)
       rbs (>= 3, < 4)

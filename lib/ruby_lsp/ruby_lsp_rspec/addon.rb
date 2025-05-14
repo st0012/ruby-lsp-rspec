@@ -31,6 +31,7 @@ module RubyLsp
       #: (GlobalState, Thread::Queue) -> void
       def activate(global_state, message_queue)
         @index = global_state.index #: RubyIndexer::Index?
+        @global_state = global_state #: GlobalState?
 
         settings = global_state.settings_for_addon(name)
         @rspec_command = rspec_command(settings)
@@ -59,6 +60,7 @@ module RubyLsp
       #: (ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens], URI::Generic, Prism::Dispatcher) -> void
       def create_code_lens_listener(response_builder, uri, dispatcher)
         return unless uri.to_standardized_path&.end_with?("_test.rb") || uri.to_standardized_path&.end_with?("_spec.rb")
+        return if @global_state&.enabled_feature?(:fullTestDiscovery)
 
         CodeLens.new(
           response_builder,

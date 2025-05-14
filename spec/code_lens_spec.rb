@@ -6,11 +6,11 @@ require_relative "spec_helper"
 RSpec.describe RubyLsp::RSpec do
   include RubyLsp::TestHelper
 
-  let(:uri) { URI("file:///fake_spec.rb") }
+  let(:uri) { URI("file://#{File.expand_path("fake_spec.rb", __dir__)}") }
 
   describe "code lens" do
     context "with full test discovery" do
-      it "doesn't generate code lens" do
+      it "generates code lens through TestDiscovery" do
         source = <<~RUBY
           RSpec.describe Foo do
             context "when something" do
@@ -36,7 +36,11 @@ RSpec.describe RubyLsp::RSpec do
 
           response = pop_result(server).response
 
-          expect(response.count).to eq(0)
+          expect(response.count).to eq(9)
+
+          expect(response[0].data).to eq({ kind: "run_test", arguments: [uri.to_standardized_path, "./spec/fake_spec.rb:1"] })
+          expect(response[3].data).to eq({ kind: "run_test", arguments: [uri.to_standardized_path, "./spec/fake_spec.rb:1::./spec/fake_spec.rb:2"] })
+          expect(response[6].data).to eq({ kind: "run_test", arguments: [uri.to_standardized_path, "./spec/fake_spec.rb:1::./spec/fake_spec.rb:2::./spec/fake_spec.rb:3"] })
         end
       end
     end
@@ -74,9 +78,9 @@ RSpec.describe RubyLsp::RSpec do
 
           0.upto(2) do |i|
             expect(response[i].command.arguments).to eq([
-              "/fake_spec.rb",
+              uri.to_standardized_path,
               "Foo",
-              "bundle exec rspec /fake_spec.rb:1",
+              "bundle exec rspec #{uri.to_standardized_path}:1",
               { start_line: 0, start_column: 0, end_line: 5, end_column: 3 },
             ])
           end
@@ -87,9 +91,9 @@ RSpec.describe RubyLsp::RSpec do
 
           3.upto(5) do |i|
             expect(response[i].command.arguments).to eq([
-              "/fake_spec.rb",
+              uri.to_standardized_path,
               "when something",
-              "bundle exec rspec /fake_spec.rb:2",
+              "bundle exec rspec #{uri.to_standardized_path}:2",
               { start_line: 1, start_column: 2, end_line: 4, end_column: 5 },
             ])
           end
@@ -100,9 +104,9 @@ RSpec.describe RubyLsp::RSpec do
 
           6.upto(8) do |i|
             expect(response[i].command.arguments).to eq([
-              "/fake_spec.rb",
+              uri.to_standardized_path,
               "does something",
-              "bundle exec rspec /fake_spec.rb:3",
+              "bundle exec rspec #{uri.to_standardized_path}:3",
               { start_line: 2, start_column: 4, end_line: 3, end_column: 7 },
             ])
           end
@@ -226,7 +230,7 @@ RSpec.describe RubyLsp::RSpec do
             )
 
             response = pop_result(server).response
-            expect(response[0].command.arguments[2]).to eq("docker compose run --rm web rspec /fake_spec.rb:1")
+            expect(response[0].command.arguments[2]).to eq("docker compose run --rm web rspec #{uri.to_standardized_path}:1")
           end
         end
       end
@@ -296,7 +300,7 @@ RSpec.describe RubyLsp::RSpec do
             response = pop_result(server).response
 
             expect(response.count).to eq(3)
-            expect(response[0].command.arguments[2]).to eq("bundle exec bin/rspec /fake_spec.rb:1")
+            expect(response[0].command.arguments[2]).to eq("bundle exec bin/rspec #{uri.to_standardized_path}:1")
           end
         end
       end

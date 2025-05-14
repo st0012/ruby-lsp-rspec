@@ -57,6 +57,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
         "method" => "start",
         "params" => {
           "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:13",
+          "line" => "13",
           "uri" => "file://#{fixture_path}",
         },
       },
@@ -71,6 +72,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
         "method" => "start",
         "params" => {
           "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:17",
+          "line" => "17",
           "uri" => "file://#{fixture_path}",
         },
       },
@@ -86,6 +88,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
         "method" => "start",
         "params" => {
           "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:21",
+          "line" => "21",
           "uri" => "file://#{fixture_path}",
         },
       },
@@ -100,6 +103,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
         "method" => "start",
         "params" => {
           "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:26",
+          "line" => "26",
           "uri" => "file://#{fixture_path}",
         },
       },
@@ -114,6 +118,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
         "method" => "start",
         "params" => {
           "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:30",
+          "line" => "30",
           "uri" => "file://#{fixture_path}",
         },
       },

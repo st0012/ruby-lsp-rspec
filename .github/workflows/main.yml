@@ -8,6 +8,19 @@ on:
   pull_request:
 
 jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    name: Typecheck
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+      - name: Typecheck
+        run: bundle exec srb tc
+
   build:
     runs-on: ubuntu-latest
     name: Ruby ${{ matrix.ruby }}
@@ -19,7 +32,6 @@ jobs:
           - "3.3"
           - "3.2"
           - "3.1"
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby
@@ -27,7 +39,5 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
-      - name: Typecheck
-        run: bundle exec srb tc
-      - name: Run the default task
+      - name: Run tests
         run: bundle exec rake

@@ -66,7 +66,7 @@ All configuration options must be nested under the `Ruby LSP RSpec` addon within
 {
   // ...
   "rubyLsp.addonSettings": {
-    "Ruby LSP RSpec": {
+    "ruby-lsp-rspec": {
       // Configuration options go here
     }
   }
@@ -87,7 +87,7 @@ Customize the command used to run tests via CodeLens. If not set, the command wi
 {
   // ...
   "rubyLsp.addonSettings": {
-    "Ruby LSP RSpec": {
+    "ruby-lsp-rspec": {
       "rspecCommand": "rspec -f d"
     }
   }
@@ -107,7 +107,7 @@ Enable debug logging. Currently, this only logs the RSpec command used by CodeLe
 ```json
 {
   "rubyLsp.addonSettings": {
-    "Ruby LSP RSpec": {
+    "ruby-lsp-rspec": {
       "debug": true
     }
   }

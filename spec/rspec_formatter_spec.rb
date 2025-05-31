@@ -82,7 +82,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
         "method" => "fail",
         "params" => {
           "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:17",
-          "message" => "\nexpected: 1\n     got: 2\n\n(compared using ==)\n",
+          "message" => "Failure/Error: expect(2).to eq(1)\n\n  expected: 1\n       got: 2\n\n  (compared using ==)\n\n# file://#{fixture_path}:18 : in `block (3 levels) in <top (required)>'",
           "uri" => "file://#{fixture_path}",
         },
       },
@@ -128,7 +128,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
         "method" => "fail",
         "params" => {
           "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:30",
-          "message" => "oops",
+          "message" => "Failure/Error: raise \"oops\"\n\nRuntimeError:\n  oops\n\n# file://#{fixture_path}:31 : in `block (3 levels) in <top (required)>'",
           "uri" => "file://#{fixture_path}",
         },
       },
@@ -175,8 +175,8 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
     end
 
     it "invokes ProgressFormatter's example_failed" do
-      exception = double("Exception", message: "error message")
-      allow(notification).to receive(:exception).and_return(exception)
+      allow(notification).to receive(:message_lines).and_return(["message lines"])
+      allow(notification).to receive(:formatted_backtrace).and_return(["spec/example_spec.rb:13:in `something'"])
 
       expect_any_instance_of(RSpec::Core::Formatters::ProgressFormatter).to receive(:example_failed)
 

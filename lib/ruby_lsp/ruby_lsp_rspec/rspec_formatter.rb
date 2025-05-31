@@ -18,6 +18,7 @@ module RubyLsp
 
       def initialize(output)
         @output = output
+        @relative_path = ENV["RUBY_LSP_RSPEC_RELPATH"]
       end
 
       def example_started(notification)
@@ -59,7 +60,13 @@ module RubyLsp
       end
 
       def generate_id(example)
-        [example, *example.example_group.parent_groups].reverse.map(&:location).join("::")
+        [example, *example.example_group.parent_groups].reverse.map(&:location).map(&method(:make_relative)).join("::")
+      end
+
+      def make_relative(location)
+        return location unless @relative_path
+
+        location.sub(/^#{@relative_path}/, "./")
       end
     end
   end

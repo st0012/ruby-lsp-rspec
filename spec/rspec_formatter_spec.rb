@@ -5,6 +5,7 @@ require "spec_helper"
 require "socket"
 require "open3"
 require "json"
+require_relative "../lib/ruby_lsp/ruby_lsp_rspec/rspec_formatter"
 
 RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
   it "sends correct LSP events during test execution" do
@@ -134,5 +135,25 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
     ]
 
     expect(events).to eq(expected)
+  end
+
+  context "ID generation" do
+    before(:all) { @original_relpath = ENV["RUBY_LSP_RSPEC_RELPATH"] }
+    after { ENV["RUBY_LSP_RSPEC_RELPATH"] = @original_relpath }
+
+    it "generates the correct ID" do
+      formatter = RubyLsp::RSpec::RSpecFormatter.new(double("output"))
+
+      id = formatter.generate_id(RSpec.current_example)
+      expect(id).to match(%r{\.\/spec\/rspec_formatter_spec.rb:\d+::\.\/spec\/rspec_formatter_spec.rb:\d+})
+    end
+
+    it "strips a path prefix from test IDs" do
+      ENV["RUBY_LSP_RSPEC_RELPATH"] = "./spec/"
+      formatter = RubyLsp::RSpec::RSpecFormatter.new(double("output"))
+
+      id = formatter.generate_id(RSpec.current_example)
+      expect(id).to match(%r{\.\/rspec_formatter_spec.rb:\d+::\.\/rspec_formatter_spec.rb:\d+})
+    end
   end
 end

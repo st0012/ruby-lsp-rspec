@@ -43,6 +43,37 @@ RSpec.describe RubyLsp::RSpec do
           expect(response[6].data).to eq({ kind: "run_test", arguments: [uri.to_standardized_path, "./spec/fake_spec.rb:1::./spec/fake_spec.rb:2::./spec/fake_spec.rb:3"] })
         end
       end
+
+      it "processes an ordinairy ruby file with module and class blocks" do
+        source = <<~RUBY
+          module RubyLspRSpecTests
+            class ExampleClass
+              def dummy
+                # Test case to verify issue #71
+              end
+            end
+          end
+        RUBY
+
+        with_server(source) do |server, uri|
+          allow(server.global_state).to receive(:enabled_feature?).with(:fullTestDiscovery).and_return(true)
+
+          server.process_message(
+            {
+              id: 1,
+              method: "textDocument/foldingRange",
+              params: {
+                textDocument: { uri: uri },
+                position: { line: 0, character: 0 },
+              },
+            },
+          )
+
+          response = pop_result(server).response
+          expect(response.count).to eq(3)
+          # We are happy if processing the source did not bail with an error
+        end
+      end
     end
 
     context "without full test discovery" do

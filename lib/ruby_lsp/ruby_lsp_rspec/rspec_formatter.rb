@@ -2,22 +2,24 @@
 # frozen_string_literal: true
 
 require "rspec/core/formatters"
+require "rspec/core/formatters/progress_formatter"
 require "ruby_lsp/test_reporters/lsp_reporter"
 
 module RubyLsp
   module RSpec
-    class RSpecFormatter
+    class RSpecFormatter < ::RSpec::Core::Formatters::ProgressFormatter
       ::RSpec::Core::Formatters.register(
         self,
         :example_passed,
         :example_pending,
         :example_failed,
         :example_started,
+        :start_dump,
         :stop,
       )
 
       def initialize(output)
-        @output = output
+        super(output)
       end
 
       def example_started(notification)
@@ -29,6 +31,8 @@ module RubyLsp
       end
 
       def example_passed(notification)
+        super(notification)
+
         example = notification.example
         uri = uri_for(example)
         id = generate_id(example)
@@ -36,6 +40,8 @@ module RubyLsp
       end
 
       def example_failed(notification)
+        super(notification)
+
         example = notification.example
         uri = uri_for(example)
         id = generate_id(example)
@@ -43,6 +49,8 @@ module RubyLsp
       end
 
       def example_pending(notification)
+        super(notification)
+
         example = notification.example
         uri = uri_for(example)
         id = generate_id(example)

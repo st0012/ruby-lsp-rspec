@@ -5,6 +5,8 @@ require "spec_helper"
 require "socket"
 require "open3"
 require "json"
+require "stringio"
+require "ruby_lsp/ruby_lsp_rspec/rspec_formatter"
 
 RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
   it "sends correct LSP events during test execution" do
@@ -134,5 +136,64 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
     ]
 
     expect(events).to eq(expected)
+  end
+
+  describe "RubyLsp::RSpec::RSpecFormatter notifications" do
+    let(:output) { StringIO.new }
+    let(:formatter) { RubyLsp::RSpec::RSpecFormatter.new(output) }
+    let(:notification) { double("Notification") }
+    let(:example) { double("Example") }
+
+    before do
+      allow(notification).to receive(:example).and_return(example)
+      allow(example).to receive(:file_path).and_return("spec/fixtures/rspec_example_spec.rb")
+      allow(example).to receive(:location).and_return("./spec/fixtures/rspec_example_spec.rb:13")
+      allow(example).to receive(:example_group).and_return(double("ExampleGroup", parent_groups: []))
+    end
+
+    it "is a subclass of ProgressFormatter" do
+      expect(RubyLsp::RSpec::RSpecFormatter.superclass).to eq(RSpec::Core::Formatters::ProgressFormatter)
+    end
+
+    it "registers necessary notifications with RSpec" do
+      registered_notifications = RSpec::Core::Formatters::Loader.formatters[RubyLsp::RSpec::RSpecFormatter]
+
+      expect(registered_notifications).to match_array([
+        :example_passed,
+        :example_pending,
+        :example_failed,
+        :example_started,
+        :start_dump,
+        :stop,
+      ])
+    end
+
+    it "invokes ProgressFormatter's example_passed" do
+      expect_any_instance_of(RSpec::Core::Formatters::ProgressFormatter).to receive(:example_passed)
+
+      formatter.example_passed(notification)
+    end
+
+    it "invokes ProgressFormatter's example_failed" do
+      exception = double("Exception", message: "error message")
+      allow(notification).to receive(:exception).and_return(exception)
+
+      expect_any_instance_of(RSpec::Core::Formatters::ProgressFormatter).to receive(:example_failed)
+
+      formatter.example_failed(notification)
+    end
+
+    it "invokes ProgressFormatter's example_pending" do
+      expect_any_instance_of(RSpec::Core::Formatters::ProgressFormatter).to receive(:example_pending)
+
+      formatter.example_pending(notification)
+    end
+
+    it "invokes ProgressFormatter's start_dump" do
+      dump_notification = double("DumpNotification")
+      expect_any_instance_of(RSpec::Core::Formatters::ProgressFormatter).to receive(:start_dump)
+
+      formatter.start_dump(dump_notification)
+    end
   end
 end

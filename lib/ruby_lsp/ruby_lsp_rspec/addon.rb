@@ -46,7 +46,7 @@ module RubyLsp
       # @override
       #: -> String
       def name
-        "ruby-lsp-rspec"
+        "Ruby LSP RSpec"
       end
 
       # @override

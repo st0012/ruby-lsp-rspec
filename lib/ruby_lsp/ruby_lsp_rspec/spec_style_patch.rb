@@ -7,7 +7,7 @@ module RubyLsp
     class SpecStyle
       #: (ResponseBuilders::TestCollection, GlobalState, Prism::Dispatcher, URI::Generic) -> void
       def initialize(response_builder, global_state, dispatcher, uri)
-        super
+        # nop
       end
     end
   end

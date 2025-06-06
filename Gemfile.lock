@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ruby-lsp-rspec (0.1.24)
-      ruby-lsp (~> 0.23.19)
+      ruby-lsp (~> 0.24.0)
 
 GEM
   remote: https://rubygems.org/
@@ -83,10 +83,10 @@ GEM
       rubocop (~> 1.62)
     rubocop-sorbet (0.10.0)
       rubocop (>= 1)
-    ruby-lsp (0.23.19)
+    ruby-lsp (0.24.0)
       language_server-protocol (~> 3.17.0)
       prism (>= 1.2, < 2.0)
-      rbs (>= 3, < 4)
+      rbs (>= 3, < 5)
       sorbet-runtime (>= 0.5.10782)
     ruby-progressbar (1.13.0)
     sorbet (0.5.12087)

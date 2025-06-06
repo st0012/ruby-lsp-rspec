@@ -41,5 +41,5 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "ruby-lsp", "~> 0.23.19"
+  spec.add_dependency "ruby-lsp", "~> 0.24.0"
 end

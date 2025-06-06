@@ -9,3 +9,11 @@ module RubyIndexer
     end
   end
 end
+
+module RubyLsp
+  module ResponseBuilders
+    #: [ResponseType < Object]
+    class CollectionResponseBuilder
+    end
+  end
+end

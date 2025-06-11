@@ -45,7 +45,10 @@ module RubyLsp
         example = notification.example
         uri = uri_for(example)
         id = generate_id(example)
-        RubyLsp::LspReporter.instance.record_fail(id: id, message: notification.exception.message, uri: uri)
+        message = notification.message_lines.join("\n")
+        message << "\n\n"
+        message << notification.formatted_backtrace.map(&method(:adjust_backtrace)).map { |s| "# " + s }.join("\n")
+        RubyLsp::LspReporter.instance.record_fail(id: id, message: message, uri: uri)
       end
 
       def example_pending(notification)
@@ -68,6 +71,12 @@ module RubyLsp
 
       def generate_id(example)
         [example, *example.example_group.parent_groups].reverse.map(&:location).join("::")
+      end
+
+      def adjust_backtrace(backtrace)
+        # Correct the backtrace entry so that vscode recognized it as a link to open
+        parts = backtrace.split(":", 3)
+        parts[0].sub(/^\./, "file://" + File.expand_path(".")) + ":" + parts[1] + " : " + parts[2]
       end
     end
   end

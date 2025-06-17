@@ -116,8 +116,11 @@ module RubyLsp
           elsif tags.include?("test_group")
             start_line = item.dig(:range, :start, :line)
             commands << "#{@rspec_command} -r #{FORMATTER_PATH} -f #{FORMATTER_NAME} #{path}:#{start_line + 1}"
-          else
+          elsif tags.include?("test_case")
             full_files << "#{path}:#{item.dig(:range, :start, :line) + 1}"
+          else
+            # whole project
+            full_files << path
           end
 
           queue.concat(children)

@@ -92,5 +92,33 @@ RSpec.describe RubyLsp::RSpec::Addon do
         ])
       end
     end
+
+    it "resolves commands for the whole project" do
+      project_uri = "file:///test-project"
+      with_server do |server|
+        server.process_message(
+          {
+            id: 1,
+            method: "rubyLsp/resolveTestCommands",
+            params: {
+              items: [
+                {
+                  id: project_uri,
+                  label: "test-project",
+                  tags: ["framework:rspec"],
+                  uri: project_uri,
+                  children: [],
+                },
+              ],
+            },
+          },
+        )
+
+        response = pop_result(server).response
+        expect(response[:commands]).to eq([
+          "bundle exec rspec -r #{formatter_absolute_path} -f #{formatter_name} /test-project",
+        ])
+      end
+    end
   end
 end

@@ -8,35 +8,35 @@
 class Array
   include ::Enumerable
 
-  # source://pp/lib/pp.rb#402
+  # source://pp//lib/pp.rb#402
   def pretty_print(q); end
 
-  # source://pp/lib/pp.rb#410
+  # source://pp//lib/pp.rb#410
   def pretty_print_cycle(q); end
 end
 
 class Data
-  # source://pp/lib/pp.rb#456
+  # source://pp//lib/pp.rb#456
   def pretty_print(q); end
 
-  # source://pp/lib/pp.rb#484
+  # source://pp//lib/pp.rb#484
   def pretty_print_cycle(q); end
 end
 
 class File::Stat
   include ::Comparable
 
-  # source://pp/lib/pp.rb#518
+  # source://pp//lib/pp.rb#518
   def pretty_print(q); end
 end
 
 class Hash
   include ::Enumerable
 
-  # source://pp/lib/pp.rb#416
+  # source://pp//lib/pp.rb#416
   def pretty_print(q); end
 
-  # source://pp/lib/pp.rb#420
+  # source://pp//lib/pp.rb#420
   def pretty_print_cycle(q); end
 end
 
@@ -45,7 +45,7 @@ module Kernel
   #
   # See the PP module for more information.
   #
-  # source://pp/lib/pp.rb#685
+  # source://pp//lib/pp.rb#685
   def pretty_inspect; end
 
   private
@@ -54,7 +54,7 @@ module Kernel
   #
   # +#pp+ returns argument(s).
   #
-  # source://pp/lib/pp.rb#692
+  # source://pp//lib/pp.rb#692
   def pp(*objs); end
 
   class << self
@@ -62,13 +62,13 @@ module Kernel
     #
     # +#pp+ returns argument(s).
     #
-    # source://pp/lib/pp.rb#692
+    # source://pp//lib/pp.rb#692
     def pp(*objs); end
   end
 end
 
 class MatchData
-  # source://pp/lib/pp.rb#601
+  # source://pp//lib/pp.rb#601
   def pretty_print(q); end
 end
 
@@ -135,7 +135,7 @@ class PP < ::PrettyPrint
   class << self
     # :stopdoc:
     #
-    # source://pp/lib/pp.rb#116
+    # source://pp//lib/pp.rb#116
     def mcall(obj, mod, meth, *args, &block); end
 
     # Outputs +obj+ to +out+ in pretty printed format of
@@ -147,19 +147,19 @@ class PP < ::PrettyPrint
     #
     # PP.pp returns +out+.
     #
-    # source://pp/lib/pp.rb#96
+    # source://pp//lib/pp.rb#96
     def pp(obj, out = T.unsafe(nil), width = T.unsafe(nil)); end
 
     # Returns the sharing detection flag as a boolean value.
     # It is false by default.
     #
-    # source://pp/lib/pp.rb#125
+    # source://pp//lib/pp.rb#125
     def sharing_detection; end
 
     # Returns the sharing detection flag as a boolean value.
     # It is false by default.
     #
-    # source://pp/lib/pp.rb#129
+    # source://pp//lib/pp.rb#129
     def sharing_detection=(b); end
 
     # Outputs +obj+ to +out+ like PP.pp but with no indent and
@@ -167,7 +167,7 @@ class PP < ::PrettyPrint
     #
     # PP.singleline_pp returns +out+.
     #
-    # source://pp/lib/pp.rb#108
+    # source://pp//lib/pp.rb#108
     def singleline_pp(obj, out = T.unsafe(nil)); end
 
     # Returns the usable width for +out+.
@@ -181,7 +181,7 @@ class PP < ::PrettyPrint
     # * This -1 is for Windows command prompt, which moves the cursor to
     #   the next line if it reaches the last column.
     #
-    # source://pp/lib/pp.rb#79
+    # source://pp//lib/pp.rb#79
     def width_for(out); end
   end
 end
@@ -197,13 +197,13 @@ module PP::ObjectMixin
   # This module provides predefined #pretty_print methods for some of
   # the most commonly used built-in classes for convenience.
   #
-  # source://pp/lib/pp.rb#353
+  # source://pp//lib/pp.rb#353
   def pretty_print(q); end
 
   # A default pretty printing method for general objects that are
   # detected as part of a cycle.
   #
-  # source://pp/lib/pp.rb#370
+  # source://pp//lib/pp.rb#370
   def pretty_print_cycle(q); end
 
   # Is #inspect implementation using #pretty_print.
@@ -214,7 +214,7 @@ module PP::ObjectMixin
   # However, doing this requires that every class that #inspect is called on
   # implement #pretty_print, or a RuntimeError will be raised.
   #
-  # source://pp/lib/pp.rb#392
+  # source://pp//lib/pp.rb#392
   def pretty_print_inspect; end
 
   # Returns a sorted array of instance variable names.
@@ -222,7 +222,7 @@ module PP::ObjectMixin
   # This method should return an array of names of instance variables as symbols or strings as:
   # +[:@a, :@b]+.
   #
-  # source://pp/lib/pp.rb#381
+  # source://pp//lib/pp.rb#381
   def pretty_print_instance_variables; end
 end
 
@@ -232,7 +232,7 @@ module PP::PPMethods
   # to be pretty printed. Used to break cycles in chains of objects to be
   # pretty printed.
   #
-  # source://pp/lib/pp.rb#169
+  # source://pp//lib/pp.rb#169
   def check_inspect_key(id); end
 
   # A convenience method which is same as follows:
@@ -240,31 +240,31 @@ module PP::PPMethods
   #   text ','
   #   breakable
   #
-  # source://pp/lib/pp.rb#232
+  # source://pp//lib/pp.rb#232
   def comma_breakable; end
 
   # Yields to a block
   # and preserves the previous set of objects being printed.
   #
-  # source://pp/lib/pp.rb#147
+  # source://pp//lib/pp.rb#147
   def guard_inspect_key; end
 
   # A convenience method, like object_group, but also reformats the Object's
   # object_id.
   #
-  # source://pp/lib/pp.rb#222
+  # source://pp//lib/pp.rb#222
   def object_address_group(obj, &block); end
 
   # A convenience method which is same as follows:
   #
   #   group(1, '#<' + obj.class.name, '>') { ... }
   #
-  # source://pp/lib/pp.rb#216
+  # source://pp//lib/pp.rb#216
   def object_group(obj, &block); end
 
   # Removes an object from the set of objects being pretty printed.
   #
-  # source://pp/lib/pp.rb#182
+  # source://pp//lib/pp.rb#182
   def pop_inspect_key(id); end
 
   # Adds +obj+ to the pretty printing buffer
@@ -273,28 +273,28 @@ module PP::PPMethods
   # Object#pretty_print_cycle is used when +obj+ is already
   # printed, a.k.a the object reference chain has a cycle.
   #
-  # source://pp/lib/pp.rb#191
+  # source://pp//lib/pp.rb#191
   def pp(obj); end
 
   # A pretty print for a Hash
   #
-  # source://pp/lib/pp.rb#291
+  # source://pp//lib/pp.rb#291
   def pp_hash(obj); end
 
   # A pretty print for a pair of Hash
   #
-  # source://pp/lib/pp.rb#322
+  # source://pp//lib/pp.rb#322
   def pp_hash_pair(k, v); end
 
   # A present standard failsafe for pretty printing any given Object
   #
-  # source://pp/lib/pp.rb#275
+  # source://pp//lib/pp.rb#275
   def pp_object(obj); end
 
   # Adds the object_id +id+ to the set of objects being pretty printed, so
   # as to not repeat objects.
   #
-  # source://pp/lib/pp.rb#177
+  # source://pp//lib/pp.rb#177
   def push_inspect_key(id); end
 
   # Adds a separated list.
@@ -322,7 +322,7 @@ module PP::PPMethods
   #   q.comma_breakable
   #   xxx 3
   #
-  # source://pp/lib/pp.rb#261
+  # source://pp//lib/pp.rb#261
   def seplist(list, sep = T.unsafe(nil), iter_method = T.unsafe(nil)); end
 end
 
@@ -332,37 +332,37 @@ end
 
 # The version string
 #
-# source://pp/lib/pp.rb#67
+# source://pp//lib/pp.rb#67
 PP::VERSION = T.let(T.unsafe(nil), String)
 
 class Range
   include ::Enumerable
 
-  # source://pp/lib/pp.rb#490
+  # source://pp//lib/pp.rb#490
   def pretty_print(q); end
 end
 
 class RubyVM::AbstractSyntaxTree::Node
-  # source://pp/lib/pp.rb#640
+  # source://pp//lib/pp.rb#640
   def pretty_print(q); end
 
-  # source://pp/lib/pp.rb#627
+  # source://pp//lib/pp.rb#627
   def pretty_print_children(q, names = T.unsafe(nil)); end
 end
 
 class String
   include ::Comparable
 
-  # source://pp/lib/pp.rb#502
+  # source://pp//lib/pp.rb#502
   def pretty_print(q); end
 end
 
 class Struct
   include ::Enumerable
 
-  # source://pp/lib/pp.rb#436
+  # source://pp//lib/pp.rb#436
   def pretty_print(q); end
 
-  # source://pp/lib/pp.rb#450
+  # source://pp//lib/pp.rb#450
   def pretty_print_cycle(q); end
 end

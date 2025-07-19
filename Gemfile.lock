@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ruby-lsp-rspec (0.1.25)
-      ruby-lsp (~> 0.24.0)
+      ruby-lsp (~> 0.25.0)
 
 GEM
   remote: https://rubygems.org/
@@ -43,7 +43,7 @@ GEM
       prism (~> 1.0)
       rbs (>= 3.4.4)
       sorbet-runtime (>= 0.5.9204)
-    rbs (3.9.3)
+    rbs (3.9.4)
       logger
     rdoc (6.13.1)
       psych (>= 4.0.0)
@@ -83,11 +83,10 @@ GEM
       rubocop (~> 1.62)
     rubocop-sorbet (0.10.0)
       rubocop (>= 1)
-    ruby-lsp (0.24.0)
+    ruby-lsp (0.25.0)
       language_server-protocol (~> 3.17.0)
       prism (>= 1.2, < 2.0)
       rbs (>= 3, < 5)
-      sorbet-runtime (>= 0.5.10782)
     ruby-progressbar (1.13.0)
     sorbet (0.5.12087)
       sorbet-static (= 0.5.12087)
@@ -141,4 +140,4 @@ DEPENDENCIES
   tapioca (~> 0.11)
 
 BUNDLED WITH
-   2.5.11
+   2.6.9

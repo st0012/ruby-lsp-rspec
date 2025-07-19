@@ -48,21 +48,22 @@ module RubyLsp
 
       private
 
-      #: (Prism::CallNode) -> String?
+      #: (Prism::CallNode) -> String
       def extract_description(node)
-        # Try to extract the description from a string literal argument
+        # Try to extract the description from the argument
         first_arg = node.arguments&.arguments&.first
-        return "example at #{relative_location(node)}" if first_arg.nil?
 
         case first_arg
         when Prism::StringNode
           first_arg.content
         when Prism::SymbolNode
-          first_arg.value
+          first_arg.value.to_s
         when Prism::ConstantReadNode
           first_arg.name.to_s
         when Prism::ConstantPathNode
           first_arg.full_name
+        else
+          "example at #{relative_location(node)}"
         end
       end
 

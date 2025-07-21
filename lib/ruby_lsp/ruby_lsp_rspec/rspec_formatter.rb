@@ -61,9 +61,10 @@ module RubyLsp
       end
 
       def stop(notification)
-        RubyLsp::LspReporter.instance.shutdown
         if RubyLsp::LspReporter.start_coverage?
           RubyLsp::LspReporter.instance.at_coverage_exit
+        else
+          RubyLsp::LspReporter.instance.shutdown
         end
       end
 

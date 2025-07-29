@@ -26,12 +26,12 @@ module RubyLsp
 
       #: (Prism::CallNode) -> void
       def on_call_node_enter(node)
-        return unless ["describe", "context", "it", "specify", "example"].include?(node.message)
+        return unless ["describe", "context", "it", "specify", "example", "feature", "scenario"].include?(node.message)
 
         case node.message
-        when "describe", "context"
+        when "describe", "context", "feature"
           handle_describe(node)
-        when "it", "specify", "example"
+        when "it", "specify", "example", "scenario"
           handle_example(node)
         end
       end
@@ -39,7 +39,7 @@ module RubyLsp
       #: (Prism::CallNode) -> void
       def on_call_node_leave(node)
         case node.message
-        when "context", "describe"
+        when "context", "describe", "feature"
           return unless valid_group?(node)
 
           @group_stack.pop

@@ -55,9 +55,11 @@ module RubyLsp
         puts "[#{self.class}]: #{message}"
       end
 
+      # A node is valid if it has a block and the receiver is RSpec (or nil)
       #: (Prism::CallNode) -> bool
       def valid_group?(node)
-        !(node.block.nil? || (node.receiver && node.receiver&.slice != "RSpec"))
+        return false if node.block.nil?
+        node.receiver.nil? || node.receiver&.slice == "RSpec"
       end
 
       #: (Prism::CallNode) -> String

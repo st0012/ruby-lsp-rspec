@@ -229,6 +229,122 @@ RSpec.describe RubyLsp::RSpec do
         end
       end
 
+      it "ignores describe and context calls without blocks" do
+        source = <<~RUBY
+          RSpec.describe "Valid group with block" do
+            it "test in valid group" do
+            end
+          end
+
+          # These should be ignored because they don't have blocks
+          RSpec.describe "Invalid group without block"
+          RSpec.context "Another invalid group"
+
+          # This should also work with non-RSpec receivers
+          describe "Valid group without RSpec prefix" do
+            it "test in valid group" do
+            end
+          end
+
+          # Invalid without block, even without RSpec prefix
+          describe "Invalid without block"
+          context "Invalid context without block"
+        RUBY
+
+        with_server(source, uri) do |server, uri|
+          server.process_message(
+            {
+              id: 1,
+              method: "textDocument/codeLens",
+              params: {
+                textDocument: { uri: uri },
+                position: { line: 0, character: 0 },
+              },
+            },
+          )
+
+          response = pop_result(server).response
+
+          # Should only generate code lens for the 2 valid groups (with blocks) and their children
+          # Each group gets 3 code lenses (run, run in terminal, debug)
+          # Each example gets 3 code lenses 
+          # So: 2 groups * 3 + 2 examples * 3 = 12 total
+          expect(response.count).to eq(12)
+
+          # Verify the valid groups are present
+          group_commands = response.select { |r| r.data[:kind] == :group }
+          expect(group_commands.count).to eq(6) # 2 groups * 3 commands each
+
+          # Check that the correct groups are present
+          group_names = group_commands.map { |cmd| cmd.command.arguments[1] }.uniq
+          expect(group_names).to contain_exactly("Valid group with block", "Valid group without RSpec prefix")
+
+          # Verify examples are present
+          example_commands = response.select { |r| r.data[:kind] == :example }
+          expect(example_commands.count).to eq(6) # 2 examples * 3 commands each
+        end
+      end
+
+      it "handles nested groups where some lack blocks" do
+        source = <<~RUBY
+          RSpec.describe "Outer group with block" do
+            # Valid nested group
+            describe "Valid nested group" do
+              it "nested test" do
+              end
+            end
+
+            # Invalid nested group (no block) - should be ignored
+            describe "Invalid nested group"
+
+            # Another valid nested group
+            context "Valid context" do
+              it "context test" do
+              end
+            end
+
+            # Invalid context (no block) - should be ignored
+            context "Invalid context"
+          end
+        RUBY
+
+        with_server(source, uri) do |server, uri|
+          server.process_message(
+            {
+              id: 1,
+              method: "textDocument/codeLens",
+              params: {
+                textDocument: { uri: uri },
+                position: { line: 0, character: 0 },
+              },
+            },
+          )
+
+          response = pop_result(server).response
+
+          # Should generate code lens for:
+          # - 1 outer group (3 commands)
+          # - 2 valid nested groups (2 * 3 = 6 commands)  
+          # - 2 examples (2 * 3 = 6 commands)
+          # Total: 15 commands
+          expect(response.count).to eq(15)
+
+          # Check that only the valid groups are present
+          group_commands = response.select { |r| r.data[:kind] == :group }
+          expect(group_commands.count).to eq(9) # 3 groups * 3 commands each
+
+          group_names = group_commands.map { |cmd| cmd.command.arguments[1] }.uniq
+          expect(group_names).to contain_exactly("Outer group with block", "Valid nested group", "Valid context")
+
+          # Verify examples are present
+          example_commands = response.select { |r| r.data[:kind] == :example }
+          expect(example_commands.count).to eq(6) # 2 examples * 3 commands each
+
+          example_names = example_commands.map { |cmd| cmd.command.arguments[1] }.uniq
+          expect(example_names).to contain_exactly("nested test", "context test")
+        end
+      end
+
       context "with a custom rspec command configured" do
         let(:configuration) do
           {

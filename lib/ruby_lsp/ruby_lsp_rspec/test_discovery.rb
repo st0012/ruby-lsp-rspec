@@ -31,6 +31,7 @@ module RubyLsp
         case node.message
         when "describe", "context"
           return unless valid_group?(node)
+
           handle_describe(node)
         when "it", "specify", "example"
           handle_example(node)
@@ -121,6 +122,7 @@ module RubyLsp
       #: (Prism::CallNode) -> bool
       def valid_group?(node)
         return false if node.block.nil?
+
         node.receiver.nil? || node.receiver&.slice == "RSpec"
       end
 

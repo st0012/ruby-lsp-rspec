@@ -59,6 +59,7 @@ module RubyLsp
       #: (Prism::CallNode) -> bool
       def valid_group?(node)
         return false if node.block.nil?
+
         node.receiver.nil? || node.receiver&.slice == "RSpec"
       end
 

@@ -267,7 +267,7 @@ RSpec.describe RubyLsp::RSpec do
 
           # Should only generate code lens for the 2 valid groups (with blocks) and their children
           # Each group gets 3 code lenses (run, run in terminal, debug)
-          # Each example gets 3 code lenses 
+          # Each example gets 3 code lenses
           # So: 2 groups * 3 + 2 examples * 3 = 12 total
           expect(response.count).to eq(12)
 
@@ -324,7 +324,7 @@ RSpec.describe RubyLsp::RSpec do
 
           # Should generate code lens for:
           # - 1 outer group (3 commands)
-          # - 2 valid nested groups (2 * 3 = 6 commands)  
+          # - 2 valid nested groups (2 * 3 = 6 commands)
           # - 2 examples (2 * 3 = 6 commands)
           # Total: 15 commands
           expect(response.count).to eq(15)

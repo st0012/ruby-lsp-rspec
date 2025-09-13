@@ -30,5 +30,9 @@ RSpec.describe "RSpecExample" do
     it "raises an error" do
       raise "oops"
     end
+    it "is pending but fixed" do
+      pending
+      expect { raise "error" }.to raise_error
+    end
   end
 end

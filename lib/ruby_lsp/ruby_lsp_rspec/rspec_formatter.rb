@@ -80,7 +80,7 @@ module RubyLsp
       def adjust_backtrace(backtrace)
         # Correct the backtrace entry so that vscode recognized it as a link to open
         parts = backtrace.split(":", 3)
-        parts[0].sub(/^\./, "file://" + File.expand_path(".")) + ":" + parts[1] + " : " + parts[2]
+        parts[0].sub(/^\./, "file://" + File.expand_path(".")) + ":" + parts[1] + " : " + (parts[2] || "")
       end
     end
   end

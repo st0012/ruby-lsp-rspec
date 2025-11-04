@@ -81,6 +81,67 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
       end
     end
 
+    # Tests capybara feature/scenario syntax
+    # see https://github.com/teamcapybara/capybara
+    it "discovers Capybara examples" do
+      source = <<~RUBY
+        feature "Sample test" do
+          scenario "first test" do
+            expect(true).to be(true)
+          end
+
+          # Test a mixed syntax
+          it "second test" do
+            expect(true).to be(true)
+          end
+        end
+
+        RSpec.describe Foo do
+          it "third test" do
+            expect(true).to be(true)
+          end
+        end
+      RUBY
+
+      with_server(source, uri) do |server, uri|
+        server.process_message(
+          {
+            id: 1,
+            method: "rubyLsp/discoverTests",
+            params: {
+              textDocument: { uri: uri },
+            },
+          },
+        )
+
+        items = pop_result(server).response
+
+        expect(items.length).to eq(2)
+
+        first_group = items.first
+        expect(first_group[:id]).to eq("./spec/fake_spec.rb:1")
+        expect(first_group[:label]).to eq("Sample test")
+        expect(first_group[:children].length).to eq(2)
+
+        test_ids = first_group[:children].map { |i| i[:id] }
+        expect(test_ids).to include("./spec/fake_spec.rb:1::./spec/fake_spec.rb:2")
+        expect(test_ids).to include("./spec/fake_spec.rb:1::./spec/fake_spec.rb:6")
+
+        test_labels = first_group[:children].map { |i| i[:label] }
+        expect(test_labels).to include("first test")
+
+        expect(test_labels).to include("second test")
+
+        second_group = items[1]
+        expect(second_group[:id]).to eq("./spec/fake_spec.rb:11")
+        expect(second_group[:label]).to eq("Foo")
+        expect(second_group[:children].length).to eq(1)
+
+        test_ids = second_group[:children].map { |i| i[:id] }
+        expect(test_ids).to include("./spec/fake_spec.rb:11::./spec/fake_spec.rb:12")
+      end
+    end
+
     it "discovers nested example groups" do
       source = <<~RUBY
         RSpec.describe "Outer group" do

@@ -132,6 +132,22 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
           "uri" => "file://#{fixture_path}",
         },
       },
+      {
+        "method" => "start",
+        "params" => {
+          "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:33",
+          "line" => "33",
+          "uri" => "file://#{fixture_path}",
+        },
+      },
+      {
+        "method" => "fail",
+        "params" => {
+          "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:33",
+          "message" => "Expected pending 'No reason given' to fail. No error was raised.\n\n# file://#{fixture_path}:33 : ",
+          "uri" => "file://#{fixture_path}",
+        },
+      },
       { "method" => "finish", "params" => {} },
     ]
 

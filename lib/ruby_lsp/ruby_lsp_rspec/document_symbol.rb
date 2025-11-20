@@ -27,7 +27,7 @@ module RubyLsp
             selection_range: range_from_node(node),
             range: range_from_node(node),
           )
-        when "context", "describe", "shared_examples", "shared_context", "shared_examples_for", "feature", "scenario"
+        when "context", "describe", "shared_examples", "shared_context", "shared_examples_for", "feature"
           return if node.receiver && node.receiver&.slice != "RSpec"
 
           name = generate_name(node)
@@ -50,7 +50,7 @@ module RubyLsp
       #: (Prism::CallNode) -> void
       def on_call_node_leave(node)
         case node.message
-        when "context", "describe", "shared_examples", "shared_context", "shared_examples_for", "feature", "scenario"
+        when "context", "describe", "shared_examples", "shared_context", "shared_examples_for", "feature"
           return if node.receiver && node.receiver&.slice != "RSpec"
 
           @response_builder.pop

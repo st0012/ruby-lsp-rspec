@@ -24,10 +24,10 @@ module RubyLsp
       #: (Prism::CallNode) -> void
       def on_call_node_enter(node)
         case node.message
-        when "example", "it", "specify"
+        when "example", "it", "specify", "scenario"
           name = generate_name(node)
           add_test_code_lens(node, name: name, kind: :example)
-        when "context", "describe"
+        when "context", "describe", "feature"
           return unless valid_group?(node)
 
           name = generate_name(node)
@@ -41,7 +41,7 @@ module RubyLsp
       #: (Prism::CallNode) -> void
       def on_call_node_leave(node)
         case node.message
-        when "context", "describe"
+        when "context", "describe", "feature"
           return unless valid_group?(node)
 
           @group_id_stack.pop

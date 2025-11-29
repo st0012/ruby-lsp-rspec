@@ -2,3 +2,4 @@
 --color
 --require spec_helper
 --exclude-pattern **/fixtures/*
+--order random

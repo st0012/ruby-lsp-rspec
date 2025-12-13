@@ -10,8 +10,11 @@ module RubyLsp
       def initialize(response_builder, uri, dispatcher, rspec_command, debug: false)
         @response_builder = response_builder
         # Listener is only initialized if uri.to_standardized_path is valid
-        path = uri.to_standardized_path #: as !nil
-        @path = path #: String
+        workspace_root = Pathname.new(Dir.pwd)
+        file_path = Pathname.new(uri.to_standardized_path) #: as !nil
+
+        # Calculate the relative path from workspace root
+        @path = file_path.relative_path_from(workspace_root).to_s #: String
         @group_id = 1 #: Integer
         @group_id_stack = [] #: Array[Integer]
         @rspec_command = rspec_command
@@ -89,9 +92,14 @@ module RubyLsp
       #: (Prism::Node, name: String, kind: Symbol) -> void
       def add_test_code_lens(node, name:, kind:)
         line_number = node.location.start_line
-        command = "#{@rspec_command} #{@path}:#{line_number}"
 
-        log_message("Full command: `#{command}`") if @debug
+        # Command for terminal execution (with Docker)
+        terminal_command = "#{@rspec_command} #{@path}:#{line_number}"
+
+        # Command for Test Runner execution (without Docker prefix)
+        runner_command = "bundle exec rspec #{@path}:#{line_number}"
+
+        log_message("Full command: `#{terminal_command}`") if @debug
 
         grouping_data = { group_id: @group_id_stack.last, kind: kind }
         grouping_data[:id] = @group_id if kind == :group
@@ -99,7 +107,7 @@ module RubyLsp
         arguments = [
           @path,
           name,
-          command,
+          runner_command,
           {
             start_line: node.location.start_line - 1,
             start_column: node.location.start_column,
@@ -108,29 +116,32 @@ module RubyLsp
           },
         ]
 
-        @response_builder << create_code_lens(
-          node,
-          title: "Run",
-          command_name: "rubyLsp.runTest",
-          arguments: arguments,
-          data: { type: "test", **grouping_data },
-        )
+        terminal_arguments = arguments.dup
+        terminal_arguments[2] = terminal_command
+
+        # @response_builder << create_code_lens(
+        #   node,
+        #   title: "Run",
+        #   command_name: "rubyLsp.runTest",
+        #   arguments: arguments,
+        #   data: { type: "test", **grouping_data },
+        # )
 
         @response_builder << create_code_lens(
           node,
           title: "Run In Terminal",
           command_name: "rubyLsp.runTestInTerminal",
-          arguments: arguments,
+          arguments: terminal_arguments,
           data: { type: "test_in_terminal", **grouping_data },
         )
 
-        @response_builder << create_code_lens(
-          node,
-          title: "Debug",
-          command_name: "rubyLsp.debugTest",
-          arguments: arguments,
-          data: { type: "debug", **grouping_data },
-        )
+        # @response_builder << create_code_lens(
+        #   node,
+        #   title: "Debug",
+        #   command_name: "rubyLsp.debugTest",
+        #   arguments: arguments,
+        #   data: { type: "debug", **grouping_data },
+        # )
       end
     end
   end

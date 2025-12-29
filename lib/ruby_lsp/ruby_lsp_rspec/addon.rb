@@ -67,6 +67,7 @@ module RubyLsp
           uri,
           dispatcher,
           @rspec_command, #: as !nil
+          @workspace_path, #: as !nil
           debug: debug,
         )
       end

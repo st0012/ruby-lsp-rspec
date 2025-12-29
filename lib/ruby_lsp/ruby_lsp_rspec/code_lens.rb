@@ -6,12 +6,13 @@ module RubyLsp
     class CodeLens
       include ::RubyLsp::Requests::Support::Common
 
-      #: (ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens], URI::Generic, Prism::Dispatcher, String, ?debug: bool) -> void
-      def initialize(response_builder, uri, dispatcher, rspec_command, debug: false)
+      #: (ResponseBuilders::CollectionResponseBuilder[Interface::CodeLens], URI::Generic, Prism::Dispatcher, String, String, ?debug: bool) -> void
+      def initialize(response_builder, uri, dispatcher, rspec_command, workspace_path, debug: false)
         @response_builder = response_builder
         # Listener is only initialized if uri.to_standardized_path is valid
         path = uri.to_standardized_path #: as !nil
         @path = path #: String
+        @workspace_path = workspace_path #: String
         @group_id = 1 #: Integer
         @group_id_stack = [] #: Array[Integer]
         @rspec_command = rspec_command
@@ -89,7 +90,7 @@ module RubyLsp
       #: (Prism::Node, name: String, kind: Symbol) -> void
       def add_test_code_lens(node, name:, kind:)
         line_number = node.location.start_line
-        command = "#{@rspec_command} #{@path}:#{line_number}"
+        command = "cd \"#{@workspace_path}\" && #{@rspec_command} #{@path}:#{line_number}"
 
         log_message("Full command: `#{command}`") if @debug
 

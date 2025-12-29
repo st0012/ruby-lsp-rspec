@@ -107,11 +107,12 @@ RSpec.describe RubyLsp::RSpec do
           expect(response[1].data).to eq({ type: "test_in_terminal", kind: :group, group_id: nil, id: 1 })
           expect(response[2].data).to eq({ type: "debug", kind: :group, group_id: nil, id: 1 })
 
+          project_root = File.expand_path("..", __dir__)
           0.upto(2) do |i|
             expect(response[i].command.arguments).to eq([
               uri.to_standardized_path,
               "Foo",
-              "bundle exec rspec #{uri.to_standardized_path}:1",
+              "cd \"#{project_root}\" && bundle exec rspec #{uri.to_standardized_path}:1",
               { start_line: 0, start_column: 0, end_line: 5, end_column: 3 },
             ])
           end
@@ -124,7 +125,7 @@ RSpec.describe RubyLsp::RSpec do
             expect(response[i].command.arguments).to eq([
               uri.to_standardized_path,
               "when something",
-              "bundle exec rspec #{uri.to_standardized_path}:2",
+              "cd \"#{project_root}\" && bundle exec rspec #{uri.to_standardized_path}:2",
               { start_line: 1, start_column: 2, end_line: 4, end_column: 5 },
             ])
           end
@@ -137,7 +138,7 @@ RSpec.describe RubyLsp::RSpec do
             expect(response[i].command.arguments).to eq([
               uri.to_standardized_path,
               "does something",
-              "bundle exec rspec #{uri.to_standardized_path}:3",
+              "cd \"#{project_root}\" && bundle exec rspec #{uri.to_standardized_path}:3",
               { start_line: 2, start_column: 4, end_line: 3, end_column: 7 },
             ])
           end
@@ -377,7 +378,8 @@ RSpec.describe RubyLsp::RSpec do
             )
 
             response = pop_result(server).response
-            expect(response[0].command.arguments[2]).to eq("docker compose run --rm web rspec #{uri.to_standardized_path}:1")
+            project_root = File.expand_path("..", __dir__)
+            expect(response[0].command.arguments[2]).to eq("cd \"#{project_root}\" && docker compose run --rm web rspec #{uri.to_standardized_path}:1")
           end
         end
       end
@@ -447,7 +449,8 @@ RSpec.describe RubyLsp::RSpec do
             response = pop_result(server).response
 
             expect(response.count).to eq(3)
-            expect(response[0].command.arguments[2]).to eq("bundle exec bin/rspec #{uri.to_standardized_path}:1")
+            project_root = File.expand_path("..", __dir__)
+            expect(response[0].command.arguments[2]).to eq("cd \"#{project_root}\" && bundle exec bin/rspec #{uri.to_standardized_path}:1")
           end
         end
       end

@@ -34,5 +34,11 @@ RSpec.describe "RSpecExample" do
       pending
       expect { raise "error" }.to raise_error
     end
+
+    it "fails with a chained error" do
+      raise "secondary error"
+    rescue
+      raise "primary error"
+    end
   end
 end

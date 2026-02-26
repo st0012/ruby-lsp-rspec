@@ -148,6 +148,22 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
           "uri" => "file://#{fixture_path}",
         },
       },
+      {
+        "method" => "start",
+        "params" => {
+          "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:38",
+          "line" => "38",
+          "uri" => "file://#{fixture_path}",
+        },
+      },
+      {
+        "method" => "fail",
+        "params" => {
+          "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:38",
+          "message" => %r{RuntimeError:\n  primary error.*Caused by.*secondary error}m,
+          "uri" => "file://#{fixture_path}",
+        },
+      },
       { "method" => "finish", "params" => {} },
     ]
 

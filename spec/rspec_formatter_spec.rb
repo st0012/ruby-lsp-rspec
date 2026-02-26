@@ -148,26 +148,19 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
           "uri" => "file://#{fixture_path}",
         },
       },
-      {
-        "method" => "start",
-        "params" => {
-          "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:38",
-          "line" => "38",
-          "uri" => "file://#{fixture_path}",
-        },
-      },
-      {
-        "method" => "fail",
-        "params" => {
-          "id" => "./spec/fixtures/rspec_example_spec.rb:11::./spec/fixtures/rspec_example_spec.rb:12::./spec/fixtures/rspec_example_spec.rb:38",
-          "message" => %r{RuntimeError:\n  primary error.*Caused by.*secondary error}m,
-          "uri" => "file://#{fixture_path}",
-        },
-      },
       { "method" => "finish", "params" => {} },
     ]
 
     expect(events).to match(expected)
+  end
+
+  it "does not crash when formatting backtrace from chained exceptions" do
+    fixture_path = File.expand_path("spec/fixtures/chained_exception_spec.rb")
+
+    stdout, stderr, = Open3.capture3("bundle", "exec", "rspec", fixture_path)
+
+    output = stdout + stderr
+    expect(output).not_to include("adjust_backtrace")
   end
 
   describe "RubyLsp::RSpec::RSpecFormatter notifications" do

@@ -113,7 +113,7 @@ module RubyLsp
         @response_builder.add_code_lens(test_item)
       end
 
-      #: -> ::RubyLsp::Requests::Support::TestItem??
+      #: -> ::RubyLsp::Requests::Support::TestItem?
       def find_parent_test_group
         @group_stack.last
       end

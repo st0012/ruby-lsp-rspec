@@ -151,7 +151,7 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
       { "method" => "finish", "params" => {} },
     ]
 
-    expect(events).to match(expected)
+    expect(events).to contain_exactly(*expected)
   end
 
   describe "RubyLsp::RSpec::RSpecFormatter notifications" do

@@ -154,6 +154,15 @@ RSpec.describe "RubyLsp::RSpec::RSpecFormatter" do
     expect(events).to match(expected)
   end
 
+  it "does not crash when formatting backtrace from chained exceptions" do
+    fixture_path = File.expand_path("spec/fixtures/chained_exception_spec.rb")
+
+    stdout, stderr, = Open3.capture3("bundle", "exec", "rspec", fixture_path)
+
+    output = stdout + stderr
+    expect(output).not_to include("adjust_backtrace")
+  end
+
   describe "RubyLsp::RSpec::RSpecFormatter notifications" do
     let(:output) { StringIO.new }
     let(:formatter) { RubyLsp::RSpec::RSpecFormatter.new(output) }

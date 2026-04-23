@@ -11,4 +11,15 @@ module RubyLsp
       end
     end
   end
+
+  module Requests
+    module Support
+      class TestItem
+        #: (String) -> void
+        def add_tag(tag)
+          @tags << tag
+        end
+      end
+    end
+  end
 end

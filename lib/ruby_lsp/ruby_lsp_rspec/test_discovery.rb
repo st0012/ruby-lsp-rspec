@@ -84,6 +84,7 @@ module RubyLsp
           range_from_node(node),
           framework: :rspec,
         )
+        test_item.add_tag("test_group")
 
         if parent
           parent.add(test_item)
@@ -108,6 +109,7 @@ module RubyLsp
           range_from_node(node),
           framework: :rspec,
         )
+        test_item.add_tag("test_case")
 
         parent.add(test_item)
         @response_builder.add_code_lens(test_item)

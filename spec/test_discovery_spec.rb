@@ -52,6 +52,7 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
         first_group = items.first
         expect(first_group[:id]).to eq("./spec/fake_spec.rb:1")
         expect(first_group[:label]).to eq("Sample test")
+        expect(first_group[:tags]).to include("test_group")
         expect(first_group[:children].length).to eq(2)
 
         test_ids = first_group[:children].map { |i| i[:id] }
@@ -60,12 +61,16 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
 
         test_labels = first_group[:children].map { |i| i[:label] }
         expect(test_labels).to include("first test")
-
         expect(test_labels).to include("second test")
+
+        first_group[:children].each do |child|
+          expect(child[:tags]).to include("test_case")
+        end
 
         second_group = items[1]
         expect(second_group[:id]).to eq("./spec/fake_spec.rb:11")
         expect(second_group[:label]).to eq("Foo")
+        expect(second_group[:tags]).to include("test_group")
         expect(second_group[:children].length).to eq(1)
 
         test_ids = second_group[:children].map { |i| i[:id] }
@@ -74,6 +79,7 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
         third_group = items[2]
         expect(third_group[:id]).to eq("./spec/fake_spec.rb:17")
         expect(third_group[:label]).to eq("Foo::Bar")
+        expect(third_group[:tags]).to include("test_group")
         expect(third_group[:children].length).to eq(1)
 
         test_ids = third_group[:children].map { |i| i[:id] }
@@ -171,17 +177,22 @@ RSpec.describe RubyLsp::RSpec::TestDiscovery do
 
         outer_group = items.first
         expect(outer_group[:label]).to eq("Outer group")
+        expect(outer_group[:tags]).to include("test_group")
         expect(outer_group[:children].length).to eq(2)
 
         inner_groups = outer_group[:children]
         expect(inner_groups[0][:label]).to eq("Inner group")
+        expect(inner_groups[0][:tags]).to include("test_group")
         expect(inner_groups[1][:label]).to eq("Another group")
+        expect(inner_groups[1][:tags]).to include("test_group")
 
         expect(inner_groups[0][:children].length).to eq(1)
         expect(inner_groups[0][:children][0][:label]).to eq("nested test")
+        expect(inner_groups[0][:children][0][:tags]).to include("test_case")
 
         expect(inner_groups[1][:children].length).to eq(1)
         expect(inner_groups[1][:children][0][:label]).to eq("another test")
+        expect(inner_groups[1][:children][0][:tags]).to include("test_case")
       end
     end
 
